@@ -1,2 +1,3 @@
 # meetup-clone
-Proyecto de una web enfocada en la creación de eventos, similar a Meetup.
+
+_Portal web para la creación de eventos, similar a [Meetup](https://www.meetup.com/)._
