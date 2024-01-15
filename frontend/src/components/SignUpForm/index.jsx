@@ -1,12 +1,12 @@
 import React from "react";
 import "./style.css";
 
-function EventCard() {
+function SignUpForm() {
   return (
     <form>
-      <p>EventCard</p>
+      <p>SignUpForm</p>
     </form>
   );
 }
 
-export default EventCard;
+export default SignUpForm;
