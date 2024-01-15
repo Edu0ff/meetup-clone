@@ -1,12 +1,12 @@
 import React from "react";
 import "./style.css";
 
-function EventCard() {
+function SignInForm() {
   return (
     <form>
-      <p>EventCard</p>
+      <p>SignInForm</p>
     </form>
   );
 }
 
-export default EventCard;
+export default SignInForm;

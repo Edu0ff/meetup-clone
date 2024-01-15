@@ -1,12 +1,12 @@
 import React from "react";
 import "./style.css";
 
-function AllEventsPage() {
+function LandingPage() {
   return (
     <main>
-      <p>All Events Page</p>
+      <p>Landing Page</p>
     </main>
   );
 }
 
-export default AllEventsPage;
+export default LandingPage;

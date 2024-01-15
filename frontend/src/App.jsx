@@ -2,12 +2,15 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import NotFoundPage from "./pages/NotFoundPage";
+
 function App() {
   return (
     <div className="app">
-      <h1>Landing page</h1>
-      {/* <Toaster position="top-right" reverseOrder={false} />
       <Header />
+      {/* <Toaster position="top-right" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/events" element={<AllEventsPage />} />
@@ -21,8 +24,8 @@ function App() {
           <Route path="/profile/:nickname" element={<ProfilePage />} />
           <Route path="/addEvent" element={<AddEvent />} />
         </Route>
-      </Routes>
-      <Footer /> */}
+      </Routes>*/}
+      <Footer />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import "./style.css";
 
-function AllEventsPage() {
+function SignUpPage() {
   return (
     <main>
-      <p>All Events Page</p>
+      <p>Sign Up Page</p>
     </main>
   );
 }
 
-export default AllEventsPage;
+export default SignUpPage;

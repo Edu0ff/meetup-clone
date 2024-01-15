@@ -1,0 +1,18 @@
+body {
+  --text: #180325;
+  --yellow-ish: #f3f27b;
+  --primary: #b528eb;
+  --secondary: #7def51;
+  --lavender-ish: #f7edfd;
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  color: var(--text);
+}
+
+footer {
+  margin-top: auto;
+}

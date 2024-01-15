@@ -1,12 +1,12 @@
 import React from "react";
 import "./style.css";
 
-function AllEventsPage() {
+function PostEventPage() {
   return (
     <main>
-      <p>All Events Page</p>
+      <p>Post Event Page</p>
     </main>
   );
 }
 
-export default AllEventsPage;
+export default PostEventPage;
