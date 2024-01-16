@@ -15,13 +15,16 @@ const Footer = () => {
         </nav>
       </div>
       <div className="footer-socials">
-        <Link to="/" target="_blank">
+        <Link to="mailto:contact@meemee.com" target="_blank">
           Mail
         </Link>
-        <Link to="/" target="_blank">
+        <Link to="https://www.tiktok.com/" target="_blank">
+          TikTok
+        </Link>
+        <Link to="https://www.facebook.com/" target="_blank">
           Facebook
         </Link>
-        <Link to="/" target="_blank">
+        <Link to="https://www.instagram.com/" target="_blank">
           Instagram
         </Link>
       </div>

@@ -7,9 +7,9 @@ function Header() {
       <nav className="header-nav">
         {/* <HomeButton/> */}
         <NavLink to="/">MeeMee</NavLink>
-        <NavLink to="/">Post Event</NavLink>
-        <NavLink to="/">Explore Events</NavLink>
-        <NavLink to="/">Sign In</NavLink>
+        <NavLink to="/postEvent">Post Event</NavLink>
+        <NavLink to="/events">Explore Events</NavLink>
+        <NavLink to="/signin">Sign In</NavLink>
       </nav>
     </header>
   );
