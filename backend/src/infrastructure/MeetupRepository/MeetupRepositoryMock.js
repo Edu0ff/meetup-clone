@@ -3,7 +3,7 @@ import { MeetupRepository } from "../../domain/repository/MeetupRepository";
 export class MeetupRepositoryMock extends MeetupRepository {
   constructor() {
     super();
-    this.meetups = []; 
+    this.meetups = [];
   }
 
   async createMeetup(meetupData) {
@@ -19,7 +19,7 @@ export class MeetupRepositoryMock extends MeetupRepository {
       throw new Error("Please provide all required meetup information.");
     }
 
-    const newMeetup = { id: this.meetups.length + 1, ...meetupData }; 
+    const newMeetup = { id: this.meetups.length + 1, ...meetupData };
     this.meetups.push(newMeetup);
     return newMeetup.id;
   }
@@ -57,5 +57,29 @@ export class MeetupRepositoryMock extends MeetupRepository {
     }
 
     this.meetups.splice(meetupIndex, 1);
+  }
+
+  async updateAttendeesCountWithUserId(meetupId, userId, willAttend = true) {
+    const meetupIndex = this.meetups.findIndex((m) => m.id === meetupId);
+
+    if (meetupIndex === -1) {
+      throw new Error(`Meetup with ID: ${meetupId} not found`);
+    }
+
+    if (userId === undefined || userId === null) {
+      throw new Error(`User ID is required`);
+    }
+
+    const meetup = this.meetups[meetupIndex];
+
+    if (!meetup) {
+      throw new Error(`Meetup with ID: ${meetupId} not found`);
+    }
+
+    if (willAttend) {
+      meetup.attendees_count++;
+    } else {
+      meetup.attendees_count = Math.max(0, meetup.attendees_count - 1);
+    }
   }
 }

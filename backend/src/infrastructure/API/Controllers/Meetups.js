@@ -56,36 +56,8 @@ export const deleteMeetupController = async (req, res, next) => {
   }
 };
 
-export const attendMeetupController = async (req, res, next) => {
-  try {
-    const { meetupId, userId } = req.params;
-
-    await meetupService.attendMeetup(meetupId, userId);
-
-    res.status(200).json({ message: "Attended meetup successfully." });
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const unattendMeetupController = async (req, res, next) => {
-  try {
-    const { meetupId, userId } = req.params;
-
-    await meetupService.unattendMeetup(meetupId, userId);
-
-    res.status(200).json({ message: "Unattended meetup successfully." });
-  } catch (err) {
-    next(err);
-  }
-};
-
 export const getMeetupByIdController = async (req, res, next) => {
   try {
-    const { error, value } = getShipmentSchema.validate(req.params);
-    if (error) {
-      return res.status(400).json({ error: error.details[0].message });
-    }
     const { id } = req.params;
     const meetup = await meetupService.getMeetupById(id);
 
@@ -94,6 +66,35 @@ export const getMeetupByIdController = async (req, res, next) => {
     } else {
       res.status(200).json(meetup);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateAttendeesCountController = async (req, res, next) => {
+  try {
+    const { meetupId } = req.params;
+    const { userId, willAttend } = req.body;
+
+    if (!meetupId || !userId || willAttend === undefined) {
+      throw generateError(
+        "Meetup ID, User ID, and willAttend are required.",
+        400
+      );
+    }
+
+    const updatedMeetup = await meetupService.updateAttendeesCountByMeetupId(
+      meetupId,
+      userId,
+      willAttend
+    );
+
+    const responseMeetup = {
+      ...updatedMeetup,
+      attendees_count: updatedMeetup.attendees_count,
+    };
+
+    res.status(200).json(responseMeetup);
   } catch (error) {
     next(error);
   }

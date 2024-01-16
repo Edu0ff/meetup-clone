@@ -7,7 +7,7 @@ export class Meetup {
     location,
     date,
     time,
-    attendeesCount
+    attendees_count
   ) {
     return new Meetup(
       id,
@@ -17,7 +17,7 @@ export class Meetup {
       location,
       date,
       time,
-      attendeesCount
+      attendees_count
     );
   }
 
@@ -29,7 +29,7 @@ export class Meetup {
     this.location = location;
     this.date = date;
     this.time = time;
-    this.attendeesCount = attendeesCount;
+    this.attendees_count = attendees_count;
   }
 
   getId() {
@@ -92,7 +92,7 @@ export class Meetup {
     this.time = time;
   }
 
-  setAttendeesCount(attendeesCount) {
-    this.attendeesCount = attendeesCount;
+  setAttendeesCount(attendees_count) {
+    this.attendees_count = attendees_count;
   }
 }

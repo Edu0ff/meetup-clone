@@ -61,15 +61,15 @@ export class MeetupRepository {
     }
   }
 
-  async updateMeetup(meetupData) {
-    if (!meetupData.id) {
+  async updateMeetup(id, meetupData) {
+    if (!id) {
       throw new Error("No se proporcionó un ID.");
     }
     let connection;
     try {
       connection = await getConnection();
 
-      const updateQuery = `UPDATE meetups SET title = ?, picture = ?, theme = ?, location = ?, date = ?, time = ?, attendees_count = ? WHERE id = ?`;
+      const updateQuery = `UPDATE meetups SET title = ?, picture = ?, theme = ?, location = ?, date = ?, time = ? WHERE id = ?`;
       await connection.query(updateQuery, [
         meetupData.title,
         meetupData.picture,
@@ -77,8 +77,7 @@ export class MeetupRepository {
         meetupData.location,
         meetupData.date,
         meetupData.time,
-        meetupData.attendees_count,
-        meetupData.id,
+        id, 
       ]);
 
       return;
@@ -103,6 +102,40 @@ export class MeetupRepository {
       );
 
       return;
+    } finally {
+      if (connection) connection.release();
+    }
+  }
+
+  async updateAttendeesCountWithUserId(meetupId, userId, willAttend = true) {
+    let connection;
+    try {
+      connection = await getConnection();
+
+      const [userResult] = await connection.query(
+        "SELECT * FROM users WHERE id = ?",
+        [userId]
+      );
+      if (userResult.length === 0) {
+        throw new Error(`User with ID ${userId} not found`);
+      }
+
+      const [meetupResult] = await connection.query(
+        "SELECT * FROM Meetups WHERE id = ?",
+        [meetupId]
+      );
+      if (meetupResult.length === 0) {
+        throw new Error(`Meetup with ID ${meetupId} not found`);
+      }
+
+      const attendeesCount = willAttend
+        ? meetupResult[0].attendees_count + 1
+        : Math.max(0, meetupResult[0].attendees_count - 1);
+
+      await connection.query(
+        "UPDATE Meetups SET attendees_count = ? WHERE id = ?",
+        [attendeesCount, meetupId]
+      );
     } finally {
       if (connection) connection.release();
     }

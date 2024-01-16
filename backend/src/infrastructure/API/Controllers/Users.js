@@ -63,12 +63,14 @@ export const loginController = async (req, res, next) => {
     if (error) {
       throw generateError(error.details[0].message, 404);
     }
+
     const { email, password } = req.body;
-    const user = await userService.login(email, password);
-    if (!user) {
+    const token = await userService.login(email, password);
+
+    if (!token) {
       throw generateError("Invalid email or password.", 401);
     }
-    const token = await userService.login(email, password);
+
     res.status(200).json({ token });
   } catch (err) {
     next(err);
