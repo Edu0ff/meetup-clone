@@ -11,6 +11,9 @@ import ProfilePage from "./pages/ProfilePage";
 import EventPage from "./pages/EventPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PostEventPage from "./pages/PostEventPage";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import CookiePage from "./pages/CookiePage";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
         <Route path="/user/:nickname" element={<ProfilePage />} />
         <Route path="/event/:id" element={<EventPage />} />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/cookie" element={<CookiePage />} />
         {/* <Route element={<PrivateRoutes />}>
           <Route path="/profile/:nickname" element={<ProfilePage />} />
           <Route path="/postEvent" element={<PostEventPage />} />
