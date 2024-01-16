@@ -1,0 +1,13 @@
+.LandingPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-top,
+.landing-bottom {
+  flex: 1;
+}
+
+.landing-top {
+  border-bottom: 2px solid var(--text);
+}
