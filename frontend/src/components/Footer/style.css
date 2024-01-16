@@ -1,3 +1,40 @@
 footer {
   background-color: var(--yellow-ish);
+  border-top: 2px solid var(--text);
+  display: flex;
+  height: 3.75rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: var(--text);
+}
+
+.footer-links nav,
+.footer-socials {
+  display: flex;
+  align-items: center;
+}
+.footer-links nav p {
+  margin-right: 20px;
+}
+.footer-links nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.footer-links a:hover,
+.footer-socials a:hover {
+  color: var(--secondary);
+}
+
+.footer-socials a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.footer-socials a img {
+  height: 1.8rem;
+  margin: 5px;
 }

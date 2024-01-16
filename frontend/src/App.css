@@ -7,10 +7,16 @@ body {
 }
 
 .app {
+  color: var(--text);
   min-height: 100vh;
   display: grid;
   grid-template-rows: 3rem 1fr;
-  color: var(--text);
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.main-app {
+  border: 1px solid black;
 }
 
 footer {

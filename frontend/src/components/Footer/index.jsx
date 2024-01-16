@@ -7,7 +7,7 @@ const Footer = () => {
     <footer>
       <div className="footer-links">
         <nav>
-          <p>2024 MeeMee</p>
+          <p>© 2024 MeeMee</p>
           <Link to="/terms">Terms of Service</Link>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/cookie">Cookie Policy</Link>
@@ -15,16 +15,16 @@ const Footer = () => {
       </div>
       <div className="footer-socials">
         <Link to="mailto:contact@meemee.com" target="_blank">
-          Mail
+          <img src="icons\mail.svg" alt="mail" />
         </Link>
         <Link to="https://www.tiktok.com/" target="_blank">
-          TikTok
+          <img src="icons\tik-tok.svg" alt="tik-tok" />
         </Link>
-        <Link to="https://www.facebook.com/" target="_blank">
-          Facebook
+        <Link to="https://discord.com/" target="_blank">
+          <img src="icons\discord.svg" alt="discord" />
         </Link>
         <Link to="https://www.instagram.com/" target="_blank">
-          Instagram
+          <img src="icons\instagram.svg" alt="instagram" />
         </Link>
       </div>
     </footer>

@@ -1,3 +1,4 @@
 .header {
   background-color: var(--lavender-ish);
+  border-bottom: 2px solid var(--text);
 }

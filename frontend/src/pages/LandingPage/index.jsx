@@ -6,7 +6,7 @@ import NextEvents from "../../components/NextEvents";
 
 function LandingPage() {
   return (
-    <main>
+    <main className="LandingPage">
       <section className="landing-top">
         <h1>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nobis
