@@ -8,10 +8,9 @@ const Footer = () => {
       <div className="footer-links">
         <nav>
           <p>2024 MeeMee</p>
-          <Link to="/">Terms of Service</Link>
-          <Link to="/">Privacy Policy</Link>
-          <Link to="/">Cookie Settings</Link>
-          <Link to="/">Cookie Policy</Link>
+          <Link to="/terms">Terms of Service</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+          <Link to="/cookie">Cookie Policy</Link>
         </nav>
       </div>
       <div className="footer-socials">
