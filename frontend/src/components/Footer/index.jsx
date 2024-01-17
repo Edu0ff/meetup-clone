@@ -14,18 +14,34 @@ const Footer = () => {
         </nav>
       </div>
       <div className="footer-socials">
-        <Link to="mailto:contact@meemee.com" target="_blank">
+        <a
+          href="mailto:contact@meemee.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="icons\mail.svg" alt="mail" />
-        </Link>
-        <Link to="https://www.tiktok.com/" target="_blank">
+        </a>
+        <a
+          href="https://www.tiktok.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="icons\tik-tok.svg" alt="tik-tok" />
-        </Link>
-        <Link to="https://discord.com/" target="_blank">
+        </a>
+        <a
+          href="https://discord.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="icons\discord.svg" alt="discord" />
-        </Link>
-        <Link to="https://www.instagram.com/" target="_blank">
+        </a>
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="icons\instagram.svg" alt="instagram" />
-        </Link>
+        </a>
       </div>
     </footer>
   );

@@ -23,9 +23,8 @@ footer {
   color: var(--text);
 }
 
-.footer-links a:hover,
-.footer-socials a:hover {
-  color: var(--primary);
+.footer-links a:hover {
+  color: var(--secondary);
 }
 
 .footer-socials a {
