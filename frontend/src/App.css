@@ -8,6 +8,27 @@ body {
   --lavender-ish: #f7edfd;
 }
 
+lavender-grid {
+  background-image: linear-gradient(#ffffff 3px, transparent 3px),
+    linear-gradient(to right, #ffffff 3px, transparent 3px);
+  background-size: 150px 100px;
+  background-color: #dd9ef6;
+}
+
+green-grid {
+  background-image: linear-gradient(#baeea7 10px, transparent 10px),
+    linear-gradient(to right, #baeea7 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #dcf08d;
+}
+
+yellow-grid {
+  background-image: linear-gradient(#f3f27b 10px, transparent 10px),
+    linear-gradient(to right, #f3f27b 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #acf062;
+}
+
 .app {
   color: var(--text);
   min-height: 100vh;

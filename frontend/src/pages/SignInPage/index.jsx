@@ -3,7 +3,7 @@ import "./style.css";
 
 function SignInPage() {
   return (
-    <main>
+    <main className="signin-page">
       <p>Sign In Page</p>
     </main>
   );

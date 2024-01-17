@@ -1,0 +1,21 @@
+.next-events {
+  background-color: var(--secondary);
+  color: var(--text);
+  font-weight: 600;
+  border-radius: none;
+  border: 2px solid var(--text);
+  font-size: 18px;
+  width: 11rem;
+  height: 2.7rem;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-left: -3px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+}
+
+.next-events p {
+  margin-left: 2.5rem;
+}
