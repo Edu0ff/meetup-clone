@@ -1,4 +1,43 @@
 .header {
   background-color: var(--lavender-ish);
   border-bottom: 2px solid var(--text);
+  display: flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 26px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.right-section {
+  margin-right: 3rem;
+}
+
+.right-section a {
+  text-decoration: none;
+  margin-right: 1rem;
+  margin: 2rem;
+  color: var(--text);
+}
+
+.right-section a:hover {
+  color: var(--primary);
+}
+
+.separator {
+  border-left: 2px solid var(--text);
+  height: 3rem;
+  width: 2px;
 }

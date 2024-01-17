@@ -1,0 +1,12 @@
+.home-button {
+  margin-right: 1rem;
+}
+
+.home-link {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.home-link:hover {
+  color: var(--primary);
+}
