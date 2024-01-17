@@ -1,0 +1,16 @@
+.search-bar input {
+  background-color: var(--lavender-ish);
+  border-radius: none;
+  border: 2px solid var(--text);
+  font-size: large;
+  width: 50%;
+  height: 3rem;
+  padding: 0 3rem;
+  margin: 2rem;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+}
+
+.search-bar input:focus {
+  outline: none;
+}
