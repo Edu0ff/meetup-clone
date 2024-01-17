@@ -14,7 +14,7 @@ function LandingPage() {
         </h1>
         <div className="Hello">Hello!</div>
         <SearchBar />
-        <button>Sign Up</button>
+        <button className="landing-signup">Sign Up</button>
       </section>
 
       <section className="landing-bottom">
