@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import "./style.css";
+import ArrowButton from "../../components/ArrowButton";
 
 const NotFoundPage = () => {
   return (
     <main className="not-found-main">
       <div className="not-found">
-        <h2>404 - Página no encontrada</h2>
+        <h1 className="errorfour">404</h1>
+        <h2 className="pagenotfound">PAGE NOT FOUND</h2>
+        <h3 className="go-back">GO BACK TO MeeMee</h3>
         <Link to="/">
-          <button>Volver al Inicio</button>
+          <ArrowButton />
         </Link>
       </div>
     </main>
