@@ -16,6 +16,11 @@
   background-color: #acf062;
 }
 
+.landing-bottom {
+  background-image: url(/img/suminagashi.svg);
+  background-size: cover;
+}
+
 .landing-signup {
   background-color: var(--primary);
   color: white;
