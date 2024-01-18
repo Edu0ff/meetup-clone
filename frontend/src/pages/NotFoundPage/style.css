@@ -1,19 +1,34 @@
 .not-found-main {
   background-color: #f7edfd;
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .not-found {
-  background-color: red;
+  text-align: center;
 }
 
 .errorfour {
-  color: white;
+  font-size: 6rem;
+  color: var(--text);
+  margin: 0;
 }
 
 .pagenotfound {
-  background-color: blue;
+  font-size: 2rem;
+  color: var(--text);
+  margin: 0;
+  font-weight: 600;
 }
 
 .go-back {
-  background-color: blueviolet;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 0;
+  font-weight: 300;
+  margin-top: 10rem;
+  margin-bottom: 1rem;
 }
