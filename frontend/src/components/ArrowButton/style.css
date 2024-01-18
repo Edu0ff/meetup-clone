@@ -6,7 +6,6 @@
   border: 2px solid var(--text);
   width: 3.5rem;
   height: 3rem;
-  margin: 2rem;
   box-sizing: border-box;
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
   cursor: pointer;
