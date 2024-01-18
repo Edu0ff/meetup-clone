@@ -6,6 +6,8 @@ import HomeButton from "../HomeButton";
 function Header() {
   return (
     <header className="header">
+      <div className="triangleright-header"></div>
+      <div className="triangleleft-header"></div>
       <nav className="header-nav">
         <div className="left-section">
           <HomeButton />
