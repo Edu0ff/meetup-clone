@@ -24,7 +24,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 .footer-socials a {
