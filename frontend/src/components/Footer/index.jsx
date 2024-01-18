@@ -5,6 +5,8 @@ import "./style.css";
 const Footer = () => {
   return (
     <footer>
+      <div className="triangleright-footer"></div>
+      <div className="triangleleft-footer"></div>
       <div className="footer-links">
         <nav>
           <p>© 2024 MeeMee</p>
