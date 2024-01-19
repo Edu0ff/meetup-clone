@@ -1,4 +1,4 @@
-.next-events {
+.next-events-banner {
   background-color: var(--secondary);
   color: var(--text);
   font-weight: 600;
@@ -16,6 +16,6 @@
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
 }
 
-.next-events p {
+.next-events-banner p {
   margin-left: 2.5rem;
 }

@@ -17,7 +17,9 @@
   outline: none;
   background-image: url("/icons/search.svg");
   background-repeat: no-repeat;
-  background-size: 2.8rem;
+  background-size: 2rem;
+  background-position: 0 50%;
+  background-position-x: 0.5rem;
 }
 
 .search-button {

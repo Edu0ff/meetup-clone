@@ -1,10 +1,15 @@
 import React from "react";
 import "./style.css";
 
+import EventCard from "../EventCard";
+
 function NextEvents() {
   return (
     <div className="next-events">
-      <p>Next Events!</p>
+      <div className="next-events-banner">
+        <p>Next Events!</p>
+      </div>
+      <EventCard />
     </div>
   );
 }

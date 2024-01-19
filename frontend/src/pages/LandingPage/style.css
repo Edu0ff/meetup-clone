@@ -19,6 +19,7 @@
 .landing-bottom {
   background-image: url(/img/suminagashi.svg);
   background-size: cover;
+  background-color: var(--lavender-ish);
 }
 
 .landing-signup {
