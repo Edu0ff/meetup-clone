@@ -3,13 +3,15 @@ import "./style.css";
 
 function ArrowButton() {
   return (
-    <button className="arrow-button">
-      <div className="triangles-container">
-        <div className="black-triangle">
-          <div className="green-triangle"></div>
+    <div className="arrow-element">
+      <button className="arrow-button">
+        <div className="triangles-container">
+          <div className="black-triangle">
+            <div className="green-triangle"></div>
+          </div>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 }
 
