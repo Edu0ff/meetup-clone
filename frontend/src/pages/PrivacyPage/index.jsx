@@ -3,7 +3,7 @@ import "./style.css";
 
 function PrivacyPage() {
   return (
-    <main>
+    <main className="privacy-page">
       <div>
         <h1>Privacy Policy for MeeMee</h1>
 
@@ -39,7 +39,7 @@ function PrivacyPage() {
           <br />
           MeeMee uses cookies to enhance your browsing experience. You can
           disable cookies in your browser settings if you prefer. Check our{" "}
-          <a href="/cookie">Cookies Policy</a>
+          <a href="/cookie">Cookies Policy.</a>
         </p>
 
         <p>
@@ -75,7 +75,7 @@ function PrivacyPage() {
           <strong>Contact Us</strong>
           <br />
           Questions or concerns about your privacy? Reach out to us at{" "}
-          <a href="mailto:privacy@meemee.com">privacy@mee-mee.com</a>.
+          <a href="mailto:privacy@meemee.com">privacy@MeeMee.com</a>.
         </p>
 
         <p>

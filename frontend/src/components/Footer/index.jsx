@@ -12,7 +12,7 @@ const Footer = () => {
           <p>© 2024 MeeMee</p>
           <Link to="/terms">Terms of Service</Link>
           <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/cookie">Cookie Policy</Link>
+          <Link to="/cookie">Cookies Policy</Link>
         </nav>
       </div>
       <div className="footer-socials">

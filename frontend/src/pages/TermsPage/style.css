@@ -1,0 +1,50 @@
+.terms-page {
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(#f7edfd 10px, transparent 10px),
+    linear-gradient(to right, #f7edfd 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #dcf08d;
+}
+
+.terms-page div {
+  text-align: left;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.terms-page h1 {
+  font-size: 2.5rem;
+  color: var(--text);
+  margin: 0 0 1rem;
+}
+
+.terms-page h2 {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.terms-page p {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+}
+
+.terms-page strong {
+  font-weight: 600;
+}
+
+.terms-page a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms-page a:hover {
+  color: var(--yellow-ish);
+}
