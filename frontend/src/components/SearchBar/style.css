@@ -1,16 +1,67 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
 .search-bar input {
   background-color: var(--lavender-ish);
   border-radius: none;
   border: 2px solid var(--text);
+  border-right: 0px;
   font-size: large;
-  width: 50%;
+  width: 40%;
   height: 3rem;
   padding: 0 3rem;
-  margin: 2rem;
   box-sizing: border-box;
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  outline: none;
+  background-image: url("/icons/search.svg");
+  background-repeat: no-repeat;
+  background-size: 2.8rem;
 }
 
-.search-bar input:focus {
-  outline: none;
+.search-button {
+  position: relative;
+  background-color: var(--lavender-ish);
+  border-radius: none;
+  border: 2px solid var(--text);
+  width: 3.5rem;
+  height: 3rem;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.searchtriangles-container {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searchblack-triangle,
+.searchgreen-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  transform: rotate(0deg);
+}
+
+.searchblack-triangle {
+  border-width: 20px 0 20px 34.6px;
+  border-color: transparent transparent transparent var(--text);
+  transform: scale(0.75);
+}
+
+.searchgreen-triangle {
+  border-width: 16px 0 16px 27.6px;
+  border-color: transparent transparent transparent var(--secondary);
+  transform: scale(0.97);
+  z-index: 2;
+  top: -16px;
+  left: -32.3px;
 }
