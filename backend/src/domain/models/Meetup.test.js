@@ -20,6 +20,6 @@ describe("Meetup", () => {
     expect(meetup.getLocation()).toEqual("location");
     expect(meetup.getDate()).toEqual("date");
     expect(meetup.getTime()).toEqual("time");
-    expect(meetup.getAttendeesCount()).toEqual(0);
+    expect(meetup.getAttendees_Count()).toEqual(0);
   });
 });

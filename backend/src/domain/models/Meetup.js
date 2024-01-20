@@ -21,7 +21,16 @@ export class Meetup {
     );
   }
 
-  constructor(id, title, picture, theme, location, date, time, attendeesCount) {
+  constructor(
+    id,
+    title,
+    picture,
+    theme,
+    location,
+    date,
+    time,
+    attendees_count
+  ) {
     this.id = id;
     this.title = title;
     this.picture = picture;
@@ -64,8 +73,8 @@ export class Meetup {
     return this.time;
   }
 
-  getAttendeesCount() {
-    return this.attendeesCount;
+  getAttendees_Count() {
+    return this.attendees_count;
   }
 
   setTitle(title) {
