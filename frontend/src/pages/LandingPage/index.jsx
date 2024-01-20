@@ -8,7 +8,7 @@ function LandingPage() {
   return (
     <main className="LandingPage">
       <section className="landing-top">
-        <h1>
+        <h1 className="header-text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nobis
           dolor ratione aspernatur!
         </h1>

@@ -1,0 +1,6 @@
+.signup-page {
+  background-image: linear-gradient(#baeea7 10px, transparent 10px),
+    linear-gradient(to right, #baeea7 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #dcf08d;
+}
