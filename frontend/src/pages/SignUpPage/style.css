@@ -3,4 +3,45 @@
     linear-gradient(to right, #baeea7 10px, transparent 10px);
   background-size: 20px 20px;
   background-color: #dcf08d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-container {
+  display: flex;
+  align-items: center;
+  max-width: 95vh;
+  max-height: 100vh;
+  border-radius: none;
+  border: 2px solid var(--text);
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.signup-image {
+  border-right: 2px dashed var(--text);
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.signup-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.signup-header a {
+  text-decoration: none;
 }
