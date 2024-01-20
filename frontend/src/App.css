@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");
+
+body {
+  --text: #180325;
+  --yellow-ish: #f3f27b;
+  --primary: #b528eb;
+  --secondary: #7def51;
+  --lavender-ish: #f7edfd;
+}
+
+lavender-grid {
+  background-image: linear-gradient(#ffffff 3px, transparent 3px),
+    linear-gradient(to right, #ffffff 3px, transparent 3px);
+  background-size: 150px 100px;
+  background-color: #dd9ef6;
+}
+
+green-grid {
+  background-image: linear-gradient(#baeea7 10px, transparent 10px),
+    linear-gradient(to right, #baeea7 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #dcf08d;
+}
+
+yellow-grid {
+  background-image: linear-gradient(#f3f27b 10px, transparent 10px),
+    linear-gradient(to right, #f3f27b 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #acf062;
+}
+
+.app {
+  color: var(--text);
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+footer {
+  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,28 +1,43 @@
 import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import "./App.css";
+
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import LandingPage from "./pages/LandingPage";
+import AllEventsPage from "./pages/AllEventsPage";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import ProfilePage from "./pages/ProfilePage";
+import EventPage from "./pages/EventPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import PostEventPage from "./pages/PostEventPage";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import CookiePage from "./pages/CookiePage";
 
 function App() {
   return (
     <div className="app">
-      <h1>Landing page</h1>
-      {/* <Toaster position="top-right" reverseOrder={false} />
       <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/events" element={<AllEventsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/logout" element={<LogOut />} />
+        <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/user/:nickname" element={<ProfilePage />} />
-        <Route path="/event/:id" element={<EventCard />} />
+        <Route path="/event/:id" element={<EventPage />} />
         <Route path="*" element={<NotFoundPage />} />
-        <Route element={<PrivateRoutes />}>
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/cookie" element={<CookiePage />} />
+        <Route path="/postevent" element={<PostEventPage />} />
+        {/* PRIVADA postevent */}
+        {/* <Route element={<PrivateRoutes />}>
           <Route path="/profile/:nickname" element={<ProfilePage />} />
-          <Route path="/addEvent" element={<AddEvent />} />
-        </Route>
+          
+        </Route> */}
       </Routes>
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }

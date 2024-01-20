@@ -1,0 +1,50 @@
+.privacy-page {
+  background-image: linear-gradient(#f3f27b 3px, transparent 3px),
+    linear-gradient(to right, #f3f27b 3px, transparent 3px);
+  background-size: 150px 100px;
+  background-color: #f7edfd;
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.privacy-page div {
+  text-align: left;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.privacy-page h1 {
+  font-size: 2.5rem;
+  color: var(--text);
+  margin: 0 0 1rem;
+}
+
+.privacy-page h2 {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.privacy-page p {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+}
+
+.privacy-page strong {
+  font-weight: 600;
+}
+
+.privacy-page a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.privacy-page a:hover {
+  color: var(--secondary);
+}

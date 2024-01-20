@@ -1,0 +1,14 @@
+.cookies-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--lavender-ish);
+}
+
+.cookie-button {
+  background-color: transparent;
+  border: none;
+  font-size: 5rem;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+}

@@ -1,0 +1,6 @@
+.events-page {
+  background-image: linear-gradient(#ffffff 3px, transparent 3px),
+    linear-gradient(to right, #ffffff 3px, transparent 3px);
+  background-size: 150px 100px;
+  background-color: #dd9ef6;
+}
