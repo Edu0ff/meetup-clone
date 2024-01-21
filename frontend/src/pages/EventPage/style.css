@@ -4,26 +4,57 @@
   background-size: 150px 100px;
   background-color: #dd9ef6;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 #goback-banner {
-  margin-left: -3px;
+  position: fixed;
+  top: 7rem;
+  left: 0;
 }
 
-.goback-banner p {
-  margin-left: 2.5rem;
+#goback-button {
+  margin-left: 3rem;
+  font-size: 24px;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .event-container {
-  width: 100%;
   max-width: 95vh;
-  max-height: 100vh;
+  max-height: 95vh;
   border-radius: none;
   border: 2px solid var(--text);
   box-sizing: border-box;
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
   outline: none;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+#event-signme {
+  background-color: var(--yellow-ish);
+}
+
+#button-signme {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#eventpage-image {
+  width: 25rem;
+  height: 25rem;
+  object-fit: cover;
+  border: dashed;
+}
+
+#eventpage-person {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  border: dashed;
 }

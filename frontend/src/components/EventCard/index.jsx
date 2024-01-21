@@ -12,21 +12,22 @@ function EventCard() {
         height={200}
       />
       <p className="eventcard-location">
-        <img className="event-icon" src="icons\location.svg" alt="mail" />
+        <img className="event-icon" src="icons\location.svg" alt="location" />
         Location
       </p>
       <h1 className="eventcard-title">Event Title</h1>
       <h2 className="eventcard-by">
-        <img className="event-icon" src="icons\person.svg" alt="mail" />
+        <img className="event-icon" src="icons\person.svg" alt="orgnized by" />
         Organized by Jane Doe
       </h2>
       <div className="eventcard-details">
         <p className="eventcard-date">
-          <img className="event-icon" src="icons\calendar.svg" alt="mail" />
+          <img className="event-icon" src="icons\calendar.svg" alt="calendar" />
           Date
         </p>
         <p className="eventcard-going">
-          <img className="event-icon" src="icons\check.svg" alt="mail" />9 Going
+          <img className="event-icon" src="icons\check.svg" alt="attendees" />9
+          Going
         </p>
       </div>
     </div>
