@@ -6,7 +6,7 @@ import ArrowButton from "../../components/ArrowButton";
 function SignInPage() {
   return (
     <main className="signin-page">
-      <div className="signin-container">
+      <div className="basic-container" id="signin-container">
         <img className="signin-image" src="/img/show.avif" alt="" />
         <div className="signin-section">
           <div className="signin-header">
@@ -33,7 +33,7 @@ function SignInPage() {
                 placeholder="password"
               />
             </div>
-            <ArrowButton type="submit" />
+            <ArrowButton id="signin-button" type="submit" />
           </form>
         </div>
       </div>

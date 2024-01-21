@@ -14,16 +14,6 @@
   z-index: 1000;
 }
 
-.confirmation-content {
-  text-align: center;
-}
-
-.confirmation-buttons {
-  margin-top: 20px;
-}
-
 .confirmation-buttons button {
-  margin: 0 10px;
-  padding: 8px 16px;
   cursor: pointer;
 }

@@ -15,7 +15,7 @@ function SignUnPage() {
 
   return (
     <main className="signup-page">
-      <div className="signup-container">
+      <div className="basic-container">
         <img className="signup-image" src="/img/cosplay.avif" alt="" />
         <div className="signup-section">
           <div className="signup-header">
@@ -85,7 +85,7 @@ function SignUnPage() {
                 accept="image/*"
               />
             </div>
-            <ArrowButton type="submit" />
+            <ArrowButton id="signup-button" type="submit" />
           </form>
         </div>
       </div>
