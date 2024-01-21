@@ -70,32 +70,3 @@ export const getMeetupByIdController = async (req, res, next) => {
     next(error);
   }
 };
-
-export const updateAttendeesCountController = async (req, res, next) => {
-  try {
-    const { meetupId } = req.params;
-    const { userId, willAttend } = req.body;
-
-    if (!meetupId || !userId || willAttend === undefined) {
-      throw generateError(
-        "Meetup ID, User ID, and willAttend are required.",
-        400
-      );
-    }
-
-    const updatedMeetup = await meetupService.updateAttendeesCountByMeetupId(
-      meetupId,
-      userId,
-      willAttend
-    );
-
-    const responseMeetup = {
-      ...updatedMeetup,
-      attendees_count: updatedMeetup.attendees_count,
-    };
-
-    res.status(200).json(responseMeetup);
-  } catch (error) {
-    next(error);
-  }
-};

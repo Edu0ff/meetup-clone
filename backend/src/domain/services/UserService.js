@@ -1,4 +1,5 @@
 import { UserRepository } from "../repository/UserRepository.js";
+import { UserNotFoundError } from "../errors/UserNotFoundError.js";
 
 class UserService {
   constructor() {
@@ -46,7 +47,13 @@ class UserService {
   }
 
   async getUserById(userId) {
-    return this.userRepository.getUserById(userId);
+    const user = await this.userRepository.getUserById(userId);
+
+    if (!user) {
+      throw new UserNotFoundError();
+    }
+
+    return user;
   }
 
   async getUserByEmail(email) {
