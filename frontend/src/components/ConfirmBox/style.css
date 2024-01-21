@@ -1,0 +1,29 @@
+.confirmation-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 30rem;
+  width: 40rem;
+  background-color: var(--primary);
+  transform: translate(-50%, -50%);
+  border-radius: none;
+  outline: none;
+  border: 2px solid var(--text);
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.confirmation-content {
+  text-align: center;
+}
+
+.confirmation-buttons {
+  margin-top: 20px;
+}
+
+.confirmation-buttons button {
+  margin: 0 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
