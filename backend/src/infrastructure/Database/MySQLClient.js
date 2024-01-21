@@ -1,8 +1,8 @@
-import { createPool } from "mysql2/promise";
-import { config } from "../Shared/config.js";
+import { createPool } from 'mysql2/promise'
+import { config } from '../Shared/config.js'
 
-const { address, user, password, database } = config.mysql;
-let pool;
+const { address, user, password, database } = config.mysql
+let pool
 
 export const getConnection = async () => {
   if (!pool) {
@@ -12,9 +12,9 @@ export const getConnection = async () => {
       user: user,
       password: password,
       database: database,
-      timezone: "Z",
-    });
+      timezone: 'Z',
+    })
   }
 
-  return await pool.getConnection();
-};
+  return await pool.getConnection()
+}

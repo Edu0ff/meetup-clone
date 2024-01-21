@@ -1,5 +1,5 @@
-import Server from "./server";
+import Server from './server'
 
-const server = new Server();
-await server.connect();
-server.listen();
+const server = new Server()
+await server.connect()
+server.listen()

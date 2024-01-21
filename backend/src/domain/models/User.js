@@ -1,5 +1,5 @@
-import { UserEmail } from "./UserEmail.js";
-import { UserPassword } from "./UserPassword.js";
+import { UserEmail } from './UserEmail.js'
+import { UserPassword } from './UserPassword.js'
 
 export class User {
   static create(
@@ -12,7 +12,7 @@ export class User {
     email,
     password,
     meetups_attended,
-    avatar
+    avatar,
   ) {
     return new User(
       id,
@@ -24,8 +24,8 @@ export class User {
       email,
       UserPassword.fromPlain(password),
       meetups_attended,
-      avatar
-    );
+      avatar,
+    )
   }
 
   constructor(
@@ -38,62 +38,62 @@ export class User {
     email,
     password,
     meetups_attended,
-    avatar
+    avatar,
   ) {
-    this.id = id;
-    this.username = username;
-    this.name = name;
-    this.last_name = last_name;
-    this.category = category;
-    this.bio = bio;
-    this.email = new UserEmail(email);
-    this.password = password;
-    this.meetups_attended = meetups_attended;
-    this.avatar = avatar;
+    this.id = id
+    this.username = username
+    this.name = name
+    this.last_name = last_name
+    this.category = category
+    this.bio = bio
+    this.email = new UserEmail(email)
+    this.password = password
+    this.meetups_attended = meetups_attended
+    this.avatar = avatar
   }
 
   getId() {
-    return this.id;
+    return this.id
   }
 
   hasId(id) {
-    return this.id === id;
+    return this.id === id
   }
 
   hasUsername(username) {
-    return this.username === username;
+    return this.username === username
   }
   hasName(name) {
-    return this.name === name;
+    return this.name === name
   }
 
   hasLastName(last_name) {
-    return this.last_name === last_name;
+    return this.last_name === last_name
   }
 
   hasCategory(category) {
-    return this.category === category;
+    return this.category === category
   }
 
   hasBio(bio) {
-    return this.bio === bio;
+    return this.bio === bio
   }
 
   hasEmail(email) {
-    return this.email.equals(new UserEmail(email));
+    return this.email.equals(new UserEmail(email))
   }
 
   hasPassword(plainPassword) {
-    return this.password.compareWith(plainPassword);
+    return this.password.compareWith(plainPassword)
   }
 
   getPassword() {
-    return this.password;
+    return this.password
   }
   hasMeetupsAttended(meetups_attended) {
-    return this.meetups_attended === meetups_attended;
+    return this.meetups_attended === meetups_attended
   }
   hasAvatar(avatar) {
-    return this.avatar === avatar;
+    return this.avatar === avatar
   }
 }

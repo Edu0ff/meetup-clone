@@ -1,9 +1,9 @@
-import { UserRepository } from "../repository/UserRepository.js";
-import { UserNotFoundError } from "../errors/UserNotFoundError.js";
+import { UserRepository } from '../repository/UserRepository.js'
+import { UserNotFoundError } from '../errors/UserNotFoundError.js'
 
 class UserService {
   constructor() {
-    this.userRepository = new UserRepository();
+    this.userRepository = new UserRepository()
   }
 
   async createUser({
@@ -27,46 +27,46 @@ class UserService {
       password,
       meetups_attended,
       avatar,
-    });
+    })
   }
 
   async login(email, password) {
-    return this.userRepository.login(email, password);
+    return this.userRepository.login(email, password)
   }
 
   async getUserbyName(name) {
-    return this.userRepository.getUserbyName(name);
+    return this.userRepository.getUserbyName(name)
   }
 
   async getUserByUserName(username) {
-    return this.userRepository.getUserByUserName(username);
+    return this.userRepository.getUserByUserName(username)
   }
 
   async getUserByLastName(last_name) {
-    return this.userRepository.getUserByLastName(last_name);
+    return this.userRepository.getUserByLastName(last_name)
   }
 
   async getUserById(userId) {
-    const user = await this.userRepository.getUserById(userId);
+    const user = await this.userRepository.getUserById(userId)
 
     if (!user) {
-      throw new UserNotFoundError();
+      throw new UserNotFoundError()
     }
 
-    return user;
+    return user
   }
 
   async getUserByEmail(email) {
-    return this.userRepository.getUserByEmail(email);
+    return this.userRepository.getUserByEmail(email)
   }
 
   async getUsersByCategory(category) {
-    return this.userRepository.getUsersByCategory(category);
+    return this.userRepository.getUsersByCategory(category)
   }
 
   async getUsersByMeetupsAttended(meetups_attended) {
-    return this.userRepository.getUsersByMeetups_attended(meetups_attended);
+    return this.userRepository.getUsersByMeetups_attended(meetups_attended)
   }
 }
 
-export default UserService;
+export default UserService

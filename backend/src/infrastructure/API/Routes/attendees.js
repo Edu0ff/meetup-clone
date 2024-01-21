@@ -1,29 +1,23 @@
-import express from "express";
+import express from 'express'
 import {
   newAttendeeController,
   listAttendeesController,
-  deleteAttendeeController,
   getAttendeeByIdController,
-} from "../Controllers/Attendees.js";
-import { authUser } from "../Middlewares/auth.js";
+} from '../Controllers/Attendees.js'
+import { authUser } from '../Middlewares/auth.js'
 
-const attendeesRoutes = express.Router();
+const attendeesRoutes = express.Router()
 
-attendeesRoutes.post("/attendees", authUser, newAttendeeController);
-attendeesRoutes.delete(
-  "/attendees/:attendeeId",
-  authUser,
-  deleteAttendeeController
-);
+attendeesRoutes.post('/attendees', authUser, newAttendeeController)
 attendeesRoutes.get(
-  "/attendees/:attendeeId",
+  '/attendees/:attendeeId',
   authUser,
-  getAttendeeByIdController
-);
+  getAttendeeByIdController,
+)
 attendeesRoutes.get(
-  "/attendees/:meetupId/list",
+  '/attendees/:meetupId/list',
   authUser,
-  listAttendeesController
-);
+  listAttendeesController,
+)
 
-export { attendeesRoutes };
+export { attendeesRoutes }

@@ -1,9 +1,9 @@
-import { MeetupRepository } from "../../domain/repository/MeetupRepository";
+import { MeetupRepository } from '../../domain/repository/MeetupRepository'
 
 export class MeetupRepositoryMock extends MeetupRepository {
   constructor() {
-    super();
-    this.meetups = [];
+    super()
+    this.meetups = []
   }
 
   async createMeetup(meetupData) {
@@ -16,47 +16,46 @@ export class MeetupRepositoryMock extends MeetupRepository {
       !meetupData.time ||
       !meetupData.attendees_count
     ) {
-      throw new Error("Please provide all required meetup information.");
+      throw new Error('Please provide all required meetup information.')
     }
 
-    const newMeetup = { id: this.meetups.length + 1, ...meetupData };
-    this.meetups.push(newMeetup);
-    return newMeetup.id;
+    const newMeetup = { id: this.meetups.length + 1, ...meetupData }
+    this.meetups.push(newMeetup)
+    return newMeetup.id
   }
 
   async listMeetups() {
-    return this.meetups;
+    return this.meetups
   }
 
   async getMeetupsById(id) {
-    const meetup = this.meetups.find((meetup) => meetup.id === id);
+    const meetup = this.meetups.find((meetup) => meetup.id === id)
     if (!meetup) {
-      throw new Error(`the meetup with ID: ${id} not found`);
+      throw new Error(`the meetup with ID: ${id} not found`)
     }
-    return meetup;
+    return meetup
   }
 
   async updateMeetup(id, meetupData) {
-    const meetupIndex = this.meetups.findIndex((meetup) => meetup.id === id);
+    const meetupIndex = this.meetups.findIndex((meetup) => meetup.id === id)
 
     if (meetupIndex === -1) {
-      throw new Error(`the meetup with ID: ${id} not found`);
+      throw new Error(`the meetup with ID: ${id} not found`)
     }
 
     this.meetups[meetupIndex] = {
       ...this.meetups[meetupIndex],
       ...meetupData,
-    };
+    }
   }
 
   async deleteMeetupById(id) {
-    const meetupIndex = this.meetups.findIndex((meetup) => meetup.id === id);
+    const meetupIndex = this.meetups.findIndex((meetup) => meetup.id === id)
 
     if (meetupIndex === -1) {
-      throw new Error(`the meetup with ID: ${id} not found`);
+      throw new Error(`the meetup with ID: ${id} not found`)
     }
 
-    this.meetups.splice(meetupIndex, 1);
+    this.meetups.splice(meetupIndex, 1)
   }
-
 }

@@ -1,24 +1,24 @@
-import express from "express";
+import express from 'express'
 import {
   newUserController,
   loginController,
   getUserController,
   getUsersByCategoryController,
-} from "../Controllers/Users.js";
-import { authUser } from "../Middlewares/auth.js";
+} from '../Controllers/Users.js'
+import { authUser } from '../Middlewares/auth.js'
 
-const userRoutes = express.Router();
+const userRoutes = express.Router()
 
-userRoutes.post("/user/register", newUserController);
+userRoutes.post('/user/register', newUserController)
 
-userRoutes.post("/user/login", loginController);
+userRoutes.post('/user/login', loginController)
 
-userRoutes.get("/user/:id", authUser, getUserController);
+userRoutes.get('/user/:id', authUser, getUserController)
 
 userRoutes.get(
-  "/users/category/:category",
+  '/users/category/:category',
   authUser,
-  getUsersByCategoryController
-);
+  getUsersByCategoryController,
+)
 
-export { userRoutes };
+export { userRoutes }

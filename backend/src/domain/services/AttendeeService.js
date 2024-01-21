@@ -1,8 +1,8 @@
-import { AttendeeRepository } from "../repository/AttendeeRepository.js";
+import { AttendeeRepository } from '../repository/AttendeeRepository.js'
 
 class AttendeeService {
   constructor() {
-    this.attendeeRepository = new AttendeeRepository();
+    this.attendeeRepository = new AttendeeRepository()
   }
 
   async addAttendee(meetupId, userId) {
@@ -10,27 +10,27 @@ class AttendeeService {
       const existingAttendee =
         await this.attendeeRepository.getAttendeeByMeetupAndUser(
           meetupId,
-          userId
-        );
+          userId,
+        )
 
       if (existingAttendee) {
-        await this.attendeeRepository.deleteAttendee(meetupId, userId);
+        await this.attendeeRepository.deleteAttendee(meetupId, userId)
       } else {
-        await this.attendeeRepository.createAttendee(meetupId, userId, true);
+        await this.attendeeRepository.createAttendee(meetupId, userId, true)
       }
 
-      await this.updateCounts(meetupId, userId);
+      await this.updateCounts(meetupId, userId)
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
   async getAttendeesByMeetup(meetupId) {
-    return this.attendeeRepository.getAttendeesByMeetup(meetupId);
+    return this.attendeeRepository.getAttendeesByMeetup(meetupId)
   }
 
   async getAttendeeById(attendeeId) {
-    return this.attendeeRepository.getAttendeeById(attendeeId);
+    return this.attendeeRepository.getAttendeeById(attendeeId)
   }
 
   async toggleAttendee(meetupId, userId) {
@@ -38,45 +38,45 @@ class AttendeeService {
       const existingAttendee =
         await this.attendeeRepository.getAttendeeByMeetupAndUser(
           meetupId,
-          userId
-        );
+          userId,
+        )
 
       if (existingAttendee) {
-        const newWillAttend = !existingAttendee.willAttend;
+        const newWillAttend = !existingAttendee.willAttend
         await this.attendeeRepository.updateAttendee(
           meetupId,
           userId,
-          newWillAttend
-        );
+          newWillAttend,
+        )
       } else {
-        await this.attendeeRepository.createAttendee(meetupId, userId, true);
+        await this.attendeeRepository.createAttendee(meetupId, userId, true)
       }
 
-      await this.updateCounts(meetupId, userId);
+      await this.updateCounts(meetupId, userId)
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
   async getTotalAttendeesCount() {
-    return this.attendeeRepository.getTotalAttendeesCount();
+    return this.attendeeRepository.getTotalAttendeesCount()
   }
 
   async updateCounts(meetupId, userId) {
     const totalMeetupAttendees =
-      await this.attendeeRepository.getMeetupAttendeesCount(meetupId);
+      await this.attendeeRepository.getMeetupAttendeesCount(meetupId)
     await this.attendeeRepository.updateMeetupAttendeesCount(
       meetupId,
-      totalMeetupAttendees
-    );
+      totalMeetupAttendees,
+    )
 
     const totalUserMeetupsAttended =
-      await this.attendeeRepository.getUserMeetupsAttendedCount(userId);
+      await this.attendeeRepository.getUserMeetupsAttendedCount(userId)
     await this.attendeeRepository.updateUserMeetupsAttended(
       userId,
-      totalUserMeetupsAttended
-    );
+      totalUserMeetupsAttended,
+    )
   }
 }
 
-export default AttendeeService;
+export default AttendeeService
