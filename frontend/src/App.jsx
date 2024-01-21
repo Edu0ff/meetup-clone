@@ -31,10 +31,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/cookie" element={<CookiePage />} />
         <Route path="/postevent" element={<PostEventPage />} />
-        {/* PRIVADA postevent */}
-        {/* <Route element={<PrivateRoutes />}>
-          <Route path="/profile/:nickname" element={<ProfilePage />} />
-          
+        {/* PRIVADA postevent,/profile/:nickname"  */}
+        {/* <Route element={<PrivateRoutes />}>          
         </Route> */}
       </Routes>
       <Footer />
