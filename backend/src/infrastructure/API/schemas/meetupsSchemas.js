@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi'
 
 export const meetupSchema = Joi.object({
   title: Joi.string().max(255).required(),
@@ -8,4 +8,4 @@ export const meetupSchema = Joi.object({
   date: Joi.date().iso().required(),
   time: Joi.string().max(255).required(),
   attendeesCount: Joi.number().integer().min(0).required(),
-});
+})

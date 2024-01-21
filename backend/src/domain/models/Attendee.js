@@ -1,53 +1,53 @@
 export class Attendee {
   static create(id, meetupId, userId, willAttend, createdAt) {
-    return new Attendee(id, meetupId, userId, willAttend, createdAt);
+    return new Attendee(id, meetupId, userId, willAttend, createdAt)
   }
 
   constructor(id, meetupId, userId, willAttend, createdAt) {
-    this.id = id;
-    this.meetupId = meetupId;
-    this.userId = userId;
-    this.willAttend = willAttend;
-    this.createdAt = createdAt;
+    this.id = id
+    this.meetupId = meetupId
+    this.userId = userId
+    this.willAttend = willAttend
+    this.createdAt = createdAt
   }
 
   getId() {
-    return this.id;
+    return this.id
   }
 
   getMeetupId() {
-    return this.meetupId;
+    return this.meetupId
   }
 
   getUserId() {
-    return this.userId;
+    return this.userId
   }
 
   getWillAttend() {
-    return this.willAttend;
+    return this.willAttend
   }
 
   getCreatedAt() {
-    return this.createdAt;
+    return this.createdAt
   }
 
   hasId(id) {
-    return this.id === id;
+    return this.id === id
   }
 
   setMeetupId(meetupId) {
-    this.meetupId = meetupId;
+    this.meetupId = meetupId
   }
 
   setUserId(userId) {
-    this.userId = userId;
+    this.userId = userId
   }
 
   setWillAttend(willAttend) {
-    this.willAttend = willAttend;
+    this.willAttend = willAttend
   }
 
   setCreatedAt(createdAt) {
-    this.createdAt = createdAt;
+    this.createdAt = createdAt
   }
 }

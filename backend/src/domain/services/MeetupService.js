@@ -1,13 +1,13 @@
-import { MeetupRepository } from "../repository/MeetupRepository.js";
+import { MeetupRepository } from '../repository/MeetupRepository.js'
 
 class MeetupService {
   constructor() {
-    this.meetupRepository = new MeetupRepository();
+    this.meetupRepository = new MeetupRepository()
   }
 
   async createMeetup({ title, picture, theme, location, date, time }) {
     if (!title || !picture || !theme || !location || !date || !time) {
-      throw new Error("Please provide all required meetup information.");
+      throw new Error('Please provide all required meetup information.')
     }
 
     const meetupData = {
@@ -18,20 +18,20 @@ class MeetupService {
       date,
       time,
       attendees_count: 1,
-    };
+    }
 
-    console.log("Meetup Data:", meetupData);
+    console.log('Meetup Data:', meetupData)
 
-    const meetupId = await this.meetupRepository.createMeetup(meetupData);
+    const meetupId = await this.meetupRepository.createMeetup(meetupData)
 
-    return meetupId;
+    return meetupId
   }
   async listMeetups() {
-    return this.meetupRepository.listMeetups();
+    return this.meetupRepository.listMeetups()
   }
 
   async updateMeetupById(id, meetupData) {
-    const meetup = await this.meetupRepository.getMeetupsById(id);
+    const meetup = await this.meetupRepository.getMeetupsById(id)
 
     const updatedMeetup = {
       id: meetup.id,
@@ -45,24 +45,24 @@ class MeetupService {
       created_at: meetup.created_at,
       updated_at: meetup.updated_at,
       ...meetupData,
-    };
+    }
 
-    await this.meetupRepository.updateMeetup(id, updatedMeetup);
+    await this.meetupRepository.updateMeetup(id, updatedMeetup)
 
-    return updatedMeetup;
+    return updatedMeetup
   }
 
   async deleteMeetupById(id) {
-    return this.meetupRepository.deleteMeetupById(id);
+    return this.meetupRepository.deleteMeetupById(id)
   }
 
   async getMeetupById(id) {
-    const meetup = await this.meetupRepository.getMeetupsById(id);
+    const meetup = await this.meetupRepository.getMeetupsById(id)
     if (!meetup) {
-      throw new Error(`The meetup with ID: ${id} not found`);
+      throw new Error(`The meetup with ID: ${id} not found`)
     }
-    return meetup;
+    return meetup
   }
 }
 
-export default MeetupService;
+export default MeetupService

@@ -1,5 +1,5 @@
-import crypto from "node:crypto"
-import { InvalidPasswordError } from "../errors/InvalidPasswordError.js"
+import crypto from 'node:crypto'
+import { InvalidPasswordError } from '../errors/InvalidPasswordError.js'
 
 export class UserPassword {
   static fromPlain(plainPassword) {
@@ -7,7 +7,11 @@ export class UserPassword {
       throw new InvalidPasswordError()
     }
 
-    const hashed = crypto.createHash("sha256").update(plainPassword).digest().toString("hex")
+    const hashed = crypto
+      .createHash('sha256')
+      .update(plainPassword)
+      .digest()
+      .toString('hex')
 
     return new UserPassword(hashed)
   }
@@ -17,7 +21,11 @@ export class UserPassword {
   }
 
   compareWith(plainPassword) {
-    const hash = crypto.createHash("sha256").update(plainPassword).digest().toString("hex")
+    const hash = crypto
+      .createHash('sha256')
+      .update(plainPassword)
+      .digest()
+      .toString('hex')
 
     return this.password === hash
   }
