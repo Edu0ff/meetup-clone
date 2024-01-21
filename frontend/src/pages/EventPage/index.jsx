@@ -4,7 +4,7 @@ import "./style.css";
 function EventPage() {
   return (
     <main className="event-page">
-      <div className="goback-banner">
+      <div className="green-banner" id="goback-banner">
         <p>Go Back</p>
       </div>
       <div className="event-container">

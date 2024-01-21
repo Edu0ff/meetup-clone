@@ -7,8 +7,12 @@ const ConfirmBox = ({ message, onConfirm, onCancel }) => {
       <div className="confirmation-content">
         <p>{message}</p>
         <div className="confirmation-buttons">
-          <button onClick={onConfirm}>Aceptar</button>
-          <button onClick={onCancel}>Cerrar</button>
+          <button className="green-banner" onClick={onCancel}>
+            Cerrar
+          </button>
+          <button className="green-banner" onClick={onConfirm}>
+            Aceptar
+          </button>
         </div>
       </div>
     </div>
