@@ -63,19 +63,6 @@ class MeetupService {
     }
     return meetup;
   }
-
-  async updateAttendeesCountByMeetupId(meetupId, userId, willAttend = true) {
-    await this.meetupRepository.updateAttendeesCountWithUserId(
-      meetupId,
-      userId,
-      willAttend
-    );
-    const meetup = await this.meetupRepository.getMeetupsById(meetupId);
-
-    await this.meetupRepository.updateMeetup(meetupId, meetup);
-
-    return meetup;
-  }
 }
 
 export default MeetupService;

@@ -9,6 +9,7 @@ async function main() {
     connection = await getConnection();
     console.log("connected");
     console.log("Dropping existing tables");
+    await dropTableIfExists(connection, "Attendees");
     await dropTableIfExists(connection, "Meetups");
     await dropTableIfExists(connection, "users");
 
@@ -16,6 +17,10 @@ async function main() {
 
     await createUsersTable(connection);
     await createMeetupsTable(connection);
+    await createAttendeesTable(connection);
+
+    await insertAttendees(connection);
+    await updateCounters(connection);
   } catch (error) {
     console.error(error);
   } finally {
@@ -39,7 +44,7 @@ async function createUsersTable(connection) {
     bio VARCHAR(255) NOT NULL,
     email VARCHAR(90) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    meetups_attended INT DEFAULT 0, 
+    meetups_attended INT DEFAULT 0,  
     avatar VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`);
@@ -67,7 +72,7 @@ async function createUsersTable(connection) {
     },
     {
       username: "user3",
-      name: "Pablo",
+      name: "María",
       last_name: "López",
       category: "usuario",
       bio: "Bio de usuario 3",
@@ -76,31 +81,34 @@ async function createUsersTable(connection) {
       password: "password3",
     },
     {
-      username: "admin1",
-      name: "María",
+      username: "Ana",
+      name: "Admin",
+      last_name: "1",
       category: "administrador",
       bio: "Bio de administrador 1",
-      email: "admin1@example.com",
+      email: "user4@example.com",
       avatar: "https://picsum.photos/200",
-      password: "adminpassword1",
+      password: "password3",
     },
     {
-      username: "admin2",
-      name: "Edu",
+      username: "Edu",
+      name: "Admin",
+      last_name: "2",
       category: "administrador",
       bio: "Bio de administrador 2",
-      email: "admin2@example.com",
+      email: "user5@example.com",
       avatar: "https://picsum.photos/200",
-      password: "adminpassword2",
+      password: "password5",
     },
     {
-      username: "admin3",
-      name: "Ana",
+      username: "Ayoze",
+      name: "Admin",
+      last_name: "3",
       category: "administrador",
       bio: "Bio de administrador 3",
-      email: "admin3@example.com",
+      email: "user6@example.com",
       avatar: "https://picsum.photos/200",
-      password: "adminpassword3",
+      password: "password6",
     },
   ];
 
@@ -124,7 +132,7 @@ async function createMeetupsTable(connection) {
     location VARCHAR(255),
     date DATE,
     time TIME,
-    attendees_count INT DEFAULT 1,  
+    attendees_count INT DEFAULT 0,  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   )`);
@@ -161,6 +169,60 @@ async function createMeetupsTable(connection) {
   }
 
   console.log("Table Meetups created and populated with examples.");
+}
+
+async function createAttendeesTable(connection) {
+  await connection.query(`CREATE TABLE IF NOT EXISTS Attendees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    meetup_id INT,
+    user_id INT,
+    will_attend BOOLEAN,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (meetup_id) REFERENCES Meetups(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  )`);
+
+  console.log("Table Attendees created.");
+}
+
+async function insertAttendees(connection) {
+  const attendeesToInsert = [
+    {
+      meetup_id: 1,
+      user_id: 1,
+      will_attend: true,
+    },
+  ];
+
+  for (const attendee of attendeesToInsert) {
+    await connection.query(`INSERT INTO Attendees SET ?`, attendee);
+  }
+
+  console.log("Attendees inserted.");
+}
+
+async function updateCounters(connection) {
+  await connection.query(`
+    UPDATE users
+    SET meetups_attended = (
+      SELECT COUNT(*)
+      FROM Attendees
+      WHERE Attendees.user_id = users.id
+      AND Attendees.will_attend = 1
+    )
+  `);
+
+  await connection.query(`
+    UPDATE Meetups
+    SET attendees_count = (
+      SELECT COUNT(*)
+      FROM Attendees
+      WHERE Attendees.meetup_id = Meetups.id
+      AND Attendees.will_attend = 1
+    )
+  `);
+
+  console.log("Counters updated.");
 }
 
 main();
