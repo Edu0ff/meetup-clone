@@ -16,7 +16,7 @@ export const validateNewAttendee = (req, res, next) => {
 export const newAttendeeController = async (req, res, next) => {
   try {
     const { meetupId, userId } = req.body;
-    await attendeeService.createOrUpdateAttendee(meetupId, userId);
+    await attendeeService.addAttendee(meetupId, userId);
 
     res.status(200).json({ message: "Attendee status updated successfully." });
   } catch (error) {
@@ -30,29 +30,6 @@ export const listAttendeesController = async (req, res, next) => {
     const attendees = await attendeeService.getAttendeesByMeetup(meetupId);
 
     res.status(200).json(attendees);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const updateAttendeeController = async (req, res, next) => {
-  try {
-    const { meetupId, userId, newWillAttend } = req.body;
-
-    if (
-      meetupId === undefined ||
-      userId === undefined ||
-      newWillAttend === undefined
-    ) {
-      throw generateError(
-        "Meetup ID, User ID, and newWillAttend are required.",
-        400
-      );
-    }
-
-    await attendeeService.updateAttendee(meetupId, userId, newWillAttend);
-
-    res.status(200).json({ message: "Attendee updated successfully." });
   } catch (err) {
     next(err);
   }
