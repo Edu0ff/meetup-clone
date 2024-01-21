@@ -6,7 +6,7 @@ import EventCard from "../EventCard";
 function NextEvents() {
   return (
     <div className="next-events">
-      <div className="next-events-banner">
+      <div className="green-banner" id="nextevents-banner">
         <p>Next Events!</p>
       </div>
       <EventCard />

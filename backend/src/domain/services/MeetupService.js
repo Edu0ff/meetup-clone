@@ -1,30 +1,13 @@
-import { updateAttendeesCount } from "../../domain/utils/updateAttendeesCount.js";
-import { MeetupRepository } from "../repository/MeetupRepository.js";
+import { MeetupRepository } from '../repository/MeetupRepository.js'
 
 class MeetupService {
   constructor() {
-    this.meetupRepository = new MeetupRepository();
+    this.meetupRepository = new MeetupRepository()
   }
 
-  async createMeetup({
-    title,
-    picture,
-    theme,
-    location,
-    date,
-    time,
-    attendeesCount,
-  }) {
-    if (
-      !title ||
-      !picture ||
-      !theme ||
-      !location ||
-      !date ||
-      !time ||
-      !attendeesCount
-    ) {
-      throw new Error("Please provide all required meetup information.");
+  async createMeetup({ title, picture, theme, location, date, time }) {
+    if (!title || !picture || !theme || !location || !date || !time) {
+      throw new Error('Please provide all required meetup information.')
     }
 
     const meetupData = {
@@ -34,47 +17,52 @@ class MeetupService {
       location,
       date,
       time,
-      attendeesCount,
-    };
+      attendees_count: 1,
+    }
 
-    const meetupId = await this.meetupRepository.createMeetup(meetupData);
+    console.log('Meetup Data:', meetupData)
 
-    return meetupId;
+    const meetupId = await this.meetupRepository.createMeetup(meetupData)
+
+    return meetupId
   }
-
   async listMeetups() {
-    return this.meetupRepository.listMeetups();
+    return this.meetupRepository.listMeetups()
   }
 
   async updateMeetupById(id, meetupData) {
-    const meetup = await this.meetupRepository.getMeetupById(id);
-    const updatedMeetup = { ...meetup, ...meetupData };
-    return this.meetupRepository.updateMeetupById(id, updatedMeetup);
+    const meetup = await this.meetupRepository.getMeetupsById(id)
+
+    const updatedMeetup = {
+      id: meetup.id,
+      title: meetup.title,
+      picture: meetup.picture,
+      theme: meetup.theme,
+      location: meetup.location,
+      date: meetup.date,
+      time: meetup.time,
+      attendees_count: meetup.attendees_count,
+      created_at: meetup.created_at,
+      updated_at: meetup.updated_at,
+      ...meetupData,
+    }
+
+    await this.meetupRepository.updateMeetup(id, updatedMeetup)
+
+    return updatedMeetup
   }
 
   async deleteMeetupById(id) {
-    return this.meetupRepository.deleteMeetupById(id);
-  }
-
-  async attendMeetup(meetupId, userId) {
-    const meetup = await this.meetupRepository.getMeetupsById(meetupId);
-    updateAttendeesCount(meetup, userId, true);
-    return this.meetupRepository.updateMeetup(meetupId, meetup);
-  }
-
-  async unattendMeetup(meetupId, userId) {
-    const meetup = await this.meetupRepository.getMeetupsById(meetupId);
-    updateAttendeesCount(meetup, userId, false);
-    return this.meetupRepository.updateMeetup(meetupId, meetup);
+    return this.meetupRepository.deleteMeetupById(id)
   }
 
   async getMeetupById(id) {
-    const meetup = await this.meetupRepository.getMeetupById(id);
+    const meetup = await this.meetupRepository.getMeetupsById(id)
     if (!meetup) {
-      throw new Error(`The meetup with ID: ${id} not found`);
+      throw new Error(`The meetup with ID: ${id} not found`)
     }
-    return meetup;
+    return meetup
   }
 }
 
-export default MeetupService;
+export default MeetupService

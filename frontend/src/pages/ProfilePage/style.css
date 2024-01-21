@@ -1,0 +1,47 @@
+.profile-page {
+  background-image: linear-gradient(#baeea7 10px, transparent 10px),
+    linear-gradient(to right, #baeea7 10px, transparent 10px);
+  background-size: 20px 20px;
+  background-color: #dcf08d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 95vh;
+  max-height: 100vh;
+  border-radius: none;
+  border: 2px solid var(--text);
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.profile-title {
+  font-family: "IBM Plex Mono", monospace;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-weight: 400;
+  font-size: 26px;
+}
+
+#userphoto-profile {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  border: dashed;
+}
+
+#myaccount {
+  border-left: 5px solid var(--primary);
+  border-top: 5px solid var(--primary);
+  margin-right: auto;
+}
+
+#myevents,
+#events-saved {
+  border-left: 2px solid var(--text);
+}

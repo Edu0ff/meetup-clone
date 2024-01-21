@@ -1,8 +1,15 @@
 import React from "react";
 import "./style.css";
 
+import BlackArrow from "../BlackArrow";
+
 function ExploreCategories() {
-  return <p>ExploreCategories</p>;
+  return (
+    <div>
+      <BlackArrow id="explore-arrow" />
+      <p>Explore Categories</p>
+    </div>
+  );
 }
 
 export default ExploreCategories;

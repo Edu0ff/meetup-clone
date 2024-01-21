@@ -1,74 +1,74 @@
-import { UserRepository } from "../../domain/repository/UserRepository.js";
+import { UserRepository } from '../../domain/repository/UserRepository.js'
 
 class UserRepositoryMock extends UserRepository {
   constructor() {
-    super();
-    this.users = [];
+    super()
+    this.users = []
   }
 
   async createUser(user) {
-    if (user.category !== "usuario" && user.category !== "administrador") {
-      throw new Error('The category only can be "usuario" or "administrador');
+    if (user.category !== 'usuario' && user.category !== 'administrador') {
+      throw new Error('The category only can be "usuario" or "administrador')
     }
 
-    this.users.push(user);
+    this.users.push(user)
 
-    return user;
+    return user
   }
 
   async login(email, password) {
     const user = this.users.find(
-      (user) => user.email === email && user.password === password
-    );
+      (user) => user.email === email && user.password === password,
+    )
 
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new Error('Invalid credentials')
     }
 
-    const token = "mocked-jwt-token";
+    const token = 'mocked-jwt-token'
 
-    return { user, token };
+    return { user, token }
   }
 
   async getUserByEmail(email) {
-    const user = this.users.find((u) => u.email === email);
+    const user = this.users.find((u) => u.email === email)
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found')
     }
-    return user;
+    return user
   }
 
   async getUserById(userId) {
-    const user = this.users.find((u) => u.id === userId);
+    const user = this.users.find((u) => u.id === userId)
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found')
     }
-    return user;
+    return user
   }
 
   async updateUser(id, user) {
-    const userIndex = this.users.findIndex((user) => user.id === id);
+    const userIndex = this.users.findIndex((user) => user.id === id)
 
     if (userIndex === -1) {
-      throw new Error("User not found");
+      throw new Error('User not found')
     }
 
     this.users[userIndex] = {
       ...this.users[userIndex],
       ...user,
-    };
+    }
 
-    return this.users[userIndex];
+    return this.users[userIndex]
   }
 
   async deleteUser(id) {
-    const userIndex = this.users.findIndex((user) => user.id === id);
+    const userIndex = this.users.findIndex((user) => user.id === id)
 
     if (userIndex === -1) {
-      throw new Error("User not found");
+      throw new Error('User not found')
     }
 
-    this.users.splice(userIndex, 1);
+    this.users.splice(userIndex, 1)
   }
 }
-export default UserRepositoryMock;
+export default UserRepositoryMock

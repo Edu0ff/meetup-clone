@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { generateError } from "../../../domain/utils/helpers.js";
-import UserService from "../../../domain/services/UserService.js";
-import { userSchema, loginSchema } from "../Schemas/usersSchemas.js";
-import { v4 as uuidv4 } from "uuid";
+import { generateError } from '../../../domain/utils/helpers.js'
+import UserService from '../../../domain/services/UserService.js'
+import { userSchema, loginSchema } from '../Schemas/usersSchemas.js'
+import { v4 as uuidv4 } from 'uuid'
 
-const userService = new UserService();
+const userService = new UserService()
 
 export const generateActivationToken = () => {
-  return uuidv4();
-};
+  return uuidv4()
+}
 export const validateNewUser = (req, res, next) => {
-  const { error } = userSchema.validate(req.body);
+  const { error } = userSchema.validate(req.body)
 
   if (error) {
-    throw generateError(error.details[0].message, 400);
+    throw generateError(error.details[0].message, 400)
   }
-  next();
-};
+  next()
+}
 
 export const newUserController = async (req, res, next) => {
   try {
@@ -30,15 +30,15 @@ export const newUserController = async (req, res, next) => {
       last_name,
       meetups_attended,
       avatar,
-    } = req.body;
-    if (category !== "usuario" && category !== "administrador") {
+    } = req.body
+    if (category !== 'usuario' && category !== 'administrador') {
       throw generateError(
         'Invalid category. Category must be "usuario" or "administrador."',
-        400
-      );
+        400,
+      )
     }
 
-    const token = generateActivationToken();
+    const token = generateActivationToken()
     const userId = await userService.createUser({
       username,
       email,
@@ -49,55 +49,57 @@ export const newUserController = async (req, res, next) => {
       last_name,
       meetups_attended,
       avatar,
-    });
-    res.status(200).json({ message: "User registered successfully.", userId });
+    })
+    res.status(200).json({ message: 'User registered successfully.', userId })
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 export const loginController = async (req, res, next) => {
   try {
-    const { error, value } = loginSchema.validate(req.body);
+    const { error, value } = loginSchema.validate(req.body)
 
     if (error) {
-      throw generateError(error.details[0].message, 404);
+      throw generateError(error.details[0].message, 404)
     }
-    const { email, password } = req.body;
-    const user = await userService.login(email, password);
-    if (!user) {
-      throw generateError("Invalid email or password.", 401);
+
+    const { email, password } = req.body
+    const token = await userService.login(email, password)
+
+    if (!token) {
+      throw generateError('Invalid email or password.', 401)
     }
-    const token = await userService.login(email, password);
-    res.status(200).json({ token });
+
+    res.status(200).json({ token })
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 export const getUserController = async (req, res, next) => {
   try {
-    const user = await userService.getUserById(req.params.id);
-    res.status(200).json(user);
+    const user = await userService.getUserById(req.params.id)
+    res.status(200).json(user)
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 export const getUsersByCategoryController = async (req, res, next) => {
   try {
-    const { category } = req.params;
+    const { category } = req.params
 
-    if (category !== "usuario" && category !== "administrador") {
+    if (category !== 'usuario' && category !== 'administrador') {
       throw generateError(
         'Invalid category. Category must be "usuario" or "administrador."',
-        400
-      );
+        400,
+      )
     }
 
-    const users = await userService.getUsersByCategory(category);
-    res.status(200).json(users);
+    const users = await userService.getUsersByCategory(category)
+    res.status(200).json(users)
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}

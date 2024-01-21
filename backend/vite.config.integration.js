@@ -1,8 +1,8 @@
-import { configDefaults, defineConfig } from "vitest/config"
+import { configDefaults, defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    include: [...configDefaults.include, "**/*.integration-test.js"],
-    exclude: [...configDefaults.exclude, "**/*.test.js"],
+    include: [...configDefaults.include, '**/*.integration-test.js'],
+    exclude: [...configDefaults.exclude, '**/*.test.js'],
   },
 })

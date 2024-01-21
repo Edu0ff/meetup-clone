@@ -7,7 +7,7 @@ export class Meetup {
     location,
     date,
     time,
-    attendeesCount
+    attendees_count,
   ) {
     return new Meetup(
       id,
@@ -17,82 +17,91 @@ export class Meetup {
       location,
       date,
       time,
-      attendeesCount
-    );
+      attendees_count,
+    )
   }
 
-  constructor(id, title, picture, theme, location, date, time, attendeesCount) {
-    this.id = id;
-    this.title = title;
-    this.picture = picture;
-    this.theme = theme;
-    this.location = location;
-    this.date = date;
-    this.time = time;
-    this.attendeesCount = attendeesCount;
+  constructor(
+    id,
+    title,
+    picture,
+    theme,
+    location,
+    date,
+    time,
+    attendees_count,
+  ) {
+    this.id = id
+    this.title = title
+    this.picture = picture
+    this.theme = theme
+    this.location = location
+    this.date = date
+    this.time = time
+    this.attendees_count = attendees_count
   }
 
   getId() {
-    return this.id;
+    return this.id
   }
 
   hasId(id) {
-    return this.id === id;
+    return this.id === id
   }
 
   getTitle() {
-    return this.title;
+    return this.title
   }
 
   getPicture() {
-    return this.picture;
+    return this.picture
   }
 
   getTheme() {
-    return this.theme;
+    return this.theme
   }
 
   getLocation() {
-    return this.location;
+    return this.location
   }
 
   getDate() {
-    return this.date;
+    return this.date
   }
 
   getTime() {
-    return this.time;
+    return this.time
   }
 
-  getAttendeesCount() {
-    return this.attendeesCount;
+  getAttendees_Count() {
+    return this.attendees_count
   }
 
   setTitle(title) {
-    this.title = title;
+    this.title = title
   }
 
   setPicture(picture) {
-    this.picture = picture;
+    this.picture = picture
   }
 
   setTheme(theme) {
-    this.theme = theme;
+    this.theme = theme
   }
 
   setLocation(location) {
-    this.location = location;
+    this.location = location
   }
 
   setDate(date) {
-    this.date = date;
+    this.date = date
   }
 
   setTime(time) {
-    this.time = time;
+    this.time = time
   }
 
-  setAttendeesCount(attendeesCount) {
-    this.attendeesCount = attendeesCount;
+  setAttendeesCount(attendees_count) {
+    this.attendees_count = attendees_count
   }
 }

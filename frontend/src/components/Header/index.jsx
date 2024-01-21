@@ -14,7 +14,7 @@ function Header() {
         </div>
 
         <div className="right-section">
-          <NavLink to="/postEvent">Post Event</NavLink>
+          <NavLink to="/postevent">Post Event</NavLink>
           <NavLink to="/events">Explore Events</NavLink>
           <div className="separator"></div>
           <div className="nav-signin">

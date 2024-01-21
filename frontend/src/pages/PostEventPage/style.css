@@ -1,0 +1,43 @@
+.postevent-page {
+  background-image: linear-gradient(#ffffff 3px, transparent 3px),
+    linear-gradient(to right, #ffffff 3px, transparent 3px);
+  background-size: 150px 100px;
+  background-color: #dd9ef6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.postevent-container {
+  width: 100%;
+  max-width: 95vh;
+  max-height: 100vh;
+  border-radius: none;
+  border: 2px solid var(--text);
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.top-line {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--text);
+}
+
+.postevent-title {
+  border-left: 5px solid var(--secondary);
+  border-top: 5px solid var(--secondary);
+  margin-left: auto;
+  font-family: "IBM Plex Mono", monospace;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.formevent-container {
+  padding: 2rem;
+}
+
+#post-button {
+}

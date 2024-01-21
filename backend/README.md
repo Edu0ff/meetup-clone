@@ -1,12 +1,12 @@
-# API de INVENT - Backend del Panel de Administración 1.0
+# API de MeeMee
 
 ## Descripción
 
-La API de INVENT es el backend de un panel de administración para una empresa intermediaria de envíos de mercancías llamada INVENT. Los trabajadores pueden crear envíos a través de la plataforma, añadiendo información sobre el envío. La API también se integra con una base de datos MySQL para almacenar y recuperar datos relacionados con los envíos.
+La API de MeeMee es el backend de una aplicación para una empresa organizadora de meetups llamada MeeMee. La API también se integra con una base de datos MySQL para almacenar y recuperar datos relacionados con los envíos.
 
 ## Configuración de la Base de Datos
 
-La API de INVENT utiliza MySQL como base de datos para almacenar información sobre envíos, usuarios y compañías transportistas. Asegúrate de seguir estos pasos para configurar correctamente la base de datos:
+La API de MeeMee utiliza MySQL como base de datos para almacenar información sobre los meetups y usuarios. Asegúrate de seguir estos pasos para configurar correctamente la base de datos:
 
 1. Instala MySQL: Si aún no tienes MySQL instalado, puedes descargarlo desde el sitio web oficial: MySQL Downloads.
 
@@ -16,12 +16,12 @@ La API de INVENT utiliza MySQL como base de datos para almacenar información so
 
 Asegúrate de que el archivo .env en la raíz de tu proyecto contenga la configuración correcta para MySQL. Debería tener variables como DB_PORT y JWT SECRET. (Existe un archivo .env.example)
 
-4. MySQL Client en la API: La API de INVENT utiliza un módulo llamado MySQLClient.js para gestionar la conexión a la base de datos. Asegúrate de que este archivo esté configurado para utilizar las variables de entorno del archivo .env y los valores definidos en config.js:
+4. MySQL Client en la API: La API de MeeMee utiliza un módulo llamado MySQLClient.js para gestionar la conexión a la base de datos. Asegúrate de que este archivo esté configurado para utilizar las variables de entorno del archivo .env y los valores definidos en config.js:
 
 - `address` debería ser "localhost" o la dirección de tu base de datos MySQL.
 - `user` debería ser "demo" o el usuario de tu base de datos MySQL.
 - `password` debería obtenerse de process.env.DB_PASSWORD o utilizar "password" si no se proporciona en el archivo .env.
-- `database` debería ser "invent" o el nombre de tu base de datos MySQL.
+- `database` debería ser "MeeMee" o el nombre de tu base de datos MySQL.
 
 ## Crear las tablas de la base de datos
 
@@ -33,7 +33,7 @@ Este comando permite inicializar las tablas en la base de datos utilizando Node.
 
 ## Ejecutar la API
 
-Para ejecutar la API de INVENT, sigue estos pasos:
+Para ejecutar la API de MeeMee, sigue estos pasos:
 
 1. Instalación de Dependencias: Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando para instalar las dependencias:
 
@@ -57,36 +57,28 @@ La API debería estar en funcionamiento y escuchando en un puerto específico. P
 
 - `GET /users/category/:category`: Obtiene una lista de usuarios por categoría.
 
-### Envíos
+### Meetups
 
-- `POST /shipments`: Crea un nuevo envío proporcionando detalles como dirección de destino, código postal, nombres del destinatario y remitente, y peso del envío. La API elegirá automáticamente la empresa transportista y calculará el precio.
+- `POST /meetups`: Crea un nuevo meetup.
 
-- `GET /shipments`: Obtiene una lista de todos los envíos creados.
+- `GET /meetups`: Obtiene una lista de todos los meetups.
 
-- `GET /shipments/:id`: Obtiene detalles de un envío por su ID.
+- `GET /carrier/:id`: Obtiene detalles de un meetup por su ID.
 
-- `DELETE /shipments/:id`: Elimina un envío por su ID.
+- `PUT /carrier/:id`: Actualiza cualquier parametro de un meetup por su ID.
 
-### Empresas Transportistas
+- `DELETE /carrier/:id`: Elimina un meetup por su ID.
 
-- `POST /carrier`: Crea una nueva empresa transportista.
-
-- `GET /carriers`: Obtiene una lista de todas las empresas transportistas.
-
-- `GET /carrier/:id`: Obtiene detalles de una empresa transportista por su ID.
-
-- `PUT /carrier/:id`: Actualiza el nombre de una empresa transportista por su ID.
-
-- `DELETE /carrier/:id`: Elimina una empresa transportista por su ID.
+- `PUT /meetups/:id/updateAttendeesCount`: Actualiza el contador de asistencia de un meetup por su ID.
 
 ## Ejecutar test
 
-Para ejecutar los test de la API de INVENT, sigue estos pasos:
+Para ejecutar los test de la API de MeeMee, sigue estos pasos:
 
 1. Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando para ejecutar los test:
 
 - npm run test
-- 
+
 ## Tecnologías utilizadas
 
 - Node.js: La plataforma en la que se basa la aplicación.
@@ -111,3 +103,4 @@ Para ejecutar los test de la API de INVENT, sigue estos pasos:
 
 - Vitest: Un marco de prueba para aplicaciones Vue 3. Se utiliza para las pruebas del proyecto.
 
+- Bcrypt: Biblioteca de hashing especializada en la seguridad de contraseñas en aplicaciones web.
