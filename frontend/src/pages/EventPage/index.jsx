@@ -5,33 +5,69 @@ function EventPage() {
   return (
     <main className="event-page">
       <div className="green-banner" id="goback-banner">
-        <p>Go Back</p>
+        <button id="goback-button">Go Back</button>
       </div>
       <div className="event-container">
         <h1 className="event-title">Event Title</h1>
         <div className="event-locationinfo">
-          <div className="event-map">EventMap</div>
-          <div className="event-location">and info</div>
+          <div className="event-map" id="eventpage-map">
+            EventMap
+          </div>
+          <div className="event-location">
+            <img
+              className="event-icon"
+              src="../../icons/location.svg"
+              alt="location"
+            />
+            <p>and info</p>
+          </div>
         </div>
-        <div className="event-time">Date and hour</div>
-        <div className="event-going">9 going</div>
-        <div className="event-signme">
-          <button className="button-signme">Sign me up!</button>
+        <div className="green-banner" id="event-time">
+          <img
+            className="event-icon"
+            src="../../icons\calendar.svg"
+            alt="calendar"
+          />
+          Date and hour
         </div>
-        <div>
-          <img src="" alt="" />
+        <div className="green-banner" id="event-going">
+          9 going
         </div>
-        <div>
-          <p>
+        <div className="green-banner" id="event-signme">
+          <img
+            className="event-icon"
+            src="../../icons\check.svg"
+            alt="attendees"
+          />
+          <button id="button-signme">Sign me up!</button>
+        </div>
+        <div id="eventpage-imgcontainer">
+          <img
+            id="eventpage-image"
+            src="../../img/event1.jpg"
+            alt="event photo"
+          />
+        </div>
+        <div id="eventpage-details">
+          <p id="eventpage-text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
             dolorum nesciunt ut amet magnam dignissimos dicta eos a magni
             adipisci? Laudantium expedita ipsam aut esse hic voluptatibus qui
             praesentium maxime.
           </p>
           <div>
-            <img src="" alt="" />
+            <img
+              id="eventpage-person"
+              src="../../userPhoto/user1.jpg"
+              alt="user photo"
+            />
             <div>
-              <p>Orgnized by</p>
+              <img
+                className="event-icon"
+                src="../../icons\person.svg"
+                alt="orgnized by"
+              />
+              <p id="eventpage-organizedby">Organized by</p>
             </div>
           </div>
         </div>
