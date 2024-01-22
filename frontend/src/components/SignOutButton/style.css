@@ -1,0 +1,12 @@
+.sign-out-button {
+  margin-right: 1rem;
+}
+
+.sign-out-link {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.sign-out-link:hover {
+  color: var(--primary);
+}
