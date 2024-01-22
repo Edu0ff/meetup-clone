@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function ProfilePage() {
+function UserProfilePage() {
   return (
     <main>
       <p>User Profile Page</p>
@@ -9,4 +9,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default UserProfilePage;

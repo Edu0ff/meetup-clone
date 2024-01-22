@@ -4,6 +4,7 @@ import {
   loginController,
   getUserController,
   getUsersByCategoryController,
+  updateUserController,
 } from '../Controllers/Users.js'
 import { authUser } from '../Middlewares/auth.js'
 
@@ -14,6 +15,8 @@ userRoutes.post('/user/register', newUserController)
 userRoutes.post('/user/login', loginController)
 
 userRoutes.get('/user/:id', authUser, getUserController)
+
+userRoutes.put('/user/:id', authUser, updateUserController)
 
 userRoutes.get(
   '/users/category/:category',

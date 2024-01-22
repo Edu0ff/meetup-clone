@@ -67,6 +67,21 @@ class UserService {
   async getUsersByMeetupsAttended(meetups_attended) {
     return this.userRepository.getUsersByMeetups_attended(meetups_attended)
   }
+  async updateUser(
+    userId,
+    { username, name, last_name, category, bio, email, password, avatar },
+  ) {
+    return this.userRepository.updateUser(userId, {
+      username,
+      name,
+      last_name,
+      category,
+      bio,
+      email,
+      password,
+      avatar,
+    })
+  }
 }
 
 export default UserService

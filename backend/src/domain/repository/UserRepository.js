@@ -179,4 +179,75 @@ export class UserRepository {
       }
     }
   }
+
+  async updateUser(
+    userId,
+    { username, name, last_name, category, bio, email, password, avatar },
+  ) {
+    let connection
+
+    try {
+      connection = await getConnection()
+
+      const updateFields = []
+      const updateValues = []
+
+      if (username) {
+        updateFields.push('username = ?')
+        updateValues.push(username)
+      }
+
+      if (name) {
+        updateFields.push('name = ?')
+        updateValues.push(name)
+      }
+
+      if (last_name) {
+        updateFields.push('last_name = ?')
+        updateValues.push(last_name)
+      }
+
+      if (category) {
+        updateFields.push('category = ?')
+        updateValues.push(category)
+      }
+
+      if (bio) {
+        updateFields.push('bio = ?')
+        updateValues.push(bio)
+      }
+
+      if (email) {
+        updateFields.push('email = ?')
+        updateValues.push(email)
+      }
+
+      if (password) {
+        const saltRounds = 10
+        const hashedPassword = await bcrypt.hash(password, saltRounds)
+
+        updateFields.push('password = ?')
+        updateValues.push(hashedPassword)
+      }
+
+      if (avatar) {
+        updateFields.push('avatar = ?')
+        updateValues.push(avatar)
+      }
+
+      if (updateFields.length === 0) {
+        // No hay campos para actualizar
+        return
+      }
+
+      const updateQuery = `UPDATE users SET ${updateFields.join(', ')} WHERE id = ?`
+      updateValues.push(userId)
+
+      await connection.query(updateQuery, updateValues)
+    } finally {
+      if (connection) {
+        connection.release()
+      }
+    }
+  }
 }
