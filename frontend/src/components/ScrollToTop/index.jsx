@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import BlackArrow from "../BlackArrow";
 
 function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,9 +26,12 @@ function ScrollToTop() {
   };
 
   return (
-    <div id="scrollto-top">
-      {isVisible && <BlackArrow onClick={scrollToTop} />}
-    </div>
+    <button
+      className={`scroll-to-top ${isVisible ? "show" : "hide"}`}
+      onClick={scrollToTop}
+    >
+      ⬆
+    </button>
   );
 }
 

@@ -35,8 +35,13 @@ function SignUpPage() {
       return;
     }
 
+    if (pass1.length < 8) {
+      toast.error("La contraseña debe tener al menos 8 caracteres.");
+      return;
+    }
+
     try {
-      await registerUserService({
+      const response = await registerUserService({
         username,
         name,
         last_name: lastName,
@@ -45,6 +50,11 @@ function SignUpPage() {
         email,
         password: pass1,
       });
+
+      if (response.error) {
+        toast.error(response.error);
+        return;
+      }
 
       const loginToken = await loginUserService({ email, password: pass1 });
 
@@ -65,7 +75,7 @@ function SignUpPage() {
 
   return (
     <main className="signup-page">
-      <div className="basic-container">
+      <div className="signup-container">
         <img className="signup-image" src="/img/cosplay.avif" alt="" />
         <div className="signup-section">
           <div className="signup-header">

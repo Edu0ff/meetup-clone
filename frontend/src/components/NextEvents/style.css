@@ -1,4 +1,4 @@
-.green-banner {
+.next-events-banner {
   background-color: var(--secondary);
   color: var(--text);
   font-weight: 600;
@@ -10,15 +10,12 @@
   padding: 10px;
   display: flex;
   align-items: center;
+  margin-top: 1.5rem;
+  margin-left: -3px;
   box-sizing: border-box;
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
-  margin-left: -3px;
 }
 
-.green-banner p {
+.next-events-banner p {
   margin-left: 2.5rem;
-}
-
-#nextevents-banner {
-  margin-top: 1.5rem;
 }

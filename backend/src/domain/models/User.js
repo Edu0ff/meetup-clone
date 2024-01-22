@@ -96,4 +96,47 @@ export class User {
   hasAvatar(avatar) {
     return this.avatar === avatar
   }
+
+  update({
+    username,
+    name,
+    last_name,
+    category,
+    bio,
+    email,
+    password,
+    avatar,
+  }) {
+    if (username) {
+      this.username = username
+    }
+
+    if (name) {
+      this.name = name
+    }
+
+    if (last_name) {
+      this.last_name = last_name
+    }
+
+    if (category) {
+      this.category = category
+    }
+
+    if (bio) {
+      this.bio = bio
+    }
+
+    if (email) {
+      this.email = new UserEmail(email)
+    }
+
+    if (password) {
+      this.password = UserPassword.fromPlain(password)
+    }
+
+    if (avatar) {
+      this.avatar = avatar
+    }
+  }
 }

@@ -21,28 +21,28 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src="../icons\mail.svg" alt="mail" />
+          <img src="icons\mail.svg" alt="mail" />
         </a>
         <a
           href="https://www.tiktok.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src="../icons/tik-tok.svg" alt="tik-tok" />
+          <img src="icons\tik-tok.svg" alt="tik-tok" />
         </a>
         <a
           href="https://discord.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src="../icons\discord.svg" alt="discord" />
+          <img src="icons\discord.svg" alt="discord" />
         </a>
         <a
           href="https://www.instagram.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src="../icons\instagram.svg" alt="instagram" />
+          <img src="icons\instagram.svg" alt="instagram" />
         </a>
       </div>
     </footer>
