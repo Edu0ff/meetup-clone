@@ -1,45 +1,12 @@
-.arrow-button {
-  position: relative;
-  background-color: var(--primary);
-  border-radius: none;
-  border: 2px solid var(--text);
-  width: 3.5rem;
-  height: 3rem;
-  box-sizing: border-box;
-  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+#black-arrow {
+  background-color: var(--text);
+  height: 2rem;
+  width: 2rem;
   cursor: pointer;
-  overflow: hidden;
 }
 
-.triangles-container {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.black-triangle,
-.green-triangle {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  transform: rotate(0deg);
-}
-
-.black-triangle {
-  border-width: 20px 0 20px 34.6px;
-  border-color: transparent transparent transparent var(--text);
-  transform: scale(0.75);
-}
-
-.green-triangle {
-  border-width: 16px 0 16px 27.6px;
-  border-color: transparent transparent transparent var(--secondary);
-  transform: scale(0.97);
-  z-index: 2;
-  top: -16px;
-  left: -32.3px;
+.blackarrow-img {
+  width: 100%;
+  height: auto;
+  padding: 3px;
 }
