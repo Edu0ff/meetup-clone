@@ -1,7 +1,8 @@
-import "./style.css";
+import React from "react";
 import { NavLink } from "react-router-dom";
-
 import HomeButton from "../HomeButton";
+import SignOutButton from "../SignOutButton";
+import "./style.css";
 
 function Header() {
   return (
@@ -18,7 +19,7 @@ function Header() {
           <NavLink to="/events">Explore Events</NavLink>
           <div className="separator"></div>
           <div className="nav-signin">
-            <NavLink to="/signin">Sign In</NavLink>
+            <SignOutButton />
           </div>
         </div>
       </nav>
