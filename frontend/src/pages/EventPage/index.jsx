@@ -31,13 +31,18 @@ function EventPage() {
           Date and hour
         </div>
         <div className="green-banner" id="event-going">
+          <img
+            className="event-icon"
+            src="../../icons\attendees.svg"
+            alt="signme"
+          />
           9 going
         </div>
         <div className="green-banner" id="event-signme">
           <img
             className="event-icon"
             src="../../icons\check.svg"
-            alt="attendees"
+            alt="signme"
           />
           <button id="button-signme">Sign me up!</button>
         </div>
