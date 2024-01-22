@@ -26,11 +26,13 @@
   padding-right: 1rem;
   font-weight: 400;
   font-size: 26px;
+  text-decoration: none;
+  color: var(--text);
 }
 
 #userphoto-profile {
-  width: 20rem;
-  height: 20rem;
+  width: 15rem;
+  height: 15rem;
   object-fit: cover;
   border: dashed;
 }
@@ -44,4 +46,20 @@
 #myevents,
 #events-saved {
   border-left: 2px solid var(--text);
+}
+
+.profile-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.profile-text {
+  width: 60%;
+  padding: 2rem;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
 }
