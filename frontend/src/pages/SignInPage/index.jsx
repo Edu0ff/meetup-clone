@@ -1,39 +1,96 @@
-import React from "react";
-import "./style.css";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
+import { activateUserService, loginUserService } from "../../services/index.js";
 import ArrowButton from "../../components/ArrowButton";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 function SignInPage() {
+  const { setToken, setLogin, setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { token } = useParams();
+  const [activated, setActivated] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const activateAccount = async (token) => {
+      try {
+        const response = await activateUserService({ token });
+
+        if (response.message === "Account activated successfully") {
+          toast.success("Account activated successfully");
+          setActivated(true);
+        }
+
+        if (response) {
+          navigate("/account/myprofile");
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+
+    if (!initialLoad && token && !activated) {
+      activateAccount(token);
+    }
+    setInitialLoad(false);
+  }, [token, activated, initialLoad, navigate]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = await loginUserService({ email, password });
+      setToken(data);
+      setLogin(true);
+      setAuth(true);
+
+      if (data) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <main className="signin-page">
-      <div className="signin-container">
-        <img className="signin-image" src="/img/show.avif" alt="" />
+      <div className="basic-container" id="signin-container">
+        {/* <img className="signin-image" src="/img/show.avif" alt="" /> */}
         <div className="signin-section">
           <div className="signin-header">
             <Link to="/signup">Sign Up</Link>
             <Link to="/signin">Sign In</Link>
           </div>
           <h2 className="signin-text">Glad to see you again!</h2>
-          <form action="">
+          <form onSubmit={submitHandler}>
             <div className="form-group">
               <input
+                className="input-reg"
                 type="email"
                 id="email"
                 name="email"
                 required
-                placeholder="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group">
               <input
+                className="input-reg"
                 type="password"
                 id="password"
                 name="password"
                 required
-                placeholder="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <ArrowButton type="submit" />
+            <div className="form-group">
+              <ArrowButton id="signin-button" type="submit" />
+            </div>
           </form>
         </div>
       </div>
