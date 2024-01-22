@@ -58,7 +58,7 @@ function SignInPage() {
   return (
     <main className="signin-page">
       <div className="basic-container" id="signin-container">
-        {/* <img className="signin-image" src="/img/show.avif" alt="" /> */}
+        <img className="signin-image" src="/img/show.avif" alt="" />
         <div className="signin-section">
           <div className="signin-header">
             <Link to="/signup">Sign Up</Link>
@@ -88,9 +88,7 @@ function SignInPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-group">
-              <ArrowButton id="signin-button" type="submit" />
-            </div>
+            <ArrowButton id="signin-button" type="submit" />
           </form>
         </div>
       </div>

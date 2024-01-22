@@ -65,7 +65,7 @@ function SignUpPage() {
 
   return (
     <main className="signup-page">
-      <div className="signup-container">
+      <div className="basic-container">
         <img className="signup-image" src="/img/cosplay.avif" alt="" />
         <div className="signup-section">
           <div className="signup-header">
