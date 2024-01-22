@@ -7,7 +7,6 @@ function AllEventsPage() {
   return (
     <main className="events-page">
       <p>All Events Page</p>
-      <ConfirmBox />
       <ScrollToTop />
     </main>
   );

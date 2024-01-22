@@ -3,10 +3,12 @@
   height: 2rem;
   width: 2rem;
   cursor: pointer;
+  border: none;
 }
 
 .blackarrow-img {
   width: 100%;
   height: auto;
   padding: 3px;
+  margin-top: 4px;
 }

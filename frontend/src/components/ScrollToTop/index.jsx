@@ -27,14 +27,9 @@ function ScrollToTop() {
   };
 
   return (
-    <BlackArrow id="scrollto-top" />
-
-    // <button
-    //   className={`scroll-to-top ${isVisible ? "show" : "hide"}`}
-    //   onClick={scrollToTop}
-    // >
-    //   ⬆
-    // </button>
+    <div id="scrollto-top">
+      {isVisible && <BlackArrow onClick={scrollToTop} />}
+    </div>
   );
 }
 
