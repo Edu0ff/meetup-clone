@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.basic-container {
+.signin-container {
   display: flex;
   align-items: center;
   max-width: 95vh;
@@ -52,7 +52,4 @@
 
 .signin-header a {
   text-decoration: none;
-}
-
-#signin-button {
 }
