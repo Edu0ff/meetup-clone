@@ -6,6 +6,24 @@ export class AttendeeRepository {
     try {
       connection = await getConnection()
 
+      const meetupExists = await connection.query(
+        'SELECT COUNT(*) AS count FROM Meetups WHERE id = ?',
+        [meetupId],
+      )
+
+      const userExists = await connection.query(
+        'SELECT COUNT(*) AS count FROM users WHERE id = ?',
+        [userId],
+      )
+
+      if (meetupExists[0][0].count === 0) {
+        throw new Error(`Meetup with ID: ${meetupId} not found`)
+      }
+
+      if (userExists[0][0].count === 0) {
+        throw new Error(`User with ID: ${userId} not found`)
+      }
+
       const insertQuery = `
         INSERT INTO Attendees (meetup_id, user_id, will_attend)
         VALUES (?, ?, ?)
@@ -33,6 +51,10 @@ export class AttendeeRepository {
         'SELECT * FROM Attendees WHERE meetup_id = ?',
         [meetupId],
       )
+
+      if (result.length === 0) {
+        throw new Error(`Meetup with ID: ${meetupId} has no attendees`)
+      }
 
       return result
     } finally {

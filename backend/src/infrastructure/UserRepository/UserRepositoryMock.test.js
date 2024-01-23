@@ -13,9 +13,6 @@ describe('UserRepositoryMock', () => {
       username: 'john_doe',
       email: 'john@example.com',
       password: 'password123',
-      category: 'usuario',
-      name: 'John',
-      last_name: 'Doe',
       bio: 'A brief bio',
       avatar: 'avatar.jpg',
       meetups_attended: 0,
@@ -24,28 +21,9 @@ describe('UserRepositoryMock', () => {
     expect(newUser).toBeDefined()
     expect(newUser.username).toBe('john_doe')
     expect(newUser.email).toBe('john@example.com')
-    expect(newUser.category).toBe('usuario')
-    expect(newUser.name).toBe('John')
-    expect(newUser.last_name).toBe('Doe')
     expect(newUser.bio).toBe('A brief bio')
     expect(newUser.avatar).toBe('avatar.jpg')
     expect(newUser.meetups_attended).toBe(0)
-  })
-
-  it('should throw an error when creating a user with an invalid category', async () => {
-    await expect(
-      userRepositoryMock.createUser({
-        username: 'alice_smith',
-        email: 'alice@example.com',
-        password: 'secure123',
-        category: 'invalid_category',
-        name: 'John',
-        last_name: 'Doe',
-        bio: 'A brief bio',
-        avatar: 'avatar.jpg',
-        meetups_attended: 0,
-      }),
-    ).rejects.toThrow('The category only can be "usuario" or "administrador')
   })
 
   it('should log in a user with valid credentials', async () => {
@@ -53,7 +31,6 @@ describe('UserRepositoryMock', () => {
       username: 'alice_smith',
       email: 'alice@example.com',
       password: 'secure123',
-      category: 'administrador',
     })
 
     const { user, token } = await userRepositoryMock.login(
@@ -78,9 +55,6 @@ describe('UserRepositoryMock', () => {
       username: 'alice_smith',
       email: 'alice@example.com',
       password: 'secure123',
-      category: 'usuario',
-      name: 'John',
-      last_name: 'Doe',
       bio: 'A brief bio',
       avatar: 'avatar.jpg',
       meetups_attended: 0,
@@ -108,9 +82,6 @@ describe('UserRepositoryMock', () => {
       username: 'john_doe',
       email: 'john@example.com',
       password: 'password123',
-      category: 'usuario',
-      name: 'John',
-      last_name: 'Doe',
       bio: 'A brief bio',
       avatar: 'avatar.jpg',
       meetups_attended: 0,
@@ -138,9 +109,6 @@ describe('UserRepositoryMock', () => {
       username: 'john_doe',
       email: 'john@example.com',
       password: 'password123',
-      category: 'usuario',
-      name: 'John',
-      last_name: 'Doe',
       bio: 'A brief bio',
       avatar: 'avatar.jpg',
       meetups_attended: 0,
@@ -173,9 +141,6 @@ describe('UserRepositoryMock', () => {
       username: 'john_doe',
       email: 'john@example.com',
       password: 'password123',
-      category: 'usuario',
-      name: 'John',
-      last_name: 'Doe',
       bio: 'A brief bio',
       avatar: 'avatar.jpg',
       meetups_attended: 0,

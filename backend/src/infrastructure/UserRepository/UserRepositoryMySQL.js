@@ -11,13 +11,9 @@ export class UserRepositoryMySQL extends UserRepository {
 
   async save(user) {
     await this.client.query(
-      `INSERT INTO users (username, name, last_name, category, bio, email, password, meetups_attended, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, 
-        ?, ? )`,
+      `INSERT INTO users (username, bio, email, password, meetups_attended, avatar) VALUES (?, ?, ?, ?, ?, ?)`,
       [
         user.username,
-        user.name,
-        user.last_name,
-        user.category,
         user.bio,
         user.email.email,
         user.password.password,

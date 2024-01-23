@@ -161,21 +161,21 @@ async function insertAttendees(connection) {
 
 async function updateCounters(connection) {
   await connection.query(`
-    UPDATE users
-    SET meetups_attended = (
-      SELECT COUNT(*)
-      FROM Attendees
-      WHERE Attendees.user_id = users.id
-      AND Attendees.will_attend = 1
-    )
-  `)
-
-  await connection.query(`
     UPDATE Meetups
     SET attendees_count = (
       SELECT COUNT(*)
       FROM Attendees
       WHERE Attendees.meetup_id = Meetups.id
+      AND Attendees.will_attend = 1
+    )
+  `)
+
+  await connection.query(`
+    UPDATE users
+    SET meetups_attended = (
+      SELECT COUNT(*)
+      FROM Attendees
+      WHERE Attendees.user_id = users.id
       AND Attendees.will_attend = 1
     )
   `)
