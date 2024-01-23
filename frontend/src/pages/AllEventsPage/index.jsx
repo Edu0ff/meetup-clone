@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { searchMeetups } from "../../services/index.js";
+import Loading from "../../components/Loading";
 
 function AllEventsPage() {
   const [meetups, setMeetups] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMeetups = async () => {
@@ -12,6 +14,8 @@ function AllEventsPage() {
         setMeetups(meetupsData);
       } catch (error) {
         console.error("Error fetching meetups:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -20,8 +24,10 @@ function AllEventsPage() {
 
   return (
     <main className="events-page">
-      {/*   <h1>All Events Page</h1>
-      {meetups.length > 0 ? (
+      <h1>All Events Page</h1>
+      {loading ? (
+        <Loading />
+      ) : meetups.length > 0 ? (
         <ul>
           {meetups.map((meetup) => (
             <li key={meetup.id}>
@@ -32,14 +38,12 @@ function AllEventsPage() {
               <p>Date: {meetup.date}</p>
               <p>Time: {meetup.time}</p>
               <p>Attendees Count: {meetup.attendees_count}</p>
-              <p>Created At: {meetup.created_at}</p>
-              <p>Updated At: {meetup.updated_at}</p>
             </li>
           ))}
         </ul>
       ) : (
         <p>No hay eventos disponibles.</p>
-      )} */}
+      )}
     </main>
   );
 }
