@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken'
+import { generateError } from '../../../domain/utils/helpers.js'
 export const authUser = (req, res, next) => {
   try {
     const { authorization } = req.headers
@@ -30,10 +32,12 @@ export const authUser = (req, res, next) => {
 
     next()
   } catch (error) {
+    console.error(error)
+
     if (error instanceof jwt.JsonWebTokenError) {
       throw generateError('Token JWT mal formado', 401)
     }
-    console.error(error)
+
     next(error)
   }
 }
