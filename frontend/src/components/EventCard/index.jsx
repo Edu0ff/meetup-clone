@@ -69,7 +69,7 @@ function EventCard() {
                     src="icons/check.svg"
                     alt="Going"
                   />
-                  {meetup.attendees_count} Going
+                  {meetup.attendees_count} going
                 </p>
               </div>
             </li>
