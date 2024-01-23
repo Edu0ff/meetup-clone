@@ -1,6 +1,9 @@
 import { getConnection } from '../../infrastructure/Database/MySQLClient.js'
-
+import { AttendeeRepository } from './AttendeeRepository.js'
 export class MeetupRepository {
+  constructor() {
+    this.attendeeRepository = new AttendeeRepository()
+  }
   async createMeetup(meetupData) {
     let connection
     try {
@@ -90,18 +93,57 @@ export class MeetupRepository {
     if (!id) {
       throw new Error('No se proporcionó un ID.')
     }
+
     let connection
     try {
       connection = await getConnection()
 
-      await connection.query(
-        `
-        DELETE FROM meetups WHERE id = ?
-      `,
+      const meetupExists = await connection.query(
+        'SELECT COUNT(*) AS count FROM Meetups WHERE id = ?',
         [id],
       )
 
-      return
+      if (meetupExists[0][0].count === 0) {
+        throw new Error(`Meetup with ID: ${id} not found`)
+      }
+
+      await connection.beginTransaction()
+
+      try {
+        const userIds = await connection.query(
+          'SELECT user_id FROM Attendees WHERE meetup_id = ?',
+          [id],
+        )
+
+        await connection.query('DELETE FROM Attendees WHERE meetup_id = ?', [
+          id,
+        ])
+
+        await connection.query('DELETE FROM Meetups WHERE id = ?', [id])
+
+        for (const { user_id } of userIds[0]) {
+          await connection.query(
+            `
+          UPDATE users
+          SET meetups_attended = (
+            SELECT COUNT(*)
+            FROM Attendees
+            WHERE Attendees.user_id = ?
+            AND Attendees.will_attend = 1
+          )
+          WHERE id = ?
+        `,
+            [user_id, user_id],
+          )
+        }
+
+        await connection.commit()
+      } catch (error) {
+        await connection.rollback()
+        throw error
+      }
+
+      return { message: 'Meetup eliminado correctamente.' }
     } finally {
       if (connection) connection.release()
     }

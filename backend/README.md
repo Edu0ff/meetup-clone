@@ -55,8 +55,6 @@ La API debería estar en funcionamiento y escuchando en un puerto específico. P
 
 - `GET /user/:id`: Obtiene la información de un usuario por su ID.
 
-- `GET /users/category/:category`: Obtiene una lista de usuarios por categoría.
-
 ### Meetups
 
 - `POST /meetups`: Crea un nuevo meetup.

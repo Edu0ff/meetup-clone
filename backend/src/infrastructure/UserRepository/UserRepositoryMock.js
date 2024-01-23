@@ -7,10 +7,6 @@ class UserRepositoryMock extends UserRepository {
   }
 
   async createUser(user) {
-    if (user.category !== 'usuario' && user.category !== 'administrador') {
-      throw new Error('The category only can be "usuario" or "administrador')
-    }
-
     this.users.push(user)
 
     return user
