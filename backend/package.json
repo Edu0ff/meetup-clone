@@ -1,7 +1,7 @@
 {
-  "name": "invent-backend",
+  "name": "meemee-backend",
   "version": "1.0.0",
-  "description": "Base de datos para Invent",
+  "description": "Base de datos para MeeMee",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
@@ -24,6 +24,7 @@
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "express-fileupload": "^1.4.3",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",

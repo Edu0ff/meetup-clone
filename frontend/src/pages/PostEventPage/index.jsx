@@ -62,7 +62,7 @@ function PostEventPage() {
               <input type="text" id="where" name="where" required />
             </div>
 
-            <ArrowButton type="submit" />
+            <ArrowButton id="post-button" type="submit" />
           </form>
         </div>
       </div>

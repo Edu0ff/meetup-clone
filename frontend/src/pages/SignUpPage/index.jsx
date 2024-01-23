@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUserService, loginUserService } from "../../services/index.js";
 import { toast } from "sonner";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import ArrowButton from "../../components/ArrowButton";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -85,16 +86,16 @@ function SignUpPage() {
           <form onSubmit={handleForm}>
             <ul>
               <li className="form-group">
-                <label htmlFor="username">Nombre de usuario</label>
                 <input
                   type="text"
                   id="username"
                   name="username"
                   required
+                  placeholder="nickname"
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </li>
-              <li className="form-group">
+              {/* <li className="form-group">
                 <label htmlFor="name">Nombre</label>
                 <input
                   type="text"
@@ -126,60 +127,54 @@ function SignUpPage() {
                   <option value="usuario">Usuario</option>
                   <option value="administrador">Administrador</option>
                 </select>
-              </li>
+              </li> */}
               <li className="form-group">
-                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
+                  placeholder="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </li>
               <li className="form-group">
-                <label htmlFor="pass1">Contraseña</label>
                 <input
+                  htmlFor="pass1"
                   type="password"
                   id="pass1"
                   name="pass1"
                   required
+                  placeholder="password"
                   onChange={(e) => setPass1(e.target.value)}
                 />
               </li>
               <li className="form-group">
-                <label htmlFor="pass2">Repetir contraseña</label>
                 <input
+                  htmlFor="pass2"
                   type="password"
                   id="pass2"
                   name="pass2"
                   required
+                  placeholder="repeat password"
                   onChange={(e) => setPass2(e.target.value)}
                 />
               </li>
               <li className="form-group">
-                <label htmlFor="bio">
-                  Cuenta al mundo algo pequeño sobre ti.
-                </label>
                 <textarea
                   id="bio"
                   name="bio"
                   value={bio}
                   onChange={handleBioChange}
                   required
+                  placeholder="tell the world a little about you_"
                   maxLength={255}
                 />
                 <div className="character-count">{`${characterCount}/255`}</div>
               </li>
             </ul>
 
-            <div className="form-group">
-              <p>¿Ya tienes una cuenta con nosotros?</p>
-              <Link style={{ textAlign: "center" }} to="/signin">
-                <p className="anchor">Inicia sesión</p>
-              </Link>
-            </div>
-            <button type="submit">Registrarse</button>
+            <ArrowButton id="signup-button" type="submit" />
           </form>
         </div>
       </div>
