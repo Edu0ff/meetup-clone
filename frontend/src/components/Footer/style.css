@@ -38,6 +38,18 @@ footer {
   margin: 5px;
 }
 
+.footer-socials a img:hover {
+  -webkit-filter: drop-shadow(1px 1px 0 var(--secondary))
+    drop-shadow(-1px 1px 0 var(--secondary))
+    drop-shadow(1px -1px 0 var(--secondary))
+    drop-shadow(-1px -1px 0 var(--secondary));
+
+  filter: drop-shadow(1px 1px 0 var(--secondary))
+    drop-shadow(-1px 1px 0 var(--secondary))
+    drop-shadow(1px -1px 0 var(--secondary))
+    drop-shadow(-1px -1px 0 var(--secondary));
+}
+
 .triangleright-footer {
   position: absolute;
   width: 0px;

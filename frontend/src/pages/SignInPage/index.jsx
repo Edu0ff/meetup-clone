@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { activateUserService, loginUserService } from "../../services/index.js";
 import ArrowButton from "../../components/ArrowButton";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import "./style.css";
 
 function SignInPage() {
   const { setToken, setLogin, setAuth } = useContext(AuthContext);
@@ -58,7 +59,7 @@ function SignInPage() {
   return (
     <main className="signin-page">
       <div className="basic-container" id="signin-container">
-        {/* <img className="signin-image" src="/img/show.avif" alt="" /> */}
+        <img className="signin-image" src="/img/show.avif" alt="" />
         <div className="signin-section">
           <div className="signin-header">
             <Link to="/signup">Sign Up</Link>
@@ -73,7 +74,7 @@ function SignInPage() {
                 id="email"
                 name="email"
                 required
-                placeholder="Email"
+                placeholder="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -84,7 +85,7 @@ function SignInPage() {
                 id="password"
                 name="password"
                 required
-                placeholder="Password"
+                placeholder="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>

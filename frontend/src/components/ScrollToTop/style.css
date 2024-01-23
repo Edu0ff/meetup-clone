@@ -1,0 +1,6 @@
+#scrollto-top {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  transform: rotate(0.5turn);
+}
