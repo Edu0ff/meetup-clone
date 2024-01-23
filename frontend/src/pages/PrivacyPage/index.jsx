@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
+import ScrollToTop from "../../components/ScrollToTop";
 
 function PrivacyPage() {
   return (
     <main className="privacy-page">
-      <div>
+      <ScrollToTop />
+      <div id="privacy-page">
         <h1>Privacy Policy for MeeMee</h1>
 
         <h2>

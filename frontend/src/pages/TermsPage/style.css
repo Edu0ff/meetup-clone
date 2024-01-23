@@ -10,10 +10,11 @@
   background-color: #dcf08d;
 }
 
-.terms-page div {
+#terms-page {
   text-align: left;
   max-width: 800px;
   padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .terms-page h1 {
@@ -46,5 +47,5 @@
 }
 
 .terms-page a:hover {
-  color: var(--yellow-ish);
+  color: var(--secondary);
 }

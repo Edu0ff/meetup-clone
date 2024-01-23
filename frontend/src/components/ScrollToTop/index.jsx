@@ -1,36 +1,35 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
 import BlackArrow from "../BlackArrow";
+import "./style.css";
 
-function ScrollToTop() {
+const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    setIsVisible(scrollTop > 0);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      setIsVisible(scrollTop > 0);
-    };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <div id="scrollto-top">
-      {isVisible && <BlackArrow onClick={scrollToTop} />}
-    </div>
+    <button
+      id="scrollto-top"
+      onClick={scrollToTop}
+      style={{ display: isVisible ? "block" : "none" }}
+    >
+      <BlackArrow />
+    </button>
   );
-}
+};
 
 export default ScrollToTop;

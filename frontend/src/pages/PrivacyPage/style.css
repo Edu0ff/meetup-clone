@@ -10,10 +10,11 @@
   align-items: center;
 }
 
-.privacy-page div {
+#privacy-page {
   text-align: left;
   max-width: 800px;
   padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .privacy-page h1 {
