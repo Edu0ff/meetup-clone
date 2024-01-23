@@ -34,7 +34,7 @@ function AllEventsPage() {
           {meetups.map((meetup) => (
             <li key={meetup.id}>
               <Link to={`/event/${meetup.id}`}>
-                <EventCard />
+                <EventCard meetup={meetup} />
               </Link>
             </li>
           ))}
