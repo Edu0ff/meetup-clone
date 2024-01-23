@@ -1,34 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import { searchMeetups } from "../../services/index.js";
+import Loading from "../Loading";
 
 function EventCard() {
+  const [meetups, setMeetups] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMeetups = async () => {
+      try {
+        const meetupsData = await searchMeetups();
+        setMeetups(meetupsData);
+      } catch (error) {
+        console.error("Error fetching meetups:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMeetups();
+  }, []);
+
   return (
     <div className="event-card">
-      <img
-        className="eventcard-image"
-        src="https://images.unsplash.com/photo-1703994643629-6d0d56ee7a0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwNTY4MjY3Mw&ixlib=rb-4.0.3&q=80&w=1080"
-        alt=""
-        width={300}
-        height={200}
-      />
-      <p className="eventcard-location">
-        <img className="event-icon" src="icons\location.svg" alt="mail" />
-        Location
-      </p>
-      <h1 className="eventcard-title">Event Title</h1>
-      <h2 className="eventcard-by">
-        <img className="event-icon" src="icons\person.svg" alt="mail" />
-        Organized by Jane Doe
-      </h2>
-      <div className="eventcard-details">
-        <p className="eventcard-date">
-          <img className="event-icon" src="icons\calendar.svg" alt="mail" />
-          Date
-        </p>
-        <p className="eventcard-going">
-          <img className="event-icon" src="icons\check.svg" alt="mail" />9 Going
-        </p>
-      </div>
+      {loading ? (
+        <Loading />
+      ) : meetups.length > 0 ? (
+        <ul>
+          {meetups.map((meetup) => (
+            <li key={meetup.id}>
+              <img
+                className="eventcard-image"
+                src={meetup.picture}
+                alt={`Event: ${meetup.title}`}
+                width={300}
+                height={200}
+              />
+              <p className="eventcard-location">
+                <img
+                  className="event-icon"
+                  src="icons/location.svg"
+                  alt="Location"
+                />
+                {meetup.location}
+              </p>
+              <h1 className="eventcard-title">{meetup.title}</h1>
+              <h2 className="eventcard-by">
+                <img
+                  className="event-icon"
+                  src="icons/person.svg"
+                  alt="Organizer"
+                />
+                Organized by {meetup.organizer}
+              </h2>
+              <div className="eventcard-details">
+                <p className="eventcard-date">
+                  <img
+                    className="event-icon"
+                    src="icons/calendar.svg"
+                    alt="Date"
+                  />
+                  {meetup.date}
+                </p>
+                <p className="eventcard-going">
+                  <img
+                    className="event-icon"
+                    src="icons/check.svg"
+                    alt="Going"
+                  />
+                  {meetup.attendees_count} Going
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No hay eventos disponibles.</p>
+      )}
     </div>
   );
 }

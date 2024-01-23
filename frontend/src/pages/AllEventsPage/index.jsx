@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import { searchMeetups } from "../../services/index.js";
 import Loading from "../../components/Loading";
+import { Link } from "react-router-dom";
+import EventCard from "../../components/EventCard";
 
 function AllEventsPage() {
   const [meetups, setMeetups] = useState([]);
@@ -31,13 +33,9 @@ function AllEventsPage() {
         <ul>
           {meetups.map((meetup) => (
             <li key={meetup.id}>
-              <p>Title: {meetup.title}</p>
-              <p>Picture: {meetup.picture}</p>
-              <p>Theme: {meetup.theme}</p>
-              <p>Location: {meetup.location}</p>
-              <p>Date: {meetup.date}</p>
-              <p>Time: {meetup.time}</p>
-              <p>Attendees Count: {meetup.attendees_count}</p>
+              <Link to={`/event/${meetup.id}`}>
+                <EventCard />
+              </Link>
             </li>
           ))}
         </ul>
