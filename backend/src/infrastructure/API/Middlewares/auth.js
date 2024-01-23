@@ -22,14 +22,6 @@ export const authUser = (req, res, next) => {
     req.lastName = token.lastName
     req.userUsername = token.userUsername
 
-    if (req.userId !== Number(req.params.id)) {
-      console.log(req.userId, req.params.id)
-      throw generateError(
-        'No autorizado: no tienes permiso para realizar esta acción.',
-        401,
-      )
-    }
-
     next()
   } catch (error) {
     console.error(error)

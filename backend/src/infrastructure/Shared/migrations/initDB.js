@@ -38,9 +38,6 @@ async function createUsersTable(connection) {
   await connection.query(`CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    name VARCHAR(50),
-    last_name VARCHAR(50),
-    category ENUM('usuario', 'administrador'), 
     bio VARCHAR(255) NOT NULL,
     email VARCHAR(90) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -52,9 +49,6 @@ async function createUsersTable(connection) {
   const usersToInsert = [
     {
       username: 'user1',
-      name: 'Pedro',
-      last_name: 'Pérez',
-      category: 'usuario',
       bio: 'Bio de usuario 1',
       email: 'user1@example.com',
       avatar: 'https://picsum.photos/200',
@@ -62,9 +56,6 @@ async function createUsersTable(connection) {
     },
     {
       username: 'user2',
-      name: 'Juan',
-      last_name: 'García',
-      category: 'usuario',
       bio: 'Bio de usuario 2',
       email: 'user2@example.com',
       avatar: 'https://picsum.photos/200',
@@ -72,43 +63,10 @@ async function createUsersTable(connection) {
     },
     {
       username: 'user3',
-      name: 'María',
-      last_name: 'López',
-      category: 'usuario',
       bio: 'Bio de usuario 3',
       email: 'user3@example.com',
       avatar: 'https://picsum.photos/200',
       password: 'password3',
-    },
-    {
-      username: 'Ana',
-      name: 'Admin',
-      last_name: '1',
-      category: 'administrador',
-      bio: 'Bio de administrador 1',
-      email: 'user4@example.com',
-      avatar: 'https://picsum.photos/200',
-      password: 'password3',
-    },
-    {
-      username: 'Edu',
-      name: 'Admin',
-      last_name: '2',
-      category: 'administrador',
-      bio: 'Bio de administrador 2',
-      email: 'user5@example.com',
-      avatar: 'https://picsum.photos/200',
-      password: 'password5',
-    },
-    {
-      username: 'Ayoze',
-      name: 'Admin',
-      last_name: '3',
-      category: 'administrador',
-      bio: 'Bio de administrador 3',
-      email: 'user6@example.com',
-      avatar: 'https://picsum.photos/200',
-      password: 'password6',
     },
   ]
 
