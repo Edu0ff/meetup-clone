@@ -21,27 +21,12 @@ export const validateNewUser = (req, res, next) => {
 
 export const newUserController = async (req, res, next) => {
   try {
-    const {
-      username,
-      email,
-      password,
-      category,
-      bio,
-      name,
-      last_name,
-      meetups_attended,
-      avatar,
-    } = req.body
+    const { username, email, password, bio, meetups_attended, avatar } =
+      req.body
     if (password.length < 8) {
       return res
         .status(400)
         .json({ error: '"password" length must be at least 8 characters long' })
-    }
-    if (category !== 'usuario' && category !== 'administrador') {
-      throw generateError(
-        'Invalid category. Category must be "usuario" or "administrador."',
-        400,
-      )
     }
 
     const token = generateActivationToken()
@@ -49,10 +34,7 @@ export const newUserController = async (req, res, next) => {
       username,
       email,
       password,
-      category,
       bio,
-      name,
-      last_name,
       meetups_attended,
       avatar,
     })
@@ -90,22 +72,10 @@ export const updateUserController = async (req, res, next) => {
       throw generateError('No tienes permiso para actualizar este perfil.', 403)
     }
 
-    const {
-      username,
-      name,
-      last_name,
-      category,
-      bio,
-      email,
-      password,
-      avatar,
-    } = req.body
-    
+    const { username, bio, email, password, avatar } = req.body
+
     const updatedUser = await userService.updateUser(userId, {
       username,
-      name,
-      last_name,
-      category,
       bio,
       email,
       password,
@@ -125,24 +95,6 @@ export const getUserController = async (req, res, next) => {
   try {
     const user = await userService.getUserById(req.params.id)
     res.status(200).json(user)
-  } catch (err) {
-    next(err)
-  }
-}
-
-export const getUsersByCategoryController = async (req, res, next) => {
-  try {
-    const { category } = req.params
-
-    if (category !== 'usuario' && category !== 'administrador') {
-      throw generateError(
-        'Invalid category. Category must be "usuario" or "administrador."',
-        400,
-      )
-    }
-
-    const users = await userService.getUsersByCategory(category)
-    res.status(200).json(users)
   } catch (err) {
     next(err)
   }

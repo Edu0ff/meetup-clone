@@ -1,8 +1,5 @@
 export const registerUserService = async ({
   username,
-  name,
-  lastName,
-  category,
   bio,
   email,
   password,
@@ -18,9 +15,6 @@ export const registerUserService = async ({
         },
         body: JSON.stringify({
           username,
-          name,
-          last_name: lastName,
-          category,
           bio,
           email,
           password,

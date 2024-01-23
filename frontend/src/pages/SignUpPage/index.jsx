@@ -11,9 +11,6 @@ function SignUpPage() {
   const { setToken, setLogin } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [category, setCategory] = useState("");
   const [email, setEmail] = useState("");
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
@@ -44,9 +41,6 @@ function SignUpPage() {
     try {
       const response = await registerUserService({
         username,
-        name,
-        last_name: lastName,
-        category,
         bio,
         email,
         password: pass1,
@@ -95,39 +89,6 @@ function SignUpPage() {
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </li>
-              {/* <li className="form-group">
-                <label htmlFor="name">Nombre</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </li>
-              <li className="form-group">
-                <label htmlFor="lastName">Apellido</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  required
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </li>
-              <li className="form-group">
-                <label htmlFor="category">Categoría</label>
-                <select
-                  id="category"
-                  name="category"
-                  required
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <option value="">Selecciona una categoría</option>
-                  <option value="usuario">Usuario</option>
-                  <option value="administrador">Administrador</option>
-                </select>
-              </li> */}
               <li className="form-group">
                 <input
                   type="email"

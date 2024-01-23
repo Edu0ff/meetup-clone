@@ -30,7 +30,9 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.6.1",
     "mysql2-promise": "^0.1.4",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "validator": "^13.11.0",
+    "validator-js": "^0.2.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "^9.1.0",

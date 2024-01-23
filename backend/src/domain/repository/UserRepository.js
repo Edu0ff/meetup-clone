@@ -4,25 +4,10 @@ import { generateError } from '../../domain/utils/helpers.js'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
+import validator from 'validator'
 
 export class UserRepository {
-  async createUser({
-    username,
-    email,
-    password,
-    category,
-    name,
-    last_name,
-    bio,
-    avatar,
-  }) {
-    if (category !== 'usuario' && category !== 'administrador') {
-      throw generateError(
-        'The category can only be "usuario" or "administrador"',
-        400,
-      )
-    }
-
+  async createUser({ username, bio, email, password, avatar }) {
     let connection
     try {
       connection = await getConnection()
@@ -35,6 +20,13 @@ export class UserRepository {
         'SELECT * FROM users WHERE username = ?',
         [username],
       )
+
+      if (!validator.isEmail(email)) {
+        throw generateError(
+          'Por favor, ingresa un correo electrónico válido.',
+          400,
+        )
+      }
 
       if (emailExist.length > 0 && usernameExist.length > 0) {
         throw generateError(
@@ -61,15 +53,12 @@ export class UserRepository {
       const hashedPassword = await bcrypt.hash(password, saltRounds)
 
       const insertUserQuery =
-        'INSERT INTO users (username, email, password, category, name, last_name, bio, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+        'INSERT INTO users (username, bio, email, password,  avatar) VALUES ( ?, ?, ?, ?, ?)'
       const [insertResult] = await connection.query(insertUserQuery, [
         username,
+        bio,
         email,
         hashedPassword,
-        category,
-        name,
-        last_name,
-        bio,
         avatar,
       ])
 
@@ -161,29 +150,7 @@ export class UserRepository {
       if (connection) connection.release()
     }
   }
-
-  async getUsersByCategory(category) {
-    let connection
-    try {
-      connection = await getConnection()
-
-      const [users] = await connection.query(
-        'SELECT * FROM users WHERE category = ?',
-        [category],
-      )
-
-      return users
-    } finally {
-      if (connection) {
-        connection.release()
-      }
-    }
-  }
-
-  async updateUser(
-    userId,
-    { username, name, last_name, category, bio, email, password, avatar },
-  ) {
+  async updateUser(userId, { username, bio, email, password, avatar }) {
     let connection
 
     try {
@@ -195,21 +162,6 @@ export class UserRepository {
       if (username) {
         updateFields.push('username = ?')
         updateValues.push(username)
-      }
-
-      if (name) {
-        updateFields.push('name = ?')
-        updateValues.push(name)
-      }
-
-      if (last_name) {
-        updateFields.push('last_name = ?')
-        updateValues.push(last_name)
-      }
-
-      if (category) {
-        updateFields.push('category = ?')
-        updateValues.push(category)
       }
 
       if (bio) {
@@ -236,7 +188,6 @@ export class UserRepository {
       }
 
       if (updateFields.length === 0) {
-        // No hay campos para actualizar
         return
       }
 

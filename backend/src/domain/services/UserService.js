@@ -8,9 +8,6 @@ class UserService {
 
   async createUser({
     username,
-    name,
-    last_name,
-    category,
     bio,
     email,
     password,
@@ -19,9 +16,6 @@ class UserService {
   }) {
     return this.userRepository.createUser({
       username,
-      name,
-      last_name,
-      category,
       bio,
       email,
       password,
@@ -34,16 +28,8 @@ class UserService {
     return this.userRepository.login(email, password)
   }
 
-  async getUserbyName(name) {
-    return this.userRepository.getUserbyName(name)
-  }
-
   async getUserByUserName(username) {
     return this.userRepository.getUserByUserName(username)
-  }
-
-  async getUserByLastName(last_name) {
-    return this.userRepository.getUserByLastName(last_name)
   }
 
   async getUserById(userId) {
@@ -59,23 +45,12 @@ class UserService {
   async getUserByEmail(email) {
     return this.userRepository.getUserByEmail(email)
   }
-
-  async getUsersByCategory(category) {
-    return this.userRepository.getUsersByCategory(category)
-  }
-
   async getUsersByMeetupsAttended(meetups_attended) {
     return this.userRepository.getUsersByMeetups_attended(meetups_attended)
   }
-  async updateUser(
-    userId,
-    { username, name, last_name, category, bio, email, password, avatar },
-  ) {
+  async updateUser(userId, { username, bio, email, password, avatar }) {
     return this.userRepository.updateUser(userId, {
       username,
-      name,
-      last_name,
-      category,
       bio,
       email,
       password,

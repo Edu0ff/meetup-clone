@@ -3,7 +3,6 @@ import {
   newUserController,
   loginController,
   getUserController,
-  getUsersByCategoryController,
   updateUserController,
 } from '../Controllers/Users.js'
 import { authUser } from '../Middlewares/auth.js'
@@ -17,11 +16,5 @@ userRoutes.post('/user/login', loginController)
 userRoutes.get('/user/:id', authUser, getUserController)
 
 userRoutes.put('/user/:id', authUser, updateUserController)
-
-userRoutes.get(
-  '/users/category/:category',
-  authUser,
-  getUsersByCategoryController,
-)
 
 export { userRoutes }
