@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
+import ScrollToTop from "../../components/ScrollToTop";
 
 function TermsPage() {
   return (
     <main className="terms-page">
-      <div>
+      <ScrollToTop />
+      <div id="terms-page">
         <h1>Terms of Service for Meemee</h1>
         <h2>
           Welcome to Meemee! Before you dive into the app, here's a quick
