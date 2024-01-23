@@ -157,6 +157,11 @@ export const updataUserEmailService = async ({ email, token, id }) => {
   }
 };
 
+export const searchMeetups = async () => {
+  const response = await fetch(`${import.meta.env.VITE_APP_BACKEND}/meetups`);
+  const data = await response.json();
+  return data || [];
+};
 export const updataUserPasswordService = async ({ password, token, id }) => {
   try {
     const response = await fetch(
