@@ -97,15 +97,15 @@ async function createMeetupsTable(connection) {
 
   const meetupsToInsert = [
     {
-      title: 'Meetup 1',
+      title: 'Meetup lejana',
       picture: 'https://picsum.photos/200',
       theme: 'Tema 1',
       location: 'Lugar 1',
-      date: '2021-01-01',
+      date: '2025-01-01',
       time: '12:00:00',
     },
     {
-      title: 'Meetup 2',
+      title: 'Meetup Pasada',
       picture: 'https://picsum.photos/200',
       theme: 'Tema 2',
       location: 'Lugar 2',
@@ -113,11 +113,11 @@ async function createMeetupsTable(connection) {
       time: '12:00:00',
     },
     {
-      title: 'Meetup 3',
+      title: 'Meetup cercana',
       picture: 'https://picsum.photos/200',
       theme: 'Tema 3',
       location: 'Lugar 3',
-      date: '2021-03-03',
+      date: '2024-03-03',
       time: '12:00:00',
     },
   ]

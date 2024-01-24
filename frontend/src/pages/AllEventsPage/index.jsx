@@ -24,14 +24,19 @@ function AllEventsPage() {
     fetchMeetups();
   }, []);
 
+  const now = new Date();
+  const filteredAndSortedMeetups = meetups
+    .filter((meetup) => new Date(meetup.date) > now)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
     <main className="events-page">
       <h1>All Events Page</h1>
       {loading ? (
         <Loading />
-      ) : meetups.length > 0 ? (
+      ) : filteredAndSortedMeetups.length > 0 ? (
         <ul>
-          {meetups.map((meetup) => (
+          {filteredAndSortedMeetups.map((meetup) => (
             <li key={meetup.id}>
               <Link to={`/event/${meetup.id}`}>
                 <EventCard meetup={meetup} />
