@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { jwtDecode } from "jwt-decode";
 import PropTypes from "prop-types";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { FaCameraRetro, FaCheck, FaTimes } from "react-icons/fa";
 import Avatar from "./Avatar";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 const AvatarUploader = ({ handleAction, profile_imagen }) => {
   const [image, setImage] = useState(null);
