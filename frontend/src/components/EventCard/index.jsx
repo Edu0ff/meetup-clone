@@ -23,6 +23,7 @@ function EventCard({ meetup }) {
             {meetup.location}
           </p>
           <h1 className="eventcard-title">{meetup.title}</h1>
+          <p>{meetup.theme}</p>
           <h2 className="eventcard-by">
             <img
               className="event-icon"

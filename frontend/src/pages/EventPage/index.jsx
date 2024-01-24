@@ -1,11 +1,14 @@
 import React from "react";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 function EventPage() {
   return (
     <main className="event-page">
       <div className="green-banner" id="goback-banner">
-        <button id="goback-button">Go Back</button>
+        <Link to="/events">
+          <button id="goback-button">Go back</button>
+        </Link>
       </div>
       <div className="event-container">
         <h1 className="event-title">Event Title</h1>

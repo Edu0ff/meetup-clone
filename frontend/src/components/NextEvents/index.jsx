@@ -24,6 +24,11 @@ function NextEvents() {
     fetchMeetups();
   }, []);
 
+  const now = new Date();
+  const filteredAndSortedMeetups = meetups
+    .filter((meetup) => new Date(meetup.date) > now)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
     <div className="next-events">
       <div className="green-banner" id="nextevents-banner">
@@ -31,9 +36,9 @@ function NextEvents() {
       </div>
       {loading ? (
         <Loading />
-      ) : meetups.length > 0 ? (
+      ) : filteredAndSortedMeetups.length > 0 ? (
         <div className="event-cards-container">
-          {meetups.map((meetup) => (
+          {filteredAndSortedMeetups.map((meetup) => (
             <Link key={meetup.id} to={`/event/${meetup.id}`}>
               <EventCard meetup={meetup} />
             </Link>
