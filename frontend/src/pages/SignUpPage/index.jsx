@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUserService, loginUserService } from "../../services/index.js";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import ArrowButton from "../../components/ArrowButton";
 

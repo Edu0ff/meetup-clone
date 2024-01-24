@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { activateUserService, loginUserService } from "../../services/index.js";
 import ArrowButton from "../../components/ArrowButton";
 import { AuthContext } from "../../context/AuthContext.jsx";

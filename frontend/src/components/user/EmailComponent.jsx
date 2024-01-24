@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FaCheck, FaPencilAlt, FaTimes } from "react-icons/fa";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { updataUserEmailService } from "../../services";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";

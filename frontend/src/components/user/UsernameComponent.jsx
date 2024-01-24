@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaCheck, FaPencilAlt, FaTimes } from "react-icons/fa";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
   const [editing, setEditing] = useState(false);
