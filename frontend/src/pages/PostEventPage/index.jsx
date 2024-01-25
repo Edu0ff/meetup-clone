@@ -63,12 +63,12 @@ function PostEventPage() {
             <div>
               <select id="category" name="category" required>
                 <option value="">select a category</option>
-                <option value="category1">Social Events</option>
-                <option value="category2">Art and Culture</option>
-                <option value="category3">Videogames</option>
-                <option value="category4">Technology</option>
-                <option value="category5">Travel and Outdoors</option>
-                <option value="category6">Sports and Fitness</option>
+                <option value="Social Events">Social Events</option>
+                <option value="Art and Culture">Art and Culture</option>
+                <option value="Videogames">Videogames</option>
+                <option value="Technology">Technology</option>
+                <option value="Travel and Outdoors">Travel and Outdoors</option>
+                <option value="Sports and Fitness">Sports and Fitness</option>
               </select>
             </div>
             <div>

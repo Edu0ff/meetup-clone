@@ -68,14 +68,16 @@ function EventPage() {
               {eventData.date}
               {eventData.time}
             </div>
-            <div className="green-banner" id="event-going">
-              <img
-                className="event-icon"
-                src="../../icons\attendees.svg"
-                alt="signme"
-              />
-              {eventData.attendees_count} going
-            </div>
+            <Link to="/">
+              <div className="green-banner" id="event-going">
+                <img
+                  className="event-icon"
+                  src="../../icons\attendees.svg"
+                  alt="signme"
+                />
+                {eventData.attendees_count} going
+              </div>
+            </Link>
             <div className="green-banner" id="event-signme">
               <img
                 className="event-icon"
@@ -97,8 +99,8 @@ function EventPage() {
               <div>
                 <img
                   id="eventpage-person"
-                  src={eventData.avatar || ""}
-                  alt={`Avatar of ${eventData.organizer_id}`}
+                  src={eventData.username || ""}
+                  alt={`Avatar of ${eventData.username}`}
                 />
                 <div>
                   <img
