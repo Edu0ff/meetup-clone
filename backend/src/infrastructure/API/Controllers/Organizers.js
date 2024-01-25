@@ -1,8 +1,9 @@
 import OrganizerService from '../../../domain/services/OrganizerService.js'
 import { generateError } from '../../../domain/utils/helpers.js'
+import MeetupService from '../../../domain/services/MeetupService.js'
 
 const organizerService = new OrganizerService()
-
+const meetupService = new MeetupService()
 export const newOrganizerController = async (req, res, next) => {
   try {
     const { user_id, meetup_id } = req.body
@@ -46,6 +47,23 @@ export const getOrganizerByIdController = async (req, res, next) => {
     } else {
       res.status(200).json(organizer)
     }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getOrganizersByMeetupIdController = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    const meetup = await meetupService.getMeetupById(id)
+    if (!meetup) {
+      return res.status(404).json({ message: 'Meetup not found.' })
+    }
+
+    const organizers = await organizerService.getOrganizersByMeetupId(id)
+
+    res.status(200).json(organizers)
   } catch (error) {
     next(error)
   }

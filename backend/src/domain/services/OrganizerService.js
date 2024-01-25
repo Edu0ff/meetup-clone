@@ -1,19 +1,33 @@
 import { OrganizerRepository } from '../repository/OrganizerRepository.js'
+import UserService from './UserService.js'
 class OrganizerService {
   constructor() {
     this.organizerRepository = new OrganizerRepository()
+    this.userService = new UserService()
   }
 
   async addOrganizer(user_id, meetup_id) {
     try {
-      await this.organizerRepository.createOrganizer(user_id, meetup_id)
+      const user = await this.userService.getUserById(user_id)
+
+      if (!user) {
+        throw new Error(`User with ID: ${user_id} not found`)
+      }
+
+      const username = user.username
+
+      await this.organizerRepository.createOrganizer(
+        user_id,
+        meetup_id,
+        username,
+      )
     } catch (error) {
       throw error
     }
   }
 
-  async getOrganizersByMeetup(meetup_id) {
-    return await this.organizerRepository.getOrganizersByMeetup(meetup_id)
+  async getOrganizersByMeetupId(meetupId) {
+    return this.organizerRepository.getOrganizersByMeetup(meetupId)
   }
 
   async getOrganizerById(organizerId) {
