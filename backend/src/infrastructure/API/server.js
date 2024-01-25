@@ -5,6 +5,7 @@ import expressFileUpload from 'express-fileupload'
 import { userRoutes } from './Routes/users.js'
 import { meetupsRoutes } from './Routes/meetups.js'
 import { attendeesRoutes } from './Routes/attendees.js'
+import { organizersRoutes } from './Routes/organizers.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -20,6 +21,7 @@ app.use('/uploads', express.static('./uploads'))
 app.use('/', userRoutes)
 app.use('/', meetupsRoutes)
 app.use('/', attendeesRoutes)
+app.use('/', organizersRoutes)
 
 // Middleware para el error 404
 app.use((req, res) => {

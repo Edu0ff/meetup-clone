@@ -10,6 +10,7 @@ async function main() {
     console.log('connected')
     console.log('Dropping existing tables')
     await dropTableIfExists(connection, 'Attendees')
+    await dropTableIfExists(connection, 'Organizers')
     await dropTableIfExists(connection, 'Meetups')
     await dropTableIfExists(connection, 'users')
 
@@ -17,6 +18,7 @@ async function main() {
 
     await createUsersTable(connection)
     await createMeetupsTable(connection)
+    await createOrganizersTable(connection)
     await createAttendeesTable(connection)
 
     await insertAttendees(connection)
@@ -82,43 +84,58 @@ async function createUsersTable(connection) {
 }
 
 async function createMeetupsTable(connection) {
-  await connection.query(`CREATE TABLE IF NOT EXISTS Meetups (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    picture VARCHAR(255) NOT NULL,
-    theme VARCHAR(255) NOT NULL,
-    location VARCHAR(255),
-    date DATE,
-    time TIME,
-    attendees_count INT DEFAULT 0,  
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-  )`)
+  await connection.query(`
+    CREATE TABLE IF NOT EXISTS Meetups (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      title VARCHAR(255) NOT NULL,
+      description VARCHAR(255) NOT NULL,
+      picture VARCHAR(255) NOT NULL,
+      theme VARCHAR(255) NOT NULL,
+      location VARCHAR(255) NOT NULL,
+      address VARCHAR(255) NOT NULL,
+      date DATE NOT NULL,
+      time TIME NOT NULL,
+      attendees_count INT DEFAULT 0,  
+      organizer_id INT, 
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      FOREIGN KEY (organizer_id) REFERENCES users(id) 
+    )
+  `)
 
   const meetupsToInsert = [
     {
       title: 'Meetup lejana',
+      description: 'Descripción de la meetup lejana',
       picture: 'https://picsum.photos/200',
       theme: 'Tema 1',
       location: 'Lugar 1',
+      address: 'Dirección 1',
       date: '2025-01-01',
       time: '12:00:00',
+      organizer_id: 1,
     },
     {
       title: 'Meetup Pasada',
+      description: 'Descripción de la meetup pasada',
       picture: 'https://picsum.photos/200',
       theme: 'Tema 2',
       location: 'Lugar 2',
+      address: 'Dirección 2',
       date: '2021-02-02',
       time: '12:00:00',
+      organizer_id: 2,
     },
     {
       title: 'Meetup cercana',
+      description: 'Descripción de la meetup cercana',
       picture: 'https://picsum.photos/200',
       theme: 'Tema 3',
       location: 'Lugar 3',
+      address: 'Dirección 3',
       date: '2024-03-03',
       time: '12:00:00',
+      organizer_id: 3,
     },
   ]
 
@@ -129,6 +146,20 @@ async function createMeetupsTable(connection) {
   console.log('Table Meetups created and populated with examples.')
 }
 
+async function createOrganizersTable(connection) {
+  await connection.query(`
+    CREATE TABLE IF NOT EXISTS Organizers (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT,
+      meetup_id INT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (meetup_id) REFERENCES Meetups(id)
+    )
+  `)
+
+  console.log('Table Organizers created.')
+}
 async function createAttendeesTable(connection) {
   await connection.query(`CREATE TABLE IF NOT EXISTS Attendees (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -144,6 +175,20 @@ async function createAttendeesTable(connection) {
 }
 
 async function insertAttendees(connection) {
+  const organizersToInsert = [
+    {
+      user_id: 1,
+      meetup_id: 1,
+    },
+    {
+      user_id: 2,
+      meetup_id: 2,
+    },
+    {
+      user_id: 3,
+      meetup_id: 3,
+    },
+  ]
   const attendeesToInsert = [
     {
       meetup_id: 1,
@@ -152,11 +197,15 @@ async function insertAttendees(connection) {
     },
   ]
 
+  for (const organizer of organizersToInsert) {
+    await connection.query(`INSERT INTO Organizers SET ?`, organizer)
+  }
+
   for (const attendee of attendeesToInsert) {
     await connection.query(`INSERT INTO Attendees SET ?`, attendee)
   }
 
-  console.log('Attendees inserted.')
+  console.log('Attendees and organizers inserted.')
 }
 
 async function updateCounters(connection) {

@@ -2,6 +2,7 @@ import Joi from 'joi'
 
 export const meetupSchema = Joi.object({
   title: Joi.string().max(255).required(),
+  description: Joi.string().max(255).required(),
   picture: Joi.string().uri().required(),
   theme: Joi.string().max(255).required(),
   location: Joi.string().max(255).required(),

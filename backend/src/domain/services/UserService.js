@@ -32,6 +32,11 @@ class UserService {
     return this.userRepository.getUserByUserName(username)
   }
 
+  async userExists(userId) {
+    const user = await this.getUserById(userId)
+    return !!user
+  }
+
   async getUserById(userId) {
     const user = await this.userRepository.getUserById(userId)
 
