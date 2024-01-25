@@ -6,6 +6,7 @@ export class Meetup {
     picture,
     theme,
     location,
+    address,
     date,
     time,
     attendees_count,
