@@ -6,10 +6,25 @@ import "react-calendar/dist/Calendar.css";
 
 function PostEventPage() {
   const [description, setDescription] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
 
   const handleDescriptionChange = (event) => {
-    const newDescription = event.target.value.slice(0, 400);
+    const newDescription = event.target.value.slice(0, 255);
     setDescription(newDescription);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleTimeChange = (event) => {
+    setSelectedTime(event.target.value);
+  };
+
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
   };
 
   const characterCount = description.length;
@@ -26,7 +41,7 @@ function PostEventPage() {
               type="text"
               id="title"
               name="title"
-              placeholder="title"
+              placeholder="title_"
               required
             />
             <div className="description-group">
@@ -37,9 +52,9 @@ function PostEventPage() {
                 onChange={handleDescriptionChange}
                 required
                 placeholder="description_"
-                maxLength={400}
+                maxLength={255}
               />
-              <div className="character-count">{`${characterCount}/400`}</div>
+              <div className="character-count">{`${characterCount}/255`}</div>
             </div>
             <div>
               <label htmlFor="image">select a file for your event photo</label>
@@ -47,19 +62,59 @@ function PostEventPage() {
             </div>
             <div>
               <select id="category" name="category" required>
-                <option value="">category</option>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
+                <option value="">select a category</option>
+                <option value="category1">Social Events</option>
+                <option value="category2">Art and Culture</option>
+                <option value="category3">Videogames</option>
+                <option value="category4">Technology</option>
+                <option value="category5">Travel and Outdoors</option>
+                <option value="category6">Sports and Fitness</option>
               </select>
             </div>
             <div>
-              <label htmlFor="when">When?</label>
-              <input type="text" id="when" name="when" required />
+              <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="select a city_"
+                value={selectedCity}
+                onChange={handleCityChange}
+                required
+              />
             </div>
-            <Calendar />
             <div>
-              <label htmlFor="where">Where?</label>
-              <input type="text" id="where" name="where" required />
+              <input
+                type="text"
+                id="address"
+                name="address"
+                required
+                placeholder="select an address_"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                id="day"
+                name="day"
+                placeholder="select a day_"
+                value={selectedDate ? selectedDate.toLocaleDateString() : ""}
+                required
+                readOnly
+              />
+            </div>
+
+            <Calendar onChange={handleDateChange} value={selectedDate} />
+
+            <div>
+              <input
+                type="text"
+                id="hour"
+                name="hour"
+                required
+                placeholder="select an hour_"
+                value={selectedTime}
+                onChange={handleTimeChange}
+              />
             </div>
 
             <ArrowButton id="post-button" type="submit" />

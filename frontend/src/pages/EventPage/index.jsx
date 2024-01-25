@@ -48,7 +48,7 @@ function EventPage() {
             <h1 className="event-title">{eventData.title}</h1>
             <div className="event-locationinfo">
               <div className="event-map" id="eventpage-map">
-                EventMap
+                {eventData.address}
               </div>
               <div className="event-location">
                 <img
@@ -93,18 +93,12 @@ function EventPage() {
               />
             </div>
             <div id="eventpage-details">
-              <p id="eventpage-text">
-                {eventData.text} Lorem ipsum dolor sit amet consectetur,
-                adipisicing elit. Error molestias incidunt dignissimos eveniet
-                commodi omnis perspiciatis, officiis, repellendus modi
-                consequatur enim libero tempora voluptates, nostrum unde maiores
-                natus ipsa. Provident!
-              </p>
+              <p id="eventpage-text">{eventData.description}</p>
               <div>
                 <img
                   id="eventpage-person"
-                  src="../../userPhoto/user1.jpg"
-                  alt="user photo"
+                  src={eventData.avatar || ""}
+                  alt={`Avatar of ${eventData.organizer_id}`}
                 />
                 <div>
                   <img
@@ -113,7 +107,7 @@ function EventPage() {
                     alt="orgnized by"
                   />
                   <p id="eventpage-organizedby">
-                    Organized by {eventData.organizer}
+                    Organized by {eventData.organizer_id}
                   </p>
                 </div>
               </div>
