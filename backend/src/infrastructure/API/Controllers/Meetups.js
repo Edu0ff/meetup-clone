@@ -1,7 +1,9 @@
 import { generateError } from '../../../domain/utils/helpers.js'
 import MeetupService from '../../../domain/services/MeetupService.js'
 import { meetupSchema } from '../schemas/meetupsSchemas.js'
+import UserService from '../../../domain/services/UserService.js'
 
+const userService = new UserService()
 const meetupService = new MeetupService()
 
 export const validateNewMeetup = (req, res, next) => {
@@ -15,7 +17,19 @@ export const validateNewMeetup = (req, res, next) => {
 
 export const newMeetupController = async (req, res, next) => {
   try {
-    const meetupId = await meetupService.createMeetup(req.body)
+    const { organizer_id, ...meetupData } = req.body
+
+    const organizerExists = await userService.userExists(organizer_id)
+
+    if (!organizerExists) {
+      return res.status(404).json({ error: 'Organizer not found.' })
+    }
+
+    const meetupId = await meetupService.createMeetup({
+      ...meetupData,
+      organizer_id,
+    })
+
     res.status(200).json({ message: 'Meetup created successfully', meetupId })
   } catch (error) {
     next(error)

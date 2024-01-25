@@ -5,21 +5,25 @@ describe('Meetup', () => {
     const meetup = Meetup.create(
       '1',
       'title',
+      'description',
       'picture',
       'theme',
       'location',
       'date',
       'time',
       0,
+      2,
     )
     expect(meetup.getId()).toEqual('1')
     expect(meetup.hasId('2')).toEqual(false)
     expect(meetup.getTitle()).toEqual('title')
+    expect(meetup.getDescription()).toEqual('description')
     expect(meetup.getPicture()).toEqual('picture')
     expect(meetup.getTheme()).toEqual('theme')
     expect(meetup.getLocation()).toEqual('location')
     expect(meetup.getDate()).toEqual('date')
     expect(meetup.getTime()).toEqual('time')
     expect(meetup.getAttendees_Count()).toEqual(0)
+    expect(meetup.getOrganizer_Id()).toEqual(2)
   })
 })
