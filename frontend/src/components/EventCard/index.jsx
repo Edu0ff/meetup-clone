@@ -25,15 +25,7 @@ function EventCard({ meetup }) {
               {meetup.location}
             </p>
             <h1 className="eventcard-title">{meetup.title}</h1>
-            <p>{meetup.theme}</p>
-            <h2 className="eventcard-by">
-              <img
-                className="event-icon"
-                src="icons/person.svg"
-                alt="Organizer"
-              />
-              Organized by {meetup.organizer}
-            </h2>
+            <p className="eventcard-by">{meetup.theme}</p>
             <div className="eventcard-details">
               <p className="eventcard-date">
                 <img

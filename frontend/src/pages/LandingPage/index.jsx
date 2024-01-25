@@ -13,7 +13,7 @@ function LandingPage() {
           dolor ratione aspernatur!
         </h1>
         <div className="Hello">Hello!</div>
-        <SearchBar />
+        <SearchBar placeholderText="Search events_" />
         <button className="landing-signup">Sign Up</button>
       </section>
 
