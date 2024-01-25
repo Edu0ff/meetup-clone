@@ -5,7 +5,7 @@ class AttendeeService {
     this.attendeeRepository = new AttendeeRepository()
   }
 
-  async addAttendee(meetupId, userId) {
+  async addAttendee(meetupId, userId, username) {
     try {
       const existingAttendee =
         await this.attendeeRepository.getAttendeeByMeetupAndUser(
@@ -16,7 +16,12 @@ class AttendeeService {
       if (existingAttendee) {
         await this.attendeeRepository.deleteAttendee(meetupId, userId)
       } else {
-        await this.attendeeRepository.createAttendee(meetupId, userId, true)
+        await this.attendeeRepository.createAttendee(
+          meetupId,
+          userId,
+          true,
+          username,
+        )
       }
 
       await this.updateCounts(meetupId, userId)
@@ -27,6 +32,10 @@ class AttendeeService {
 
   async getAttendeesByMeetup(meetupId) {
     return this.attendeeRepository.getAttendeesByMeetup(meetupId)
+  }
+
+  async getUsernamesByMeetup(meetupId) {
+    return this.attendeeRepository.getUsernamesByMeetup(meetupId)
   }
 
   async getAttendeeById(attendeeId) {

@@ -10,7 +10,6 @@ export class AttendeeRepository {
         'SELECT COUNT(*) AS count FROM Meetups WHERE id = ?',
         [meetupId],
       )
-
       const userExists = await connection.query(
         'SELECT COUNT(*) AS count FROM users WHERE id = ?',
         [userId],
@@ -24,15 +23,23 @@ export class AttendeeRepository {
         throw new Error(`User with ID: ${userId} not found`)
       }
 
+      // Obtener el nombre de usuario
+      const [userResult] = await connection.query(
+        'SELECT username FROM users WHERE id = ?',
+        [userId],
+      )
+      const username = userResult[0].username
+
       const insertQuery = `
-        INSERT INTO Attendees (meetup_id, user_id, will_attend)
-        VALUES (?, ?, ?)
-      `
+      INSERT INTO Attendees (meetup_id, user_id, will_attend, username)
+      VALUES (?, ?, ?, ?)
+    `
 
       const [insertResult] = await connection.query(insertQuery, [
         meetupId,
         userId,
         willAttend,
+        username,
       ])
 
       const newAttendeeId = insertResult.insertId
@@ -57,6 +64,20 @@ export class AttendeeRepository {
       }
 
       return result
+    } finally {
+      connection.release()
+    }
+  }
+
+  async getUsernamesByMeetup(meetupId) {
+    const connection = await getConnection()
+    try {
+      const [result] = await connection.query(
+        'SELECT DISTINCT username FROM Attendees WHERE meetup_id = ?',
+        [meetupId],
+      )
+
+      return result.map((row) => row.username)
     } finally {
       connection.release()
     }

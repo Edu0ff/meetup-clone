@@ -3,6 +3,7 @@ import {
   newAttendeeController,
   listAttendeesController,
   getAttendeeByIdController,
+  listUsernamesByMeetupController,
 } from '../Controllers/Attendees.js'
 import { authUser } from '../Middlewares/auth.js'
 
@@ -18,6 +19,11 @@ attendeesRoutes.get(
   '/attendees/:meetupId/list',
   authUser,
   listAttendeesController,
+)
+attendeesRoutes.get(
+  '/attendees/:meetupId/usernames',
+  authUser,
+  listUsernamesByMeetupController,
 )
 
 export { attendeesRoutes }
