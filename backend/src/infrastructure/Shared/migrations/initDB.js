@@ -186,6 +186,7 @@ async function createOrganizersTable(connection) {
       id INT AUTO_INCREMENT PRIMARY KEY,
       user_id INT,
       meetup_id INT,
+      username VARCHAR(50),  -- Agregar la columna username
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (user_id) REFERENCES users(id),
       FOREIGN KEY (meetup_id) REFERENCES Meetups(id)
@@ -212,11 +213,11 @@ async function createAttendeesTable(connection) {
 
 async function insertData(connection) {
   const organizersToInsert = [
-    { user_id: 1, meetup_id: 1 },
-    { user_id: 2, meetup_id: 2 },
-    { user_id: 3, meetup_id: 3 },
-    { user_id: 4, meetup_id: 4 },
-    { user_id: 5, meetup_id: 5 },
+    { user_id: 1, meetup_id: 1, username: 'user1' },
+    { user_id: 2, meetup_id: 2, username: 'user2' },
+    { user_id: 3, meetup_id: 3, username: 'user3' },
+    { user_id: 4, meetup_id: 4, username: 'user4' },
+    { user_id: 5, meetup_id: 5, username: 'user5' },
   ]
 
   const attendeesToInsert = [

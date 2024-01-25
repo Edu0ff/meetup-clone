@@ -9,16 +9,24 @@ export class MeetupRepository {
     try {
       connection = await getConnection()
 
-      const userExists = await connection.query(
-        'SELECT COUNT(*) AS count FROM users WHERE id = ?',
+      await connection.beginTransaction()
+
+      const userExistsResult = await connection.query(
+        'SELECT username FROM users WHERE id = ?',
         [meetupData.organizer_id],
       )
 
-      if (userExists[0][0].count === 0) {
+      if (userExistsResult[0].length === 0) {
         throw new Error(`User with ID: ${meetupData.organizer_id} not found`)
       }
 
-      const insertQuery = `INSERT INTO meetups (title, description, picture, theme, location, address, date, time, attendees_count, organizer_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      const username = userExistsResult[0][0].username
+
+      const insertQuery = `
+      INSERT INTO meetups 
+        (title, description, picture, theme, location, address, date, time, attendees_count, organizer_id) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+
       const [insertResult] = await connection.query(insertQuery, [
         meetupData.title,
         meetupData.description,
@@ -34,12 +42,24 @@ export class MeetupRepository {
 
       const newMeetupId = insertResult.insertId
 
-      await connection.query(
-        'INSERT INTO organizers (user_id, meetup_id) VALUES (?, ?)',
-        [meetupData.organizer_id, newMeetupId],
-      )
+      const insertOrganizerQuery = `
+      INSERT INTO organizers (user_id, meetup_id, username) 
+      VALUES (?, ?, ?)`
+
+      await connection.query(insertOrganizerQuery, [
+        meetupData.organizer_id,
+        newMeetupId,
+        username,
+      ])
+
+      await connection.commit()
 
       return newMeetupId
+    } catch (error) {
+      if (connection) {
+        await connection.rollback()
+      }
+      throw error
     } finally {
       if (connection) {
         connection.release()
