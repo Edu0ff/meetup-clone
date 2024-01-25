@@ -13,10 +13,20 @@ export const validateNewAttendee = (req, res, next) => {
   next()
 }
 
+export const listUsernamesByMeetupController = async (req, res, next) => {
+  try {
+    const { meetupId } = req.params
+    const usernames = await attendeeService.getUsernamesByMeetup(meetupId)
+
+    res.status(200).json(usernames)
+  } catch (err) {
+    next(err)
+  }
+}
 export const newAttendeeController = async (req, res, next) => {
   try {
-    const { meetupId, userId } = req.body
-    await attendeeService.addAttendee(meetupId, userId)
+    const { meetupId, userId, username } = req.body
+    await attendeeService.addAttendee(meetupId, userId, username)
 
     res.status(200).json({ message: 'Attendee status updated successfully.' })
   } catch (error) {
