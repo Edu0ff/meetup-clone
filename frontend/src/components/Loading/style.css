@@ -5,7 +5,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
-  z-index: 999;
+  z-index: 99;
 }
 
 .spinner {
@@ -19,6 +19,7 @@
   border-left-style: solid;
   border-radius: 50%;
   animation: spinner-aib1d7 0.9s infinite linear;
+  z-index: 999;
 }
 
 @keyframes spinner-aib1d7 {
