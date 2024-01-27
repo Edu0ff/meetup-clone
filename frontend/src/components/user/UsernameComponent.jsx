@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaCheck, FaPencilAlt, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
+import React, { useState } from "react";
 
 const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
   const [editing, setEditing] = useState(false);
@@ -13,7 +14,7 @@ const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
 
   const handleSave = () => {
     if (!newUsername) {
-      toast.error("El campo username no se puede quedar vacio.");
+      toast.error("El campo username no puede quedar vacio.");
       return;
     }
 

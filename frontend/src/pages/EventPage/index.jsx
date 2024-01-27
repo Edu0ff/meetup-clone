@@ -7,6 +7,7 @@ import Loading from "../../components/Loading";
 function EventPage() {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
+  const [organizerUsername, setOrganizerUsername] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,6 +24,20 @@ function EventPage() {
         }
 
         setEventData(eventData);
+        if (eventData.organizer_id) {
+          const organizerResponse = await fetch(
+            `${import.meta.env.VITE_APP_BACKEND}/organizers/${
+              eventData.organizer_id
+            }`
+          );
+          const organizerData = await organizerResponse.json();
+
+          if (!organizerResponse.ok) {
+            throw new Error(organizerData.message);
+          }
+
+          setOrganizerUsername(organizerData.username);
+        }
       } catch (error) {
         console.error("Error fetching event data:", error);
       } finally {
@@ -43,79 +58,77 @@ function EventPage() {
       {loading ? (
         <Loading />
       ) : eventData ? (
-        <>
-          <div className="event-container">
-            <h1 className="event-title">{eventData.title}</h1>
-            <div className="event-locationinfo">
-              <div className="event-map" id="eventpage-map">
-                {eventData.address}
-              </div>
-              <div className="event-location">
-                <img
-                  className="event-icon"
-                  src="../../icons/location.svg"
-                  alt="location"
-                />
-                <p>{eventData.location}</p>
-              </div>
+        <div className="event-container">
+          <h1 className="event-title">{eventData.title}</h1>
+          <div className="event-locationinfo">
+            <div className="event-map" id="eventpage-map">
+              {eventData.address}
             </div>
-            <div className="green-banner" id="event-time">
+            <div className="event-location">
               <img
                 className="event-icon"
-                src="../../icons\calendar.svg"
-                alt="calendar"
+                src="../../icons/location.svg"
+                alt="location"
               />
-              {eventData.date}
-              {eventData.time}
+              <p>{eventData.location}</p>
             </div>
-            <Link to="/">
-              <div className="green-banner" id="event-going">
-                <img
-                  className="event-icon"
-                  src="../../icons\attendees.svg"
-                  alt="signme"
-                />
-                {eventData.attendees_count} going
-              </div>
-            </Link>
-            <div className="green-banner" id="event-signme">
+          </div>
+          <div className="green-banner" id="event-time">
+            <img
+              className="event-icon"
+              src="../../icons\calendar.svg"
+              alt="calendar"
+            />
+            {eventData.date}
+            {eventData.time}
+          </div>
+          <Link to="/">
+            <div className="green-banner" id="event-going">
               <img
                 className="event-icon"
-                src="../../icons\check.svg"
+                src="../../icons\attendees.svg"
                 alt="signme"
               />
-              <button id="button-signme">Sign me up!</button>
+              {eventData.attendees_count} going
             </div>
-            <div id="eventpage-imgcontainer">
+          </Link>
+          <div className="green-banner" id="event-signme">
+            <img
+              className="event-icon"
+              src="../../icons\check.svg"
+              alt="signme"
+            />
+            <button id="button-signme">Sign me up!</button>
+          </div>
+          <div id="eventpage-imgcontainer">
+            <img
+              id="eventpage-image"
+              className="event-icon"
+              src={eventData.picture || ""}
+              alt={`Event: ${eventData.title}`}
+            />
+          </div>
+          <div id="eventpage-details">
+            <p id="eventpage-text">{eventData.description}</p>
+            <div>
               <img
-                id="eventpage-image"
-                className="event-icon"
-                src={eventData.picture || ""}
-                alt={`Event: ${eventData.title}`}
+                id="eventpage-person"
+                src={eventData.username || ""}
+                alt={`Avatar of ${organizerUsername || ""}`}
               />
-            </div>
-            <div id="eventpage-details">
-              <p id="eventpage-text">{eventData.description}</p>
               <div>
                 <img
-                  id="eventpage-person"
-                  src={eventData.username || ""}
-                  alt={`Avatar of ${eventData.username}`}
+                  className="event-icon"
+                  src="../../icons\person.svg"
+                  alt="orgnized by"
                 />
-                <div>
-                  <img
-                    className="event-icon"
-                    src="../../icons\person.svg"
-                    alt="orgnized by"
-                  />
-                  <p id="eventpage-organizedby">
-                    Organized by {eventData.organizer_id}
-                  </p>
-                </div>
+                <p id="eventpage-organizedby">{`Organized by ${
+                  organizerUsername || ""
+                }`}</p>
               </div>
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <p>No hay datos disponibles para este evento.</p>
       )}
