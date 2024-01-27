@@ -119,7 +119,7 @@ async function createMeetupsTable(connection) {
     {
       title: 'Meetup 1',
       description: 'Descripción de la meetup 1',
-      picture: 'https://picsum.photos/200',
+      picture: 'https://picsum.photos/800',
       theme: 'Videogames',
       location: 'Ciudad 1',
       address: 'Dirección 1',
@@ -130,7 +130,7 @@ async function createMeetupsTable(connection) {
     {
       title: 'Meetup 2',
       description: 'Descripción de la meetup 2',
-      picture: 'https://picsum.photos/200',
+      picture: 'https://picsum.photos/800',
       theme: 'Technology',
       location: 'Ciudad 2',
       address: 'Dirección 2',
@@ -141,7 +141,7 @@ async function createMeetupsTable(connection) {
     {
       title: 'Meetup 3',
       description: 'Descripción de la meetup 3',
-      picture: 'https://picsum.photos/200',
+      picture: 'https://picsum.photos/800',
       theme: 'Technology',
       location: 'Ciudad 3',
       address: 'Dirección 3',
@@ -152,7 +152,7 @@ async function createMeetupsTable(connection) {
     {
       title: 'Meetup 4',
       description: 'Descripción de la meetup 4',
-      picture: 'https://picsum.photos/200',
+      picture: 'https://picsum.photos/800',
       theme: 'Videogames',
       location: 'Lugar 4',
       address: 'Dirección 4',
@@ -163,7 +163,7 @@ async function createMeetupsTable(connection) {
     {
       title: 'Meetup 5',
       description: 'Descripción de la meetup 5',
-      picture: 'https://picsum.photos/200',
+      picture: 'https://picsum.photos/800',
       theme: 'Art and Culture',
       location: 'Lugar 5',
       address: 'Dirección 5',
