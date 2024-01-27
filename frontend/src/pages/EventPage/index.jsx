@@ -8,6 +8,7 @@ function EventPage() {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [organizerUsername, setOrganizerUsername] = useState("");
+  const [organizerAvatar, setOrganizerAvatar] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ function EventPage() {
           }
 
           setOrganizerUsername(organizerData.username);
+          setOrganizerAvatar(organizerData.avatar);
         }
       } catch (error) {
         console.error("Error fetching event data:", error);
@@ -76,7 +78,7 @@ function EventPage() {
           <div className="green-banner" id="event-time">
             <img
               className="event-icon"
-              src="../../icons\calendar.svg"
+              src="../../icons/calendar.svg"
               alt="calendar"
             />
             {eventData.date}
@@ -86,7 +88,7 @@ function EventPage() {
             <div className="green-banner" id="event-going">
               <img
                 className="event-icon"
-                src="../../icons\attendees.svg"
+                src="../../icons/attendees.svg"
                 alt="signme"
               />
               {eventData.attendees_count} going
@@ -95,7 +97,7 @@ function EventPage() {
           <div className="green-banner" id="event-signme">
             <img
               className="event-icon"
-              src="../../icons\check.svg"
+              src="../../icons/check.svg"
               alt="signme"
             />
             <button id="button-signme">Sign me up!</button>
@@ -111,15 +113,19 @@ function EventPage() {
           <div id="eventpage-details">
             <p id="eventpage-text">{eventData.description}</p>
             <div>
-              <img
-                id="eventpage-person"
-                src={eventData.username || ""}
-                alt={`Avatar of ${organizerUsername || ""}`}
-              />
+              {organizerAvatar ? (
+                <img
+                  id="eventpage-person"
+                  src={`${import.meta.env.VITE_APP_BACKEND}/${organizerAvatar}`}
+                  alt={`Avatar of ${organizerUsername || ""}`}
+                />
+              ) : (
+                ""
+              )}
               <div>
                 <img
                   className="event-icon"
-                  src="../../icons\person.svg"
+                  src="../../icons/person.svg"
                   alt="orgnized by"
                 />
                 <p id="eventpage-organizedby">{`Organized by ${
