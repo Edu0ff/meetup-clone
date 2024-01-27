@@ -35,7 +35,7 @@ export const AuthProviderComponent = ({ children }) => {
         setAuth(true);
         console.log(decodedToken);
         if (login) {
-          toast.success(`Bienvenid@ ${decodedToken.email}`);
+          toast.success(`Welcome ${decodedToken.email}`);
           setLogin(false);
         }
       } catch (error) {
