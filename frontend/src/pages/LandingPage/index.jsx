@@ -18,6 +18,8 @@ function LandingPage() {
       </section>
 
       <section className="landing-bottom">
+        <div className="triangle-left"></div>
+        <div className="triangle-right"></div>
         <NextEvents />
       </section>
     </main>
