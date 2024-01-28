@@ -1,3 +1,32 @@
+import axios from "axios";
+
+export const createMeetup = async (meetupData, token) => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_APP_BACKEND}/meetups`,
+      meetupData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token,
+        },
+      }
+    );
+
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    } else {
+      const data = response.data;
+      console.error("Error in createMeetup:", data.message);
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.error("Error in createMeetup:", error.message);
+    throw new Error(`Error en la creación del meetup: ${error.message}`);
+  }
+};
+
 export const registerUserService = async ({
   username,
   bio,
