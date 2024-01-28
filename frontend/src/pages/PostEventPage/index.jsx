@@ -1,15 +1,15 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 import ArrowButton from "../../components/ArrowButton";
-import Calendar from "react-calendar";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import "react-calendar/dist/Calendar.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { createMeetup } from "../../services/index.js";
 
 function PostEventPage() {
-  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -17,10 +17,14 @@ function PostEventPage() {
     theme: "",
     location: "",
     address: "",
-    date: "",
+    date: null,
     time: "",
     organizer_id: "",
   });
+
+  function padZero(num) {
+    return num.toString().padStart(2, "0");
+  }
 
   const [formErrors, setFormErrors] = useState({});
 
@@ -38,27 +42,35 @@ function PostEventPage() {
 
   const handleCreateMeetup = async () => {
     try {
-      console.log("Inside handleCreateMeetup");
       if (!token) {
         console.log("Token is missing");
         return;
       }
 
       const decodedToken = JSON.parse(atob(token.split(".")[1]));
-
       const organizerId = parseInt(decodedToken.userId, 10);
 
       const meetupData = new FormData();
       meetupData.append("title", formData.title);
       meetupData.append("description", formData.description);
-      meetupData.append("picture", formData.picture);
+      meetupData.append("picture", formData.picture, formData.picture.name);
       const theme = formData.theme.replace(/\s+/g, "_");
       meetupData.append("theme", theme);
       meetupData.append("location", formData.location);
       meetupData.append("address", formData.address);
-      meetupData.append("date", formData.date);
+      const date = formData.date;
+      const formattedDate = `${date.getFullYear()}-${padZero(
+        date.getMonth() + 1
+      )}-${padZero(date.getDate())} ${padZero(date.getHours())}:${padZero(
+        date.getMinutes()
+      )}:${padZero(date.getSeconds())}`;
+
+      meetupData.append("date", formattedDate);
+      meetupData.append("date", formattedDate);
       meetupData.append("time", formData.time);
       meetupData.append("organizer_id", organizerId);
+
+      console.log("Meetup data:", Object.fromEntries(meetupData.entries()));
 
       const newMeetup = await createMeetup(
         Object.fromEntries(meetupData.entries()),
@@ -68,26 +80,28 @@ function PostEventPage() {
       console.log("New meetup created:", newMeetup);
 
       resetForm();
+      navigate("/");
     } catch (error) {
       console.error("Error creating meetup:", error);
       alert("Error creating meetup. Please try again later.");
     }
   };
+
   const resetForm = () => {
     setFormData({
       title: "",
       description: "",
-      picture: "",
+      picture: undefined,
       theme: "",
       location: "",
       address: "",
-      date: "",
+      date: null,
       time: "",
     });
     setFormErrors({});
   };
 
-  const handlepictureChange = (e) => {
+  const handlePictureChange = (e) => {
     setFormData({
       ...formData,
       picture: e.target.files[0],
@@ -118,10 +132,10 @@ function PostEventPage() {
     }
 
     if (formData.address.trim() === "") {
-      errors.details = "La dirección es requerida";
+      errors.address = "La dirección es requerida";
     }
 
-    if (formData.date.trim() === "") {
+    if (!formData.date) {
       errors.date = "El día es requerido";
     }
 
@@ -136,8 +150,6 @@ function PostEventPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Handle Submit called");
 
     if (validateForm()) {
       await handleCreateMeetup();
@@ -156,7 +168,7 @@ function PostEventPage() {
               type="text"
               id="title"
               name="title"
-              placeholder="title_"
+              placeholder="title"
               value={formData.title}
               onChange={handleInputChange}
               required
@@ -168,7 +180,7 @@ function PostEventPage() {
                 value={formData.description}
                 onChange={handleInputChange}
                 required
-                placeholder="description_"
+                placeholder="description"
                 maxLength={255}
               />
             </div>
@@ -177,7 +189,7 @@ function PostEventPage() {
                 type="file"
                 name="picture"
                 accept="image/jpeg, image/png"
-                onChange={handlepictureChange}
+                onChange={handlePictureChange}
                 style={{ marginBottom: "10px" }}
               />
               {formErrors.picture && (
@@ -194,7 +206,7 @@ function PostEventPage() {
                 onChange={handleInputChange}
                 required
               >
-                <option value="">select a theme</option>
+                <option value="">Select a theme</option>
                 <option value="Social Events">Social Events</option>
                 <option value="Art and Culture">Art and Culture</option>
                 <option value="Videogames">Videogames</option>
@@ -208,45 +220,61 @@ function PostEventPage() {
                 type="text"
                 id="location"
                 name="location"
-                placeholder="select a location"
+                placeholder="Select a location"
                 value={formData.location}
                 onChange={handleInputChange}
                 required
               />
+              {formErrors.location && (
+                <p style={{ color: "red" }}>{formErrors.location}</p>
+              )}
             </div>
             <div>
               <input
                 type="text"
                 id="address"
                 name="address"
-                required
-                placeholder="select an address"
+                placeholder="Select an address"
                 value={formData.address}
                 onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                id="date"
-                name="date"
-                placeholder="select a date"
-                value={formData.date}
-                onChange={handleInputChange}
                 required
               />
+              {formErrors.address && (
+                <p style={{ color: "red" }}>{formErrors.address}</p>
+              )}
             </div>
-
+            <div>
+              <DatePicker
+                id="date"
+                name="date"
+                selected={formData.date}
+                onChange={(date) =>
+                  setFormData({
+                    ...formData,
+                    date,
+                  })
+                }
+                placeholderText="Select a date"
+                dateFormat="dd/MM/yyyy"
+                required
+              />
+              {formErrors.date && (
+                <p style={{ color: "red" }}>{formErrors.date}</p>
+              )}
+            </div>
             <div>
               <input
                 type="text"
                 id="time"
                 name="time"
-                required
-                placeholder="select an time"
+                placeholder="Select a time"
                 value={formData.time}
                 onChange={handleInputChange}
+                required
               />
+              {formErrors.time && (
+                <p style={{ color: "red" }}>{formErrors.time}</p>
+              )}
             </div>
 
             <ArrowButton
@@ -254,7 +282,6 @@ function PostEventPage() {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                console.log("Submit button clicked");
                 handleSubmit(e);
               }}
             />
