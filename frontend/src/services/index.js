@@ -1,3 +1,34 @@
+export const createMeetup = async (meetupData, token) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_APP_BACKEND}/meetups`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(meetupData),
+        mode: "cors",
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("Inside createMeetup - After Fetch:", data);
+
+    if (!response.ok) {
+      console.error("Error in createMeetup:", data.message);
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error in createMeetup:", error.message);
+    throw new Error(`Error en la creación del meetup: ${error.message}`);
+  }
+};
+
 export const registerUserService = async ({
   username,
   bio,

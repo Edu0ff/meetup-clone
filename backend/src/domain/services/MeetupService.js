@@ -50,8 +50,6 @@ class MeetupService {
       organizer_id,
     }
 
-    console.log('Meetup Data:', meetupData)
-
     const meetupId = await this.meetupRepository.createMeetup(meetupData)
 
     return meetupId
