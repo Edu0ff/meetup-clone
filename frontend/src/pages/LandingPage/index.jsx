@@ -8,13 +8,17 @@ function LandingPage() {
   return (
     <main className="LandingPage">
       <section className="landing-top">
-        <h1 className="header-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nobis
-          dolor ratione aspernatur!
-        </h1>
-        <div className="Hello">Hello!</div>
+        <div className="first-row">
+          <h1 className="header-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nobis
+            dolor ratione aspernatur!
+          </h1>
+          <div className="Hello">Hello!</div>
+        </div>
+        <div className="second-row">
         <SearchBar placeholderText="Search events_" />
         <button className="landing-signup">Sign Up</button>
+        </div>
       </section>
 
       <section className="landing-bottom">
