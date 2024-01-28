@@ -97,22 +97,22 @@ async function createUsersTable(connection) {
 
 async function createMeetupsTable(connection) {
   await connection.query(`
-    CREATE TABLE IF NOT EXISTS Meetups (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      title VARCHAR(255) NOT NULL,
-      description VARCHAR(255) NOT NULL,
-      picture VARCHAR(255) NOT NULL,
-      theme VARCHAR(255) NOT NULL,
-      location VARCHAR(255) NOT NULL,
-      address VARCHAR(255) NOT NULL,
-      date DATE NOT NULL,
-      time TIME NOT NULL,
-      attendees_count INT DEFAULT 0,  
-      organizer_id INT, 
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      FOREIGN KEY (organizer_id) REFERENCES users(id) 
-    )
+   CREATE TABLE IF NOT EXISTS Meetups (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  picture VARCHAR(255) NOT NULL,
+  theme VARCHAR(255) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  date DATETIME NOT NULL, -- O TIMESTAMP
+  time TIME NOT NULL,
+  attendees_count INT DEFAULT 0,  
+  organizer_id INT, 
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (organizer_id) REFERENCES users(id) 
+);
   `)
 
   const meetupsToInsert = [

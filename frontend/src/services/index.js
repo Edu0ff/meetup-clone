@@ -1,28 +1,26 @@
+import axios from "axios";
+
 export const createMeetup = async (meetupData, token) => {
   try {
-    const response = await fetch(
+    const response = await axios.post(
       `${import.meta.env.VITE_APP_BACKEND}/meetups`,
+      meetupData,
       {
-        method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: token,
         },
-        body: JSON.stringify(meetupData),
-        mode: "cors",
       }
     );
 
-    const data = await response.json();
-
-    console.log("Inside createMeetup - After Fetch:", data);
-
-    if (!response.ok) {
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    } else {
+      const data = response.data;
       console.error("Error in createMeetup:", data.message);
       throw new Error(data.message);
     }
-
-    return data;
   } catch (error) {
     console.error("Error in createMeetup:", error.message);
     throw new Error(`Error en la creación del meetup: ${error.message}`);

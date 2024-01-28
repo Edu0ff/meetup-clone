@@ -14,8 +14,8 @@ app.use(cors())
 app.use(expressFileUpload())
 app.use(express.json())
 app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: true }))
 app.use('/uploads', express.static('./uploads'))
+app.use(express.urlencoded({ extended: true }))
 
 // RUTAS
 app.use('/', userRoutes)

@@ -1,10 +1,12 @@
 import { generateError } from '../../../domain/utils/helpers.js'
+import { fileURLToPath } from 'url'
 import MeetupService from '../../../domain/services/MeetupService.js'
 import { meetupSchema } from '../schemas/meetupsSchemas.js'
 import UserService from '../../../domain/services/UserService.js'
-import path from 'path'
+import { createPathIfNotExists } from '../../../domain/utils/helpers.js'
 import sharp from 'sharp'
 import crypto from 'crypto'
+import path from 'path'
 const userService = new UserService()
 const meetupService = new MeetupService()
 
@@ -21,15 +23,26 @@ export const validateNewMeetup = (req, res, next) => {
 
 export const newMeetupController = async (req, res, next) => {
   try {
-    const { organizer_id, ...meetupData } = req.body
+    const {
+      title,
+      description,
+      theme,
+      location,
+      address,
+      date,
+      time,
+      organizer_id,
+    } = req.body
 
     let imageFileName
 
-    if (req.files?.image) {
-      const uploadsDir = path.join(__dirname, '../uploads')
+    if (req.files?.picture) {
+      const currentFilePath = fileURLToPath(import.meta.url)
+      const currentDir = path.dirname(currentFilePath)
+      const uploadsDir = path.join(currentDir, '..', 'uploads')
       await createPathIfNotExists(uploadsDir)
-      const image = sharp(req.files.image.data)
-      const fileName = req.files.image.name
+      const image = sharp(req.files.picture.data)
+      const fileName = req.files.picture.name
       if (
         fileName.endsWith('.jpg') ||
         fileName.endsWith('.png') ||
@@ -47,8 +60,6 @@ export const newMeetupController = async (req, res, next) => {
       await image.toFile(path.join(uploadsDir, imageFileName))
     }
 
-    console.log(req.body)
-
     const organizerExists = await userService.userExists(organizer_id)
 
     if (!organizerExists) {
@@ -56,7 +67,14 @@ export const newMeetupController = async (req, res, next) => {
     }
 
     const meetupId = await meetupService.createMeetup({
-      ...meetupData,
+      title,
+      description,
+      picture: imageFileName,
+      theme,
+      location,
+      address,
+      date,
+      time,
       organizer_id,
     })
 
