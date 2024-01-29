@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { generateError } from '../../../domain/utils/helpers.js'
 import UserService from '../../../domain/services/UserService.js'
-import { userSchema, loginSchema } from '../Schemas/usersSchemas.js'
+import { usersSchemas, loginSchema } from '../schemas/usersSchemas.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const userService = new UserService()
@@ -10,7 +10,7 @@ export const generateActivationToken = () => {
   return uuidv4()
 }
 export const validateNewUser = (req, res, next) => {
-  const { error } = userSchema.validate(req.body)
+  const { error } = usersSchemas.validate(req.body)
 
   if (error) {
     return res.status(400).json({ error: error.details[0].message })
