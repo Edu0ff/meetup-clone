@@ -1,28 +1,28 @@
-# ⚙ Inicialización
+# ⚙ Initialization
 
-- Posicíonate en la carpeta ./frontend y abre la terminal.
+- Navigate to the ./frontend folder and open the terminal.
 
-## NPM necesarios
+## Required NPM Packages
 
-- Debes instalar primero los módulos necesarios:
+- You need to install the necessary modules first:
 
 ```
 npm i
 ```
 
-## Servidor
+## Server
 
-- Para iniciar el servidor:
+- To start the server:
 
 ```
 npm run dev
 ```
 
-## Navegador
+## Browser
 
-- Puedes clicar en el link que la terminal te proporcione para iniciar el navegador.
-- O abrir tu navegador favorito e introducir la dirección que indica la terminal.
-- Por ejemplo:
+- You can click on the link provided by the terminal to open the browser.
+- Alternatively, open your favorite browser and enter the address shown in the terminal.
+- For example:
 
 ```
 http://localhost:5173/
