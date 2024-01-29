@@ -1,104 +1,110 @@
-# API de MeeMee
+# MeeMee API
 
-## Descripción
+## Description
 
-La API de MeeMee es el backend de una aplicación para una empresa organizadora de meetups llamada MeeMee. La API también se integra con una base de datos MySQL para almacenar y recuperar datos relacionados con los envíos.
+The MeeMee API serves as the backend for an application for a meetup organizing platform called MeeMee. The API also integrates with a MySQL database to store and retrieve data related to events.
 
-## Configuración de la Base de Datos
+## Database Configuration
 
-La API de MeeMee utiliza MySQL como base de datos para almacenar información sobre los meetups y usuarios. Asegúrate de seguir estos pasos para configurar correctamente la base de datos:
+The MeeMee API uses MySQL as a database to store information about events and users. Ensure you follow these steps to set up the database correctly:
 
-1. Instala MySQL: Si aún no tienes MySQL instalado, puedes descargarlo desde el sitio web oficial: MySQL Downloads.
+1. Install MySQL: If you don't have MySQL installed, you can download it from [@the official website](https://www.mysql.com/downloads/).
 
-2. Crea una Base de Datos: Crea una base de datos en MySQL que utilizará la API. El nombre de la base de datos debe coincidir con el que se especifica en el archivo de configuración .env. Puedes usar una herramienta como MySQL Workbench o ejecutar comandos SQL para crearla.
+2. Create a Database: Create a database in MySQL that the API will use. The database name should match the one specified in the .env configuration file. You can use a tool like MySQL Workbench or run SQL commands to create it.
 
-3. Configuración en el Archivo .env:
+3. Configuration in the .env File:
 
-Asegúrate de que el archivo .env en la raíz de tu proyecto contenga la configuración correcta para MySQL. Debería tener variables como DB_PORT y JWT SECRET. (Existe un archivo .env.example)
+Ensure that the .env file in the root of your project contains the correct configuration for MySQL. It should have variables like DB_PORT and JWT SECRET (there's a .env.example file).
 
-4. MySQL Client en la API: La API de MeeMee utiliza un módulo llamado MySQLClient.js para gestionar la conexión a la base de datos. Asegúrate de que este archivo esté configurado para utilizar las variables de entorno del archivo .env y los valores definidos en config.js:
+4. MySQL Client in the API: The MeeMee API uses a module called MySQLClient.js to manage the database connection. Make sure this file is configured to use the environment variables from the .env file and the values defined in config.js:
 
-- `address` debería ser "localhost" o la dirección de tu base de datos MySQL.
-- `user` debería ser "demo" o el usuario de tu base de datos MySQL.
-- `password` debería obtenerse de process.env.DB_PASSWORD o utilizar "password" si no se proporciona en el archivo .env.
-- `database` debería ser "MeeMee" o el nombre de tu base de datos MySQL.
+- `address` should be "localhost" or the address of your MySQL database.
+- `user` should be "demo" or the user of your MySQL database.
+- `password` should be obtained from process.env.DB_PASSWORD or use "password" if not provided in the .env file.
+- `database` should be "MeeMee" or the name of your MySQL database.
 
-## Crear las tablas de la base de datos
+## Create Database Tables
 
-1. Ejecuta en la terminal:
+Open the terminal and write:
 
-- npm run migrate
+```
+npm run migrate
+```
 
-Este comando permite inicializar las tablas en la base de datos utilizando Node.js. Al ejecutar este comando, se conecta a la base de datos y crea las tablas necesarias para el funcionamiento de la API. Este comando debe ser ejecutado una sola vez, antes de utilizar la API por primera vez, o en caso de que se requiera reiniciar las tablas de la base de datos. Este comando ya te crea la base de datos precargada con usuarios y envíos.
+This command initializes tables in the database using Node.js. When you run this command, it connects to the database and creates the necessary tables for the API to function. This command should be executed only once, before using the API for the first time or if you need to restart the database tables. This command already creates the database preloaded with users and shipments.
 
-## Ejecutar la API
+## Run the API
 
-Para ejecutar la API de MeeMee, sigue estos pasos:
+To run the MeeMee API, follow these steps:
 
-1. Instalación de Dependencias: Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando para instalar las dependencias:
+1. Install Dependencies: Open a terminal in the root of your project and run the following command to install dependencies:
 
-- npm install
+```
+npm i
+```
 
-2. Iniciar la API: Una vez instaladas las dependencias, puedes iniciar la API con el siguiente comando:
+2. Start the API: Once dependencies are installed, you can start the API with the following command:
 
-- npm start
+```
+npm start
+```
 
-La API debería estar en funcionamiento y escuchando en un puerto específico. Puedes acceder a ella a través de las rutas definidas en los controladores.
+The API should be listening on a specific port. You can access it through the routes defined in the controllers.
 
 ## Endpoints
 
-### Usuarios
+### Users
 
-- `POST /user/register`: Registra un nuevo usuario en la plataforma. Los usuarios pueden ser de las categorías "trabajador" o "administrador".
+- `POST /user/register`: Registers a new user on the platform.
 
-- `POST /user/login`: Inicia sesión en la plataforma.
+- `POST /user/login`: Logs in to the platform.
 
-- `GET /user/:id`: Obtiene la información de un usuario por su ID.
+- `GET /user/:id`: Gets information about a user by their ID.
 
-### Meetups
+### Events
 
-- `POST /meetups`: Crea un nuevo meetup.
+- `POST /meetups`: Creates a new meetup.
 
-- `GET /meetups`: Obtiene una lista de todos los meetups.
+- `GET /meetups`: Gets a list of all meetups.
 
-- `GET /carrier/:id`: Obtiene detalles de un meetup por su ID.
+- `GET /meetup/:id`: Gets details of a meetup by its ID.
 
-- `PUT /carrier/:id`: Actualiza cualquier parametro de un meetup por su ID.
+- `PUT /meetup/:id`: Updates any parameter of a meetup by its ID.
 
-- `DELETE /carrier/:id`: Elimina un meetup por su ID.
+- `DELETE /meetup/:id`: Deletes a meetup by its ID.
 
-- `PUT /meetups/:id/updateAttendeesCount`: Actualiza el contador de asistencia de un meetup por su ID.
+- `PUT /meetups/:id/updateAttendeesCount`: Updates the attendance counter of a meetup by its ID.
 
-## Ejecutar test
+## Run Tests
 
-Para ejecutar los test de la API de MeeMee, sigue estos pasos:
+To run tests for the MeeMee API open a terminal in the root of your project and run the following command:
 
-1. Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando para ejecutar los test:
+```
+npm run test
+```
 
-- npm run test
+## Tech stack
 
-## Tecnologías utilizadas
+- Node.js: The platform on which the application is built.
 
-- Node.js: La plataforma en la que se basa la aplicación.
+- Express.js: A web framework for Node.js, used in constructing the API.
 
-- Express.js: Un framework web para Node.js, utilizado en la construcción de la API.
+- Cors: A middleware for Express used to enable cross-origin resource sharing.
 
-- Cors: Un middleware para Express que se utiliza para habilitar las solicitudes de recursos cruzados.
+- Dotenv: A package for loading environment variables from a .env file.
 
-- Dotenv: Un paquete para cargar variables de entorno desde un archivo .env.
+- Joi: A data validation library for Node.js, used for data validation in the application.
 
-- Joi: Una librería de validación de datos para Node.js, utilizada para validar datos en la aplicación.
+- JsonWebToken (JWT): A library for creating and verifying JWT authentication tokens.
 
-- JsonWebToken (jsonwebtoken): Una librería para crear y verificar tokens de autenticación JWT.
+- Morgan: A middleware for Express used for HTTP request logging.
 
-- Morgan: Un middleware para Express que se utiliza para el registro de solicitudes HTTP.
+- mysql2: A MySQL driver for Node.js, used to interact with the MySQL database.
 
-- mysql2: Un controlador MySQL para Node.js, utilizado para interactuar con la base de datos MySQL.
+- mysql2-promise: A library providing promise functions for working with mysql2.
 
-- mysql2-promise: Una biblioteca que proporciona funciones de promesa para trabajar con mysql2.
+- UUID: A library for generating unique identifiers (UUID).
 
-- UUID: Una biblioteca para la generación de identificadores únicos (UUID).
+- Vitest: A testing framework for Vue 3 applications. Used for project testing.
 
-- Vitest: Un marco de prueba para aplicaciones Vue 3. Se utiliza para las pruebas del proyecto.
-
-- Bcrypt: Biblioteca de hashing especializada en la seguridad de contraseñas en aplicaciones web.
+- Bcrypt: A hashing library specialized in password security for web applications.

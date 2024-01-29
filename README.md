@@ -1,27 +1,28 @@
-# 💬 meetup-clone
+# 💬 MeeMee
 
-_Portal web para la creación de eventos, similar a [Meetup](https://www.meetup.com/)._
+MeeMee it's a platform to connect people with similar interests. You can join, search for events, or create your own. Perfect for meeting people with similar tastes, whether in art, video games, or sports. Have fun connecting with others!
 
-## 📋 Descripción
+## 📋 Description
 
-- Los usuarios anónimos pueden:
-  - Ver eventos disponibles.
-  - Registrarse con un nickname, email y password.
-  - Login con email y password.
-- Los usuarios registrados pueden:
-  - Crear un nuevo evento.
-  - Anotarse o darse de baja de un evento.
-  - Hacer comentarios en los eventos.
-  - Gestionar el perfil de usuario.
-  - Eliminar su evento.
-  - Eliminar su comentario.
-  - Eliminar su cuenta.
+- Anonymous users can:
+  - View available events:
+    - Sorted by the nearest date.
+    - Past events are not displayed.
+    - They can filter by theme and city.
+  - View complete event information and organizer details.
+  - See a list of attendees for an event.
+  - Register with a nickname, email, and password.
+  - Log in with email and password.
+- Registered users can:
+  - Same as anonymous users.
+  - Create a new event.
+  - Sign up for or withdraw from an event.
 
-## ⚙ Inicialización
+## ⚙ Initialization
 
-Para inicializar la app debes seguir los pasos indicados en el ReadMe de la carpeta Backend y Frontend.
+To initialize the app, follow the steps outlined in the ReadMe in the Backend and Frontend folders.
 
-## 👩‍💻 Autores
+## 👩‍💻 Authors
 
 - [@Edu0ff](https://github.com/Edu0ff)
 - [@AnaBelenBernardez](https://github.com/AnaBelenBernardez)
