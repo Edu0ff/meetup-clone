@@ -9,9 +9,9 @@ async function main() {
     connection = await getConnection()
     console.log('Connected')
     console.log('Dropping existing tables')
-    await dropTableIfExists(connection, 'Attendees')
-    await dropTableIfExists(connection, 'Organizers')
-    await dropTableIfExists(connection, 'Meetups')
+    await dropTableIfExists(connection, 'attendees')
+    await dropTableIfExists(connection, 'organizers')
+    await dropTableIfExists(connection, 'meetups')
     await dropTableIfExists(connection, 'users')
 
     console.log('Creating tables')
@@ -32,6 +32,7 @@ async function main() {
 }
 
 async function dropTableIfExists(connection, tableName) {
+  await connection.query(`SET FOREIGN_KEY_CHECKS = 0`)
   await connection.query(`DROP TABLE IF EXISTS ${tableName}`)
   console.log(`Table ${tableName} dropped if exists.`)
 }
@@ -97,7 +98,7 @@ async function createUsersTable(connection) {
 
 async function createMeetupsTable(connection) {
   await connection.query(`
-   CREATE TABLE IF NOT EXISTS Meetups (
+   CREATE TABLE IF NOT EXISTS meetups (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
@@ -174,7 +175,7 @@ async function createMeetupsTable(connection) {
   ]
 
   for (const meetup of meetupsToInsert) {
-    await connection.query(`INSERT INTO Meetups SET ?`, meetup)
+    await connection.query(`INSERT INTO meetups SET ?`, meetup)
   }
 
   console.log('Table Meetups created and populated with 5 meetups.')
@@ -182,7 +183,7 @@ async function createMeetupsTable(connection) {
 
 async function createOrganizersTable(connection) {
   await connection.query(`
-    CREATE TABLE IF NOT EXISTS Organizers (
+    CREATE TABLE IF NOT EXISTS organizers (
       id INT AUTO_INCREMENT PRIMARY KEY,
       user_id INT,
       meetup_id INT,
@@ -197,7 +198,7 @@ async function createOrganizersTable(connection) {
 }
 
 async function createAttendeesTable(connection) {
-  await connection.query(`CREATE TABLE IF NOT EXISTS Attendees (
+  await connection.query(`CREATE TABLE IF NOT EXISTS attendees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     meetup_id INT,
     user_id INT,
@@ -229,11 +230,11 @@ async function insertData(connection) {
   ]
 
   for (const organizer of organizersToInsert) {
-    await connection.query(`INSERT INTO Organizers SET ?`, organizer)
+    await connection.query(`INSERT INTO organizers SET ?`, organizer)
   }
 
   for (const attendee of attendeesToInsert) {
-    await connection.query(`INSERT INTO Attendees SET ?`, attendee)
+    await connection.query(`INSERT INTO attendees SET ?`, attendee)
   }
 
   console.log('Data inserted.')
@@ -241,10 +242,10 @@ async function insertData(connection) {
 
 async function updateCounters(connection) {
   await connection.query(`
-    UPDATE Meetups
+    UPDATE meetups
     SET attendees_count = (
       SELECT COUNT(*)
-      FROM Attendees
+      FROM attendees
       WHERE Attendees.meetup_id = Meetups.id
       AND Attendees.will_attend = 1
     )
@@ -254,7 +255,7 @@ async function updateCounters(connection) {
     UPDATE users
     SET meetups_attended = (
       SELECT COUNT(*)
-      FROM Attendees
+      FROM attendees
       WHERE Attendees.user_id = users.id
       AND Attendees.will_attend = 1
     )
