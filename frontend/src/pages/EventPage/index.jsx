@@ -3,6 +3,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
+import AttendeesList from "../../components/ListAttendees/index.jsx";
 
 function EventPage() {
   const { id } = useParams();
@@ -128,6 +129,7 @@ function EventPage() {
                   src="../../icons/person.svg"
                   alt="orgnized by"
                 />
+                <AttendeesList />
                 <p id="eventpage-organizedby">{`Organized by ${
                   organizerUsername || ""
                 }`}</p>

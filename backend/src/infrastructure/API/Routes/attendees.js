@@ -15,11 +15,7 @@ attendeesRoutes.get(
   authUser,
   getAttendeeByIdController,
 )
-attendeesRoutes.get(
-  '/attendees/:meetupId/list',
-  authUser,
-  listAttendeesController,
-)
+attendeesRoutes.get('/attendees/:meetupId/list', listAttendeesController)
 attendeesRoutes.get(
   '/attendees/:meetupId/usernames',
   authUser,

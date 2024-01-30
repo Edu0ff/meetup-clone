@@ -27,6 +27,32 @@ export const createMeetup = async (meetupData, token) => {
   }
 };
 
+export const getAttendeesByMeetup = async (meetupId, token) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_APP_BACKEND}/attendees/${meetupId}/list`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    } else {
+      const data = response.data;
+      console.error("Error in getAttendeesByMeetup:", data.message);
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.error("Error in getAttendeesByMeetup:", error.message);
+    throw new Error(
+      `Error al obtener la lista de asistentes: ${error.message}`
+    );
+  }
+};
 export const registerUserService = async ({
   username,
   bio,
