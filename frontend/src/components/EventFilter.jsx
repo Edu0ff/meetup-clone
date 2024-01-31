@@ -6,19 +6,19 @@ function EventFilter({ locations, onFilterChange }) {
   const handleLocationChange = (event) => {
     const newLocation = event.target.value;
     setSelectedLocation(newLocation);
-    onFilterChange(newLocation); // Llama a la función de filtro con la nueva ubicación seleccionada
+    onFilterChange(newLocation);
   };
 
   return (
     <div className="event-filter">
-      <label htmlFor="location">Filter by Location:</label>
+      <label htmlFor="location">Search by city:</label>
       <select
         id="location"
         name="location"
         value={selectedLocation}
         onChange={handleLocationChange}
       >
-        <option value="">All Locations</option>
+        <option value="">All cities</option>
         {locations.map((location) => (
           <option key={location} value={location}>
             {location}

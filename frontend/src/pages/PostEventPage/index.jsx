@@ -54,7 +54,7 @@ function PostEventPage() {
       meetupData.append("title", formData.title);
       meetupData.append("description", formData.description);
       meetupData.append("picture", formData.picture, formData.picture.name);
-      const theme = formData.theme.replace(/\s+/g, "_");
+      const theme = formData.theme;
       meetupData.append("theme", theme);
       meetupData.append("location", formData.location);
       meetupData.append("address", formData.address);
@@ -70,14 +70,10 @@ function PostEventPage() {
       meetupData.append("time", formData.time);
       meetupData.append("organizer_id", organizerId);
 
-      console.log("Meetup data:", Object.fromEntries(meetupData.entries()));
-
       const newMeetup = await createMeetup(
         Object.fromEntries(meetupData.entries()),
         token
       );
-
-      console.log("New meetup created:", newMeetup);
 
       resetForm();
       navigate("/");
@@ -206,7 +202,7 @@ function PostEventPage() {
                 onChange={handleInputChange}
                 required
               >
-                <option value="">Select a theme</option>
+                <option value="">category</option>
                 <option value="Social Events">Social Events</option>
                 <option value="Art and Culture">Art and Culture</option>
                 <option value="Videogames">Videogames</option>
@@ -220,7 +216,7 @@ function PostEventPage() {
                 type="text"
                 id="location"
                 name="location"
-                placeholder="Select a location"
+                placeholder="Select a city"
                 value={formData.location}
                 onChange={handleInputChange}
                 required
