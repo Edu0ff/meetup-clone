@@ -41,12 +41,24 @@ export const getAttendeeByMeetupAndUserController = async (req, res, next) => {
     next(err)
   }
 }
-export const newAttendeeController = async (req, res, next) => {
+
+export const createAttendeeController = async (req, res, next) => {
   try {
     const { meetupId, userId, username } = req.body
-    await attendeeService.addAttendee(meetupId, userId, username)
+    await attendeeService.createAttendee(meetupId, userId, username)
 
-    res.status(200).json({ message: 'Attendee status updated successfully.' })
+    res.status(201).json({ message: 'Attendee created successfully.' })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const deleteAttendeeController = async (req, res, next) => {
+  try {
+    const { meetupId, userId } = req.body
+    await attendeeService.deleteAttendee(meetupId, userId)
+
+    res.status(200).json({ message: 'Attendee deleted successfully.' })
   } catch (error) {
     next(error)
   }
@@ -63,18 +75,6 @@ export const listAttendeesController = async (req, res, next) => {
   }
 }
 
-export const deleteAttendeeController = async (req, res, next) => {
-  try {
-    const { meetupId, userId } = req.body
-
-    await attendeeService.toggleAttendee(meetupId, userId)
-
-    res.status(200).json({ message: 'Attendee deleted successfully.' })
-  } catch (err) {
-    next(err)
-  }
-}
-
 export const getAttendeeByIdController = async (req, res, next) => {
   try {
     const { attendeeId } = req.params
@@ -84,6 +84,25 @@ export const getAttendeeByIdController = async (req, res, next) => {
       res.status(404).json({ message: 'Attendee not found.' })
     } else {
       res.status(200).json(attendee)
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const checkAttendeeExistenceController = async (req, res, next) => {
+  try {
+    const { meetupId, userId } = req.params
+
+    const existingAttendee = await attendeeService.getAttendeeByMeetupAndUser(
+      meetupId,
+      userId,
+    )
+
+    if (existingAttendee) {
+      res.status(200).json({ message: 'Attendee already exists.' })
+    } else {
+      res.status(404).json({ message: 'Attendee not found.' })
     }
   } catch (error) {
     next(error)

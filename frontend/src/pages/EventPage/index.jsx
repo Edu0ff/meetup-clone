@@ -17,12 +17,17 @@ function EventPage() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [attendees, setAttendees] = useState([]);
+  const [updatingAttendees, setUpdatingAttendees] = useState(false);
 
   const decodedToken = JSON.parse(atob(token.split(".")[1]));
   const userId = parseInt(decodedToken.userId, 10);
 
   const updateAttendees = async () => {
+    if (updatingAttendees) {
+      return;
+    }
     try {
+      setUpdatingAttendees(true);
       const attendeesResponse = await fetch(
         `${import.meta.env.VITE_APP_BACKEND}/attendees/${id}/list`
       );
