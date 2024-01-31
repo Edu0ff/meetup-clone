@@ -23,6 +23,24 @@ export const listUsernamesByMeetupController = async (req, res, next) => {
     next(err)
   }
 }
+
+export const getAttendeeByMeetupAndUserController = async (req, res, next) => {
+  try {
+    const { meetupId, userId } = req.params
+    const attendee = await attendeeService.getAttendeeByMeetupAndUser(
+      meetupId,
+      userId,
+    )
+
+    if (!attendee) {
+      return res.status(404).json({ message: 'Attendee not found' })
+    }
+
+    res.status(200).json(attendee)
+  } catch (err) {
+    next(err)
+  }
+}
 export const newAttendeeController = async (req, res, next) => {
   try {
     const { meetupId, userId, username } = req.body

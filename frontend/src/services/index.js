@@ -234,3 +234,35 @@ export const updataUserPasswordService = async ({ password, token, id }) => {
     throw new Error(error.message);
   }
 };
+
+export const createAttendeeService = async ({
+  meetupId,
+  userId,
+  username,
+  token,
+}) => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_APP_BACKEND}/attendees`,
+      { meetupId, userId, username },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    } else {
+      const data = response.data;
+      console.error("Error in createAttendeeService:", data.message);
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.error("Error in createAttendeeService:", error.message);
+    throw new Error(`Error en la creación del asistente: ${error.message}`);
+  }
+};
