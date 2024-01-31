@@ -235,16 +235,11 @@ export const updataUserPasswordService = async ({ password, token, id }) => {
   }
 };
 
-export const createAttendeeService = async ({
-  meetupId,
-  userId,
-  username,
-  token,
-}) => {
+export const createAttendeeService = async ({ meetupId, userId, token }) => {
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_APP_BACKEND}/attendees`,
-      { meetupId, userId, username },
+    const createResponse = await axios.post(
+      `${import.meta.env.VITE_APP_BACKEND}/attendees/create`,
+      { meetupId, userId },
       {
         headers: {
           "Content-Type": "application/json",
@@ -253,16 +248,60 @@ export const createAttendeeService = async ({
       }
     );
 
-    if (response.status >= 200 && response.status < 300) {
-      const data = response.data;
+    if (createResponse.status >= 200 && createResponse.status < 300) {
+      const data = createResponse.data;
       return data;
+    } else if (createResponse.status === 404) {
+      return { message: "Attendee created successfully." };
     } else {
-      const data = response.data;
+      const data = createResponse.data;
       console.error("Error in createAttendeeService:", data.message);
       throw new Error(data.message);
     }
   } catch (error) {
     console.error("Error in createAttendeeService:", error.message);
     throw new Error(`Error en la creación del asistente: ${error.message}`);
+  }
+};
+
+export const deleteAttendeeService = async ({ meetupId, userId, token }) => {
+  try {
+    const checkResponse = await axios.get(
+      `${
+        import.meta.env.VITE_APP_BACKEND
+      }/attendees/${meetupId}/user/${userId}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    if (checkResponse.status !== 200) {
+      return { message: "Attendee does not exist." };
+    }
+
+    const deleteResponse = await axios.post(
+      `${import.meta.env.VITE_APP_BACKEND}/attendees/delete`,
+      { meetupId, userId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+
+    if (deleteResponse.status >= 200 && deleteResponse.status < 300) {
+      const data = deleteResponse.data;
+      return data;
+    } else {
+      const data = deleteResponse.data;
+      console.error("Error in deleteAttendeeService:", data.message);
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.error("Error in deleteAttendeeService:", error.message);
+    throw new Error(`Error al eliminar el asistente: ${error.message}`);
   }
 };
