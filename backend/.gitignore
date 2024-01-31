@@ -17,3 +17,5 @@ node_modules/
 .eslintrc.cjs
 
 **/.eslintrc.cjs
+
+/src/infrastructure/API/uploads/

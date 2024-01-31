@@ -33,7 +33,6 @@ export const AuthProviderComponent = ({ children }) => {
         localStorage.setItem("userData", JSON.stringify(decodedToken));
         setUserData(decodedToken);
         setAuth(true);
-        console.log(decodedToken);
         if (login) {
           toast.success(`Welcome ${decodedToken.email}`);
           setLogin(false);

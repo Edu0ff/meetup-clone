@@ -48,7 +48,7 @@
 }
 
 .Hello::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 100%;
   right: 0;
@@ -72,7 +72,7 @@
 
 .landing-bottom {
   background-image: url(/img/suminagashi.svg);
-  background-size: cover;
+  background-size: contain;
   background-color: var(--lavender-ish);
 }
 

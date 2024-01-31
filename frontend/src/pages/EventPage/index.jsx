@@ -7,6 +7,7 @@ import AttendeesList from "../../components/AttendeesList/index.jsx";
 import AttendeeButton from "../../components/AttendeeButton/index.jsx";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { getDataUserService } from "../../services/index.js";
+import { format } from "date-fns";
 
 function EventPage() {
   const { id } = useParams();
@@ -86,6 +87,19 @@ function EventPage() {
     fetchEventData();
   }, [id, userId, token]);
 
+  let formattedDate = "No date available";
+  let formattedTime = "No time available";
+
+  if (eventData) {
+    formattedDate = eventData.date
+      ? format(new Date(eventData.date), "dd/MM/yy")
+      : "No date available";
+
+    formattedTime = eventData.time
+      ? format(new Date(`2022-01-01 ${eventData.time}`), "HH:mm")
+      : "No time available";
+  }
+
   return (
     <main className="event-page">
       <div className="green-banner" id="goback-banner">
@@ -117,8 +131,7 @@ function EventPage() {
               src="../../icons/calendar.svg"
               alt="calendar"
             />
-            {eventData.date}
-            {eventData.time}
+            {formattedDate} {formattedTime}
           </div>
           <Link to="/">
             <div className="green-banner" id="event-going">
