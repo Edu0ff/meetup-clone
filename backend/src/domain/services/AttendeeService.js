@@ -34,6 +34,10 @@ class AttendeeService {
     return this.attendeeRepository.getAttendeesByMeetup(meetupId)
   }
 
+  async getAttendeeByMeetupAndUser(meetupId, userId) {
+    return this.attendeeRepository.getAttendeeByMeetupAndUser(meetupId, userId)
+  }
+
   async getUsernamesByMeetup(meetupId) {
     return this.attendeeRepository.getUsernamesByMeetup(meetupId)
   }

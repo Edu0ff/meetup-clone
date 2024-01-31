@@ -1,16 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
-import AttendeesList from "../../components/ListAttendees/index.jsx";
+import AttendeesList from "../../components/AttendeesList/index.jsx";
+import AttendeeButton from "../../components/AttendeeButton/index.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { getDataUserService } from "../../services/index.js";
 
 function EventPage() {
   const { id } = useParams();
+  const { token } = useContext(AuthContext);
   const [eventData, setEventData] = useState(null);
   const [organizerUsername, setOrganizerUsername] = useState("");
   const [organizerAvatar, setOrganizerAvatar] = useState("");
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState("");
+  const [attendees, setAttendees] = useState([]);
+
+  const decodedToken = JSON.parse(atob(token.split(".")[1]));
+  const userId = parseInt(decodedToken.userId, 10);
+
+  const updateAttendees = async () => {
+    try {
+      const attendeesResponse = await fetch(
+        `${import.meta.env.VITE_APP_BACKEND}/attendees/${id}/list`
+      );
+      const attendeesData = await attendeesResponse.json();
+
+      if (!attendeesResponse.ok) {
+        throw new Error(attendeesData.message);
+      }
+
+      setAttendees(attendeesData);
+    } catch (error) {
+      console.error("Error fetching attendees:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -26,6 +52,10 @@ function EventPage() {
         }
 
         setEventData(eventData);
+
+        const userData = await getDataUserService({ id: userId, token });
+        setUsername(userData.username);
+
         if (eventData.organizer_id) {
           const organizerResponse = await fetch(
             `${import.meta.env.VITE_APP_BACKEND}/organizers/${
@@ -49,7 +79,7 @@ function EventPage() {
     };
 
     fetchEventData();
-  }, [id]);
+  }, [id, userId, token]);
 
   return (
     <main className="event-page">
@@ -101,7 +131,13 @@ function EventPage() {
               src="../../icons/check.svg"
               alt="signme"
             />
-            <button id="button-signme">Sign me up!</button>
+            <AttendeeButton
+              meetupId={id}
+              userId={userId}
+              username={username}
+              token={token}
+              updateAttendees={updateAttendees}
+            />
           </div>
           <div id="eventpage-imgcontainer">
             <img
@@ -129,7 +165,7 @@ function EventPage() {
                   src="../../icons/person.svg"
                   alt="orgnized by"
                 />
-                <AttendeesList />
+                <AttendeesList updateAttendees={updateAttendees} />
                 <p id="eventpage-organizedby">{`Organized by ${
                   organizerUsername || ""
                 }`}</p>

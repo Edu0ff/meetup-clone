@@ -3,7 +3,7 @@ import { getAttendeesByMeetup } from "../../services/index";
 import { AuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
 
-const AttendeesList = () => {
+const AttendeesList = ({ updateAttendees }) => {
   const { id } = useParams();
   const { token } = useContext(AuthContext);
   const [attendees, setAttendees] = useState([]);
@@ -15,6 +15,7 @@ const AttendeesList = () => {
       try {
         const attendeesData = await getAttendeesByMeetup(id, token);
         setAttendees(attendeesData);
+        updateAttendees();
       } catch (error) {
         setError(error.message);
       } finally {
@@ -23,7 +24,7 @@ const AttendeesList = () => {
     };
 
     fetchAttendeesData();
-  }, [id, token]);
+  }, [id, token, updateAttendees]);
 
   if (loading) {
     return <div>Cargando...</div>;
