@@ -68,9 +68,7 @@ function AllEventsPage() {
             <ul>
               {filteredAndSortedMeetups.map((meetup) => (
                 <li key={meetup.id}>
-                  <Link to={`/event/${meetup.id}`}>
-                    <EventCard meetup={meetup} />
-                  </Link>
+                  <EventCard meetup={meetup} />
                 </li>
               ))}
             </ul>

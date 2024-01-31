@@ -2,8 +2,15 @@ import React from "react";
 import "./style.css";
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 function EventCard({ meetup }) {
+  const formattedDate = meetup.date
+    ? format(new Date(meetup.date), "dd/MM/yy")
+    : "No date available";
+
+  const formattedTime = meetup.time ? meetup.time : "No time available";
+
   return (
     <Link to={`/event/${meetup.id}`}>
       <div className="event-card">
@@ -33,7 +40,7 @@ function EventCard({ meetup }) {
                   src="icons/calendar.svg"
                   alt="Date"
                 />
-                {meetup.date}
+                {formattedDate}
               </p>
               <p className="eventcard-going">
                 <img className="event-icon" src="icons/check.svg" alt="Going" />
