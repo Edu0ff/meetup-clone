@@ -7,6 +7,8 @@ import EventCard from "../../components/EventCard";
 import SearchBar from "../../components/SearchBar/index.jsx";
 import ExploreCategories from "../../components/ExploreCategories/index.jsx";
 import EventFilter from "../../components/EventFilter.jsx";
+import ScrollToTop from "../../components/ScrollToTop";
+import ScrollBar from "../../components/ScrollBar";
 
 function AllEventsPage() {
   const [meetups, setMeetups] = useState([]);
@@ -54,6 +56,8 @@ function AllEventsPage() {
         <Loading />
       ) : (
         <>
+          <ScrollBar />
+          <ScrollToTop />
           <SearchBar placeholderText="Search by city_" />
           <EventFilter
             locations={getUniqueLocations(meetups)}
