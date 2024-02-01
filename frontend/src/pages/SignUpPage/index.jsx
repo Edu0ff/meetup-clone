@@ -5,6 +5,7 @@ import { registerUserService, loginUserService } from "../../services/index.js";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import ArrowButton from "../../components/ArrowButton";
+import Loading from "../../components/Loading";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function SignUpPage() {
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
   const [bio, setBio] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleBioChange = (event) => {
     const newBio = event.target.value.slice(0, 255);
@@ -39,6 +41,7 @@ function SignUpPage() {
     }
 
     try {
+      setLoading(true);
       const response = await registerUserService({
         username,
         bio,
@@ -65,80 +68,88 @@ function SignUpPage() {
       } else {
         toast.error(error.message);
       }
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 400);
     }
   };
 
   return (
     <main className="signup-page">
-      <div className="signup-container">
-        <img className="signup-image" src="/img/cosplay.avif" alt="" />
-        <div className="signup-section">
-          <div className="signup-header">
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/signin">Sign In</Link>
-          </div>
-          <form onSubmit={handleForm}>
-            <ul>
-              <li className="form-group">
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  required
-                  placeholder="nickname"
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </li>
-              <li className="form-group">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </li>
-              <li className="form-group">
-                <input
-                  htmlFor="pass1"
-                  type="password"
-                  id="pass1"
-                  name="pass1"
-                  required
-                  placeholder="password"
-                  onChange={(e) => setPass1(e.target.value)}
-                />
-              </li>
-              <li className="form-group">
-                <input
-                  htmlFor="pass2"
-                  type="password"
-                  id="pass2"
-                  name="pass2"
-                  required
-                  placeholder="repeat password"
-                  onChange={(e) => setPass2(e.target.value)}
-                />
-              </li>
-              <li className="form-group">
-                <textarea
-                  id="bio"
-                  name="bio"
-                  value={bio}
-                  onChange={handleBioChange}
-                  required
-                  placeholder="tell the world a little about you_"
-                  maxLength={255}
-                />
-                <div className="character-count">{`${characterCount}/255`}</div>
-              </li>
-            </ul>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="signup-container">
+          <img className="signup-image" src="/img/cosplay.avif" alt="" />
+          <div className="signup-section">
+            <div className="signup-header">
+              <Link to="/signup">Sign Up</Link>
+              <Link to="/signin">Sign In</Link>
+            </div>
+            <form onSubmit={handleForm}>
+              <ul>
+                <li className="form-group">
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required
+                    placeholder="nickname"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </li>
+                <li className="form-group">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </li>
+                <li className="form-group">
+                  <input
+                    htmlFor="pass1"
+                    type="password"
+                    id="pass1"
+                    name="pass1"
+                    required
+                    placeholder="password"
+                    onChange={(e) => setPass1(e.target.value)}
+                  />
+                </li>
+                <li className="form-group">
+                  <input
+                    htmlFor="pass2"
+                    type="password"
+                    id="pass2"
+                    name="pass2"
+                    required
+                    placeholder="repeat password"
+                    onChange={(e) => setPass2(e.target.value)}
+                  />
+                </li>
+                <li className="form-group">
+                  <textarea
+                    id="bio"
+                    name="bio"
+                    value={bio}
+                    onChange={handleBioChange}
+                    required
+                    placeholder="tell the world a little about you_"
+                    maxLength={255}
+                  />
+                  <div className="character-count">{`${characterCount}/255`}</div>
+                </li>
+              </ul>
 
-            <ArrowButton id="signup-button" type="submit" />
-          </form>
+              <ArrowButton id="signup-button" type="submit" />
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }

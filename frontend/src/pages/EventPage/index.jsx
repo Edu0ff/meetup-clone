@@ -93,7 +93,9 @@ function EventPage() {
       } catch (error) {
         console.error("Error fetching event data:", error);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 400);
       }
     };
 

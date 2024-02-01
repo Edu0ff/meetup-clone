@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import ArrowButton from "../../components/ArrowButton";
@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext.jsx";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createMeetup } from "../../services/index.js";
+import Loading from "../../components/Loading";
 
 function PostEventPage() {
   const { token } = useContext(AuthContext);
@@ -21,6 +22,15 @@ function PostEventPage() {
     time: "",
     organizer_id: "",
   });
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 400);
+    return () => clearTimeout(timeout);
+  }, []);
 
   function padZero(num) {
     return num.toString().padStart(2, "0");
@@ -42,6 +52,7 @@ function PostEventPage() {
 
   const handleCreateMeetup = async () => {
     try {
+      setLoading(true);
       if (!token) {
         console.log("Token is missing");
         return;
@@ -80,6 +91,8 @@ function PostEventPage() {
     } catch (error) {
       console.error("Error creating meetup:", error);
       alert("Error creating meetup. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -154,136 +167,142 @@ function PostEventPage() {
 
   return (
     <main className="postevent-page">
-      <div className="postevent-container">
-        <div className="top-line">
-          <h1 className="postevent-title">Event Details</h1>
-        </div>
-        <div className="formevent-container">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              placeholder="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              required
-            />
-            <div className="description-group">
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                required
-                placeholder="description"
-                maxLength={255}
-              />
-            </div>
-            <div>
-              <input
-                type="file"
-                name="picture"
-                accept="image/jpeg, image/png"
-                onChange={handlePictureChange}
-                style={{ marginBottom: "10px" }}
-              />
-              {formErrors.picture && (
-                <p style={{ color: "red", marginBottom: "10px" }}>
-                  {formErrors.picture}
-                </p>
-              )}
-            </div>
-            <div>
-              <select
-                id="theme"
-                name="theme"
-                value={formData.theme}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="">category</option>
-                <option value="Social Events">Social Events</option>
-                <option value="Art and Culture">Art and Culture</option>
-                <option value="Videogames">Videogames</option>
-                <option value="Technology">Technology</option>
-                <option value="Travel and Outdoors">Travel and Outdoors</option>
-                <option value="Sports and Fitness">Sports and Fitness</option>
-              </select>
-            </div>
-            <div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="postevent-container">
+          <div className="top-line">
+            <h1 className="postevent-title">Event Details</h1>
+          </div>
+          <div className="formevent-container">
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                id="location"
-                name="location"
-                placeholder="Select a city"
-                value={formData.location}
+                id="title"
+                name="title"
+                placeholder="title"
+                value={formData.title}
                 onChange={handleInputChange}
                 required
               />
-              {formErrors.location && (
-                <p style={{ color: "red" }}>{formErrors.location}</p>
-              )}
-            </div>
-            <div>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                placeholder="Select an address"
-                value={formData.address}
-                onChange={handleInputChange}
-                required
-              />
-              {formErrors.address && (
-                <p style={{ color: "red" }}>{formErrors.address}</p>
-              )}
-            </div>
-            <div>
-              <DatePicker
-                id="date"
-                name="date"
-                selected={formData.date}
-                onChange={(date) =>
-                  setFormData({
-                    ...formData,
-                    date,
-                  })
-                }
-                placeholderText="Select a date"
-                dateFormat="dd/MM/yyyy"
-                required
-              />
-              {formErrors.date && (
-                <p style={{ color: "red" }}>{formErrors.date}</p>
-              )}
-            </div>
-            <div>
-              <input
-                type="text"
-                id="time"
-                name="time"
-                placeholder="Select a time"
-                value={formData.time}
-                onChange={handleInputChange}
-                required
-              />
-              {formErrors.time && (
-                <p style={{ color: "red" }}>{formErrors.time}</p>
-              )}
-            </div>
+              <div className="description-group">
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="description"
+                  maxLength={255}
+                />
+              </div>
+              <div>
+                <input
+                  type="file"
+                  name="picture"
+                  accept="image/jpeg, image/png"
+                  onChange={handlePictureChange}
+                  style={{ marginBottom: "10px" }}
+                />
+                {formErrors.picture && (
+                  <p style={{ color: "red", marginBottom: "10px" }}>
+                    {formErrors.picture}
+                  </p>
+                )}
+              </div>
+              <div>
+                <select
+                  id="theme"
+                  name="theme"
+                  value={formData.theme}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">category</option>
+                  <option value="Social Events">Social Events</option>
+                  <option value="Art and Culture">Art and Culture</option>
+                  <option value="Videogames">Videogames</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Travel and Outdoors">
+                    Travel and Outdoors
+                  </option>
+                  <option value="Sports and Fitness">Sports and Fitness</option>
+                </select>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Select a city"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  required
+                />
+                {formErrors.location && (
+                  <p style={{ color: "red" }}>{formErrors.location}</p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Select an address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  required
+                />
+                {formErrors.address && (
+                  <p style={{ color: "red" }}>{formErrors.address}</p>
+                )}
+              </div>
+              <div>
+                <DatePicker
+                  id="date"
+                  name="date"
+                  selected={formData.date}
+                  onChange={(date) =>
+                    setFormData({
+                      ...formData,
+                      date,
+                    })
+                  }
+                  placeholderText="Select a date"
+                  dateFormat="dd/MM/yyyy"
+                  required
+                />
+                {formErrors.date && (
+                  <p style={{ color: "red" }}>{formErrors.date}</p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="time"
+                  name="time"
+                  placeholder="Select a time"
+                  value={formData.time}
+                  onChange={handleInputChange}
+                  required
+                />
+                {formErrors.time && (
+                  <p style={{ color: "red" }}>{formErrors.time}</p>
+                )}
+              </div>
 
-            <ArrowButton
-              id="post-button"
-              type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSubmit(e);
-              }}
-            />
-          </form>
+              <ArrowButton
+                id="post-button"
+                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }}
+              />
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }

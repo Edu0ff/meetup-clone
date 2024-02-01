@@ -24,13 +24,14 @@ function AllEventsPage() {
       } catch (error) {
         console.error("Error fetching meetups:", error);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 400);
       }
     };
 
     fetchMeetups();
   }, []);
-
   const now = new Date();
   const filteredAndSortedMeetups = meetups
     .filter((meetup) => new Date(meetup.date) > now)
