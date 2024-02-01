@@ -10,16 +10,18 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
   const [isAttendee, setIsAttendee] = useState(false);
 
   useEffect(() => {
-    // Verificar si el usuario es un asistente
     const checkAttendeeStatus = async () => {
       try {
         const attendeesResponse = await fetch(
           `${import.meta.env.VITE_APP_BACKEND}/attendees/${meetupId}/list`
         );
         const attendeesData = await attendeesResponse.json();
-
-        if (!attendeesResponse.ok) {
+        if (attendeesData && attendeesData.message) {
           throw new Error(attendeesData.message);
+        }
+
+        if (!Array.isArray(attendeesData)) {
+          throw new Error("Invalid data format: Expected an array");
         }
 
         const userIsAttendee = attendeesData.some(
@@ -28,7 +30,7 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
 
         setIsAttendee(userIsAttendee);
       } catch (error) {
-        console.error("Error fetching attendees:", error);
+        console.error("Error checking attendee status:", error);
       }
     };
 
@@ -47,6 +49,7 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
       }
 
       console.log("Acción de asistente realizada exitosamente");
+      setIsAttendee(!isAttendee);
       updateAttendees();
     } catch (error) {
       console.error("Error en la acción de asistente:", error.message);

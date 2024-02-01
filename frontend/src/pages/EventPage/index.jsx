@@ -26,20 +26,33 @@ function EventPage() {
     if (updatingAttendees) {
       return;
     }
+
     try {
       setUpdatingAttendees(true);
+
       const attendeesResponse = await fetch(
         `${import.meta.env.VITE_APP_BACKEND}/attendees/${id}/list`
       );
+
       const attendeesData = await attendeesResponse.json();
 
       if (!attendeesResponse.ok) {
         throw new Error(attendeesData.message);
       }
 
+      if (attendeesData && attendeesData.message) {
+        throw new Error(attendeesData.message);
+      }
+
+      if (!Array.isArray(attendeesData)) {
+        throw new Error("Invalid data format: Expected an array");
+      }
+
       setAttendees(attendeesData);
     } catch (error) {
       console.error("Error fetching attendees:", error);
+    } finally {
+      setUpdatingAttendees(false);
     }
   };
 

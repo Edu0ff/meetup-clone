@@ -23,7 +23,6 @@ export class AttendeeRepository {
         throw new Error(`User with ID: ${userId} not found`)
       }
 
-      // Obtener el nombre de usuario
       const [userResult] = await connection.query(
         'SELECT username FROM users WHERE id = ?',
         [userId],
@@ -60,7 +59,7 @@ export class AttendeeRepository {
       )
 
       if (result.length === 0) {
-        throw new Error(`Meetup with ID: ${meetupId} has no attendees`)
+        return { message: `Meetup with ID: ${meetupId} has no attendees` }
       }
 
       return result

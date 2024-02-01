@@ -14,8 +14,10 @@ const AttendeesList = ({ updateAttendees }) => {
     const fetchAttendeesData = async () => {
       try {
         const attendeesData = await getAttendeesByMeetup(id, token);
-        setAttendees(attendeesData);
-        updateAttendees();
+
+        if (Array.isArray(attendeesData)) {
+          setAttendees(attendeesData);
+        }
       } catch (error) {
         setError(error.message);
       } finally {
@@ -37,11 +39,15 @@ const AttendeesList = ({ updateAttendees }) => {
   return (
     <div>
       <h2>Lista de Asistentes del Meetup</h2>
-      <ul>
-        {attendees.map((attendee) => (
-          <li key={attendee.id}>{attendee.username}</li>
-        ))}
-      </ul>
+      {attendees.length === 0 ? (
+        <p>No hay asistentes en este meetup.</p>
+      ) : (
+        <ul>
+          {attendees.map((attendee) => (
+            <li key={attendee.id}>{attendee.username}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
