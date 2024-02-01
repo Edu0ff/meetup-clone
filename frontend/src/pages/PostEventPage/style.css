@@ -2,6 +2,7 @@
   background-image: linear-gradient(#ffffff 3px, transparent 3px),
     linear-gradient(to right, #ffffff 3px, transparent 3px);
   background-size: 150px 100px;
+  background-position: 50vw 2.8vh;
   background-color: #dd9ef6;
   display: flex;
   justify-content: center;
