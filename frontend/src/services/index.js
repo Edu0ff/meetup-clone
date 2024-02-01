@@ -40,17 +40,26 @@ export const getAttendeesByMeetup = async (meetupId, token) => {
 
     if (response.status >= 200 && response.status < 300) {
       const data = response.data;
-      return data;
+
+      if (Array.isArray(data)) {
+        return data;
+      } else {
+        return [];
+      }
     } else {
-      const data = response.data;
-      console.error("Error in getAttendeesByMeetup:", data.message);
-      throw new Error(data.message);
+      console.error("Error in getAttendeesByMeetup:", response.data.message);
+      throw new Error(response.data.message);
     }
   } catch (error) {
-    console.error("Error in getAttendeesByMeetup:", error.message);
-    throw new Error(
-      `Error al obtener la lista de asistentes: ${error.message}`
-    );
+    if (error.response && error.response.status === 404) {
+      console.warn("Meetup has no attendees");
+      return [];
+    } else {
+      console.error("Error in getAttendeesByMeetup:", error.message);
+      throw new Error(
+        `Error al obtener la lista de asistentes: ${error.message}`
+      );
+    }
   }
 };
 export const registerUserService = async ({
