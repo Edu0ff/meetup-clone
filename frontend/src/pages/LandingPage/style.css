@@ -23,12 +23,12 @@
 
 .header-text {
   font-family: IBM Plex Mono;
-  font-size: 2rem;
+  font-size: 4vmin;
   font-weight: 600;
   text-align: center;
   color: var(--text);
   width: 40%;
-  margin-left: 24vw;
+  margin-left: 20%;
 }
 
 .Hello {
@@ -72,7 +72,7 @@
 
 .landing-bottom {
   background-image: url(/img/suminagashi.svg);
-  background-size: contain;
+  background-size: cover;
   background-color: var(--lavender-ish);
 }
 
