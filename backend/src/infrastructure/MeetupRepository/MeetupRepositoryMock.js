@@ -31,7 +31,7 @@ export class MeetupRepositoryMock extends MeetupRepository {
   async getMeetupsById(id) {
     const meetup = this.meetups.find((meetup) => meetup.id === id)
     if (!meetup) {
-      throw new Error(`the meetup with ID: ${id} not found`)
+      throw new Error(`Meetup with ID: ${id} not found`)
     }
     return meetup
   }
@@ -40,7 +40,7 @@ export class MeetupRepositoryMock extends MeetupRepository {
     const meetupIndex = this.meetups.findIndex((meetup) => meetup.id === id)
 
     if (meetupIndex === -1) {
-      throw new Error(`the meetup with ID: ${id} not found`)
+      throw new Error(`Meetup with ID: ${id} not found`)
     }
 
     this.meetups[meetupIndex] = {
@@ -53,7 +53,7 @@ export class MeetupRepositoryMock extends MeetupRepository {
     const meetupIndex = this.meetups.findIndex((meetup) => meetup.id === id)
 
     if (meetupIndex === -1) {
-      throw new Error(`the meetup with ID: ${id} not found`)
+      throw new Error(`Meetup with ID: ${id} not found`)
     }
 
     this.meetups.splice(meetupIndex, 1)

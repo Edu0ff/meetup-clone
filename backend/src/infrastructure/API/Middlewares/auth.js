@@ -6,7 +6,7 @@ export const authUser = (req, res, next) => {
 
     if (!authorization) {
       throw generateError(
-        'No autorizado. Debes ser un usuario registrado para realizar esta acción.',
+        'Unauthorized. You must be a registered user to perform this action.',
         401,
       )
     }
@@ -27,7 +27,7 @@ export const authUser = (req, res, next) => {
     console.error(error)
 
     if (error instanceof jwt.JsonWebTokenError) {
-      throw generateError('Token JWT mal formado', 401)
+      throw generateError('Malformed JWT token.', 401)
     }
 
     next(error)

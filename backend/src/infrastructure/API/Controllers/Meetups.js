@@ -51,7 +51,7 @@ export const newMeetupController = async (req, res, next) => {
         image.resize(1024)
       } else {
         throw generateError(
-          'Por favor, asegúrate de subir una imagen en formato jpg, png o jpeg.',
+          'Please make sure to upload an image in jpg, png, or jpeg format.',
           400,
         )
       }

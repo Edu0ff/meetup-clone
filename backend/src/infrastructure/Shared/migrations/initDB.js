@@ -2,19 +2,20 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { getConnection } from '../../UserRepository/MySQLClient.js'
 import bcrypt from 'bcrypt'
+import chalk from 'chalk'
 
 async function main() {
   let connection
   try {
     connection = await getConnection()
-    console.log('Connected')
-    console.log('Dropping existing tables')
+    console.log(chalk.green('Connected'))
+    console.log(chalk.yellow('Dropping existing tables'))
     await dropTableIfExists(connection, 'attendees')
     await dropTableIfExists(connection, 'organizers')
     await dropTableIfExists(connection, 'meetups')
     await dropTableIfExists(connection, 'users')
 
-    console.log('Creating tables')
+    console.log(chalk.yellow('Creating tables'))
 
     await createUsersTable(connection)
     await createMeetupsTable(connection)
@@ -34,7 +35,7 @@ async function main() {
 async function dropTableIfExists(connection, tableName) {
   await connection.query(`SET FOREIGN_KEY_CHECKS = 0`)
   await connection.query(`DROP TABLE IF EXISTS ${tableName}`)
-  console.log(`Table ${tableName} dropped if exists.`)
+  console.log(chalk.green(`Table ${tableName} dropped if exists.`))
 }
 
 async function createUsersTable(connection) {
@@ -93,7 +94,7 @@ async function createUsersTable(connection) {
     await connection.query(`INSERT INTO users SET ?`, user)
   }
 
-  console.log('Table users created and populated with 5 users.')
+  console.log(chalk.green('Table users created and populated with 5 users.'))
 }
 
 async function createMeetupsTable(connection) {
@@ -178,7 +179,9 @@ async function createMeetupsTable(connection) {
     await connection.query(`INSERT INTO meetups SET ?`, meetup)
   }
 
-  console.log('Table Meetups created and populated with 5 meetups.')
+  console.log(
+    chalk.green('Table Meetups created and populated with 5 meetups.'),
+  )
 }
 
 async function createOrganizersTable(connection) {
@@ -194,7 +197,7 @@ async function createOrganizersTable(connection) {
     )
   `)
 
-  console.log('Table Organizers created.')
+  console.log(chalk.green('Table Organizers created.'))
 }
 
 async function createAttendeesTable(connection) {
@@ -209,7 +212,7 @@ async function createAttendeesTable(connection) {
     FOREIGN KEY (user_id) REFERENCES users(id)
   );`)
 
-  console.log('Table Attendees created.')
+  console.log(chalk.green('Table Attendees created.'))
 }
 
 async function insertData(connection) {
@@ -237,7 +240,7 @@ async function insertData(connection) {
     await connection.query(`INSERT INTO attendees SET ?`, attendee)
   }
 
-  console.log('Data inserted.')
+  console.log(chalk.green('Data inserted.'))
 }
 
 async function updateCounters(connection) {
@@ -261,7 +264,7 @@ async function updateCounters(connection) {
     )
   `)
 
-  console.log('Counters updated.')
+  console.log(chalk.green('Attendees updated.'))
 }
 
 main()

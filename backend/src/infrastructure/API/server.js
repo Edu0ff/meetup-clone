@@ -6,6 +6,7 @@ import { userRoutes } from './Routes/users.js'
 import { meetupsRoutes } from './Routes/meetups.js'
 import { attendeesRoutes } from './Routes/attendees.js'
 import { organizersRoutes } from './Routes/organizers.js'
+import chalk from 'chalk'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -27,7 +28,7 @@ app.use('/', organizersRoutes)
 app.use((req, res) => {
   res.status(404).send({
     status: 'Error',
-    message: 'Página no encontrada',
+    message: 'Page not found.',
   })
 })
 
@@ -43,5 +44,5 @@ app.use((error, req, res, next) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+  console.log(chalk.blue(`Server listening on port ${port}`))
 })

@@ -26,7 +26,7 @@ export const newUserController = async (req, res, next) => {
     if (password.length < 8) {
       return res
         .status(400)
-        .json({ error: '"password" length must be at least 8 characters long' })
+        .json({ error: 'Password length must be at least 8 characters long' })
     }
 
     const token = generateActivationToken()
@@ -69,7 +69,10 @@ export const updateUserController = async (req, res, next) => {
 
   try {
     if (req.userId !== Number(userId)) {
-      throw generateError('No tienes permiso para actualizar este perfil.', 403)
+      throw generateError(
+        `You don't have permission to update this profile.`,
+        403,
+      )
     }
 
     const { username, bio, email, password, avatar } = req.body
@@ -84,7 +87,7 @@ export const updateUserController = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ message: 'Perfil actualizado correctamente', data: updatedUser })
+      .json({ message: 'Profile updated successfully.', data: updatedUser })
   } catch (error) {
     console.error(error)
     next(error)

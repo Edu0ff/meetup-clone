@@ -22,29 +22,26 @@ export class UserRepository {
       )
 
       if (!validator.isEmail(email)) {
-        throw generateError(
-          'Por favor, ingresa un correo electrónico válido.',
-          400,
-        )
+        throw generateError('Please enter a valid email address.', 400)
       }
 
       if (emailExist.length > 0 && usernameExist.length > 0) {
         throw generateError(
-          '"Username" and "email" already exist in our database. Please enter a different username and email.',
+          'Username and email already exist in our database. Please enter a different username and email.',
           409,
         )
       }
 
       if (emailExist.length > 0) {
         throw generateError(
-          '"Email" already exists in our database. Please enter a different email.',
+          'Email already exists in our database. Please enter a different email.',
           409,
         )
       }
 
       if (usernameExist.length > 0) {
         throw generateError(
-          '"Username" already exists in our database. Please enter a different username.',
+          'Username already exists in our database. Please enter a different username.',
           409,
         )
       }

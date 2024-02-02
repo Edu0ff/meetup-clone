@@ -90,7 +90,7 @@ export class MeetupRepository {
 
   async getMeetupsById(id) {
     if (!id) {
-      throw new Error('No se proporcionó un ID.')
+      throw new Error('No ID was provided.')
     }
     let connection
     try {
@@ -113,7 +113,7 @@ export class MeetupRepository {
 
   async updateMeetup(id, meetupData) {
     if (!id) {
-      throw new Error('No se proporcionó un ID.')
+      throw new Error('No ID was provided.')
     }
     let connection
     try {
@@ -140,7 +140,7 @@ export class MeetupRepository {
 
   async deleteMeetupById(id) {
     if (!id) {
-      throw new Error('No se proporcionó un ID.')
+      throw new Error('No ID was provided.')
     }
 
     let connection
@@ -192,7 +192,7 @@ export class MeetupRepository {
         throw error
       }
 
-      return { message: 'Meetup eliminado correctamente.' }
+      return { message: 'Meetup successfully deleted.' }
     } finally {
       if (connection) connection.release()
     }
