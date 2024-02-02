@@ -1,7 +1,8 @@
 import React from "react";
 import "./style.css";
+import Loading from "../Loading";
 
-function ExploreCategories({ onCategoryChange }) {
+function ExploreCategories({ onCategoryChange, isLoading }) {
   const categories = [
     "Social Events",
     "Art and Culture",
@@ -18,15 +19,19 @@ function ExploreCategories({ onCategoryChange }) {
 
   return (
     <div className="explore-categories">
-      <h2>Explore Categories</h2>
-      <select onChange={handleCategoryChange}>
-        <option value="">All categories</option>
-        {categories.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
+      <h2>Discover Categories</h2>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <select onChange={handleCategoryChange}>
+          <option value="">All Categories</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 }

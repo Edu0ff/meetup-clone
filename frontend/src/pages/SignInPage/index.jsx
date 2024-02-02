@@ -22,7 +22,7 @@ function SignInPage() {
       try {
         const response = await activateUserService({ token });
         if (response.message === "Account activated successfully") {
-          toast.success("Account activated successfully");
+          toast.success("Session initiated successfully!");
           setActivated(true);
         }
 

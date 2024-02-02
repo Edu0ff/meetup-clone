@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { getAttendeesByMeetup } from "../../services/index";
 import { AuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
+import Loading from "../Loading";
 
 const AttendeesList = ({ updateAttendees }) => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const AttendeesList = ({ updateAttendees }) => {
           setAttendees(attendeesData);
         }
       } catch (error) {
-        setError(error.message);
+        setError("Error fetching attendees: " + error.message);
       } finally {
         setLoading(false);
       }
@@ -29,7 +30,7 @@ const AttendeesList = ({ updateAttendees }) => {
   }, [id, token, updateAttendees]);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -38,9 +39,9 @@ const AttendeesList = ({ updateAttendees }) => {
 
   return (
     <div>
-      <h2>Lista de Asistentes del Meetup</h2>
+      <h2>Meetup Attendees List</h2>
       {attendees.length === 0 ? (
-        <p>No hay asistentes en este meetup.</p>
+        <p>No attendees for this meetup.</p>
       ) : (
         <ul>
           {attendees.map((attendee) => (

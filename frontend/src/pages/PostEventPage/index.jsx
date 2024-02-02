@@ -121,35 +121,35 @@ function PostEventPage() {
     const errors = {};
 
     if (formData.title.trim() === "") {
-      errors.title = "El título es requerido";
+      errors.title = "Title is required";
     }
 
     if (formData.description.trim() === "") {
-      errors.description = "La descripción es requerida";
+      errors.description = "Description is required";
     }
 
     if (formData.picture && !formData.picture.type.includes("image/")) {
-      errors.picture = "Por favor, selecciona un archivo de imagen válido";
+      errors.picture = "Please select a valid image file";
     }
 
     if (formData.theme.trim() === "") {
-      errors.theme = "La categoría es requerida";
+      errors.theme = "Category is required";
     }
 
     if (formData.location.trim() === "") {
-      errors.location = "La ubicación es requerida";
+      errors.location = "City is required";
     }
 
     if (formData.address.trim() === "") {
-      errors.address = "La dirección es requerida";
+      errors.address = "Address is required";
     }
 
     if (!formData.date) {
-      errors.date = "El día es requerido";
+      errors.date = "Date is required";
     }
 
     if (formData.time.trim() === "") {
-      errors.time = "La hora es requerida";
+      errors.time = "Time is required";
     }
 
     setFormErrors(errors);

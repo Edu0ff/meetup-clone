@@ -30,13 +30,13 @@ function SignUpPage() {
 
     if (pass1 !== pass2) {
       toast.error(
-        `Las "contraseñas" que ingresaste no coinciden. Asegúrate de ingresar la misma contraseña en ambos campos.`
+        `Passwords do not match. Make sure to enter the same password in both fields.`
       );
       return;
     }
 
     if (pass1.length < 8) {
-      toast.error("La contraseña debe tener al menos 8 caracteres.");
+      toast.error("Password must be at least 8 characters long.");
       return;
     }
 
@@ -62,11 +62,9 @@ function SignUpPage() {
       navigate(`/`);
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        toast.error(
-          "El nombre de usuario o la dirección de correo electrónico ya está en uso."
-        );
+        toast.error("Username or email is already in use.");
       } else {
-        toast.error(error.message);
+        toast.error("Error during registration. Please try again later.");
       }
     } finally {
       setTimeout(() => {

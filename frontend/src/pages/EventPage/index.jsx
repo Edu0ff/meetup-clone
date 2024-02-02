@@ -207,7 +207,7 @@ function EventPage() {
           </div>
         </div>
       ) : (
-        <p>No hay datos disponibles para este evento.</p>
+        <p>There is no data available for this event.</p>
       )}
     </main>
   );

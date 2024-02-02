@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaCheck, FaPencilAlt, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import React, { useState } from "react";
@@ -14,13 +13,13 @@ const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
 
   const handleSave = () => {
     if (!newUsername) {
-      toast.error("El campo username no puede quedar vacio.");
+      toast.error("Username field cannot be empty.");
       return;
     }
 
     handleUsernameChange(newUsername);
     setEditing(false);
-    toast.success("Necesitas actualizar para guardar los cambios");
+    toast.success("Update required to save changes");
   };
 
   const handleCancel = () => {
@@ -38,7 +37,7 @@ const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
             type="text"
             value={newUsername}
             onChange={(e) => setNewUsername(e.target.value)}
-            placeholder="Nuevo Username..."
+            placeholder="New Username"
           />
 
           <div
@@ -55,7 +54,7 @@ const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
               }}
             >
               <FaCheck
-                title="Aceptar"
+                title="Accept"
                 style={{
                   color: "green",
                 }}
@@ -69,7 +68,7 @@ const UsernameComponent = ({ currentUsername, handleUsernameChange }) => {
               }}
             >
               <FaTimes
-                title="cancelar"
+                title="Cancel"
                 style={{
                   color: "red",
                 }}

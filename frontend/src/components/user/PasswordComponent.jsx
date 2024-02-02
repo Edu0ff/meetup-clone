@@ -19,7 +19,7 @@ const PasswordComponent = ({ currentPassword }) => {
   const handleSave = async () => {
     try {
       if (!newPassword) {
-        toast.error("El campo password no se puede quedar vacio.");
+        toast.error("Password field cannot be empty.");
         return;
       }
 
@@ -28,7 +28,7 @@ const PasswordComponent = ({ currentPassword }) => {
         token,
         id: userData.userId,
       });
-      toast.success("Actualización exitosa.");
+      toast.success("Update successful.");
 
       logoutHandler();
       navigate("/login");
@@ -52,7 +52,7 @@ const PasswordComponent = ({ currentPassword }) => {
             name="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="Nuevo Password..."
+            placeholder="New Password"
           />
 
           <div
@@ -69,7 +69,7 @@ const PasswordComponent = ({ currentPassword }) => {
               }}
             >
               <FaCheck
-                title="Aceptar"
+                title="Accept"
                 style={{
                   color: "green",
                 }}
@@ -83,7 +83,7 @@ const PasswordComponent = ({ currentPassword }) => {
               }}
             >
               <FaTimes
-                title="Cancelar"
+                title="Cancel"
                 style={{
                   color: "red",
                 }}
@@ -105,7 +105,7 @@ const PasswordComponent = ({ currentPassword }) => {
           <FaPencilAlt
             className="fondo2"
             onClick={handleEdit}
-            title="Modificar Password"
+            title="Edit Password"
             style={{
               cursor: "pointer",
             }}

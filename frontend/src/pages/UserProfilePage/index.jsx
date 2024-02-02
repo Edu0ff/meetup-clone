@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import Loading from "../../components/Loading";
+import SignOutButton from "../../components/SignOutButton";
 
 function ProfilePage() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 400);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <main className="profile-page">
@@ -50,7 +59,7 @@ function ProfilePage() {
                     className="event-icon"
                     alt="sign out icon"
                   />
-                  Sign Out
+                  <SignOutButton />
                 </button>
               </div>
             </div>
