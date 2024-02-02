@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import toast from "react-hot-toast";
 import Loading from "../../components/Loading/index.jsx";
@@ -8,6 +8,7 @@ import "./style.css";
 function SignOutButton() {
   const { auth, logoutHandler } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
@@ -15,6 +16,7 @@ function SignOutButton() {
       await new Promise((resolve) => setTimeout(resolve, 400));
       await logoutHandler();
       toast.success("See you later 🐊!");
+      navigate("/");
     } catch (error) {
       toast.error("Error signing out. Please try again later.");
     } finally {
@@ -29,7 +31,7 @@ function SignOutButton() {
       ) : (
         <>
           {auth ? (
-            <NavLink to="#" onClick={handleSignOut} className="sign-out-link">
+            <NavLink onClick={handleSignOut} className="sign-out-link">
               Sign Out
             </NavLink>
           ) : (

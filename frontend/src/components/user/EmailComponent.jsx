@@ -19,7 +19,7 @@ const EmailComponent = ({ currentEmail }) => {
   const handleSave = async () => {
     try {
       if (!newEmail) {
-        toast.error("El campo email no se puede quedar vacio.");
+        toast.error("Email field cannot be empty.");
         return;
       }
 
@@ -28,7 +28,7 @@ const EmailComponent = ({ currentEmail }) => {
         token,
         id: userData.userId,
       });
-      toast.success("Actualización exitosa.");
+      toast.success("Update successful.");
 
       const clave = data.token;
 
@@ -54,7 +54,7 @@ const EmailComponent = ({ currentEmail }) => {
             name="email"
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
-            placeholder="Nuevo Email..."
+            placeholder="New Email"
           />
 
           <div
@@ -71,7 +71,7 @@ const EmailComponent = ({ currentEmail }) => {
               }}
             >
               <FaCheck
-                title="Aceptar"
+                title="Accept"
                 style={{
                   color: "green",
                 }}
@@ -85,7 +85,7 @@ const EmailComponent = ({ currentEmail }) => {
               }}
             >
               <FaTimes
-                title="Cancelar"
+                title="Cancel"
                 style={{
                   color: "red",
                 }}
@@ -106,7 +106,7 @@ const EmailComponent = ({ currentEmail }) => {
           {currentEmail}
           <FaPencilAlt
             className="fondo2"
-            title="Modificar Email"
+            title="Edit Email"
             onClick={handleEdit}
             style={{
               cursor: "pointer",

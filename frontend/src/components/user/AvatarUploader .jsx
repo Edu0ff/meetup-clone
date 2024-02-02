@@ -17,7 +17,7 @@ const AvatarUploader = ({ handleAction, profile_imagen }) => {
   const handleSave = () => {
     handleAction(image);
     setGuardar(false);
-    toast.success("Necesitas actualizar para guardar los cambios");
+    toast.success("Changes saved successfully");
   };
 
   const handleCancel = () => {
@@ -31,7 +31,7 @@ const AvatarUploader = ({ handleAction, profile_imagen }) => {
       <label htmlFor="fileInput">
         <FaCameraRetro
           className="fondo2"
-          title="Descargar Avatar"
+          title="Upload Avatar"
           style={{
             position: "absolute",
             margin: "10px",
@@ -47,7 +47,7 @@ const AvatarUploader = ({ handleAction, profile_imagen }) => {
           <img
             className="carga-avatar"
             src={URL.createObjectURL(image)}
-            alt="Mi Perfil"
+            alt="My Profile"
             style={{
               display: "inline-block",
               backgroundSize: "cover",
@@ -74,7 +74,7 @@ const AvatarUploader = ({ handleAction, profile_imagen }) => {
                 }}
               >
                 <FaCheck
-                  title="Aceptar"
+                  title="Save"
                   style={{
                     color: "green",
                   }}
@@ -89,7 +89,7 @@ const AvatarUploader = ({ handleAction, profile_imagen }) => {
                 }}
               >
                 <FaTimes
-                  title="Cancelar"
+                  title="Cancel"
                   style={{
                     color: "red",
                   }}
@@ -108,7 +108,7 @@ const AvatarUploader = ({ handleAction, profile_imagen }) => {
         onChange={handleImageChange}
         accept=".jpg, .png"
         style={{ display: "none" }}
-        ref={fileInputRef} // Asocia la referencia al input
+        ref={fileInputRef}
       />
     </>
   );

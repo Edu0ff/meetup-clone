@@ -32,6 +32,7 @@ function AllEventsPage() {
 
     fetchMeetups();
   }, []);
+
   const now = new Date();
   const filteredAndSortedMeetups = meetups
     .filter((meetup) => new Date(meetup.date) > now)
@@ -74,7 +75,7 @@ function AllEventsPage() {
               ))}
             </ul>
           ) : (
-            <p>No hay eventos disponibles.</p>
+            <p>No events available.</p>
           )}
         </>
       )}

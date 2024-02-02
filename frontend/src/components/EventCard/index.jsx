@@ -7,9 +7,9 @@ import { format } from "date-fns";
 function EventCard({ meetup }) {
   const formattedDate = meetup.date
     ? format(new Date(meetup.date), "dd/MM/yy")
-    : "No date available";
+    : "Date not available";
 
-  const formattedTime = meetup.time ? meetup.time : "No time available";
+  const formattedTime = meetup.time ? meetup.time : "Time not available";
 
   return (
     <Link to={`/event/${meetup.id}`}>
@@ -49,7 +49,7 @@ function EventCard({ meetup }) {
             </div>
           </>
         ) : (
-          <p>No hay datos de eventos disponibles.</p>
+          <p>No event data available.</p>
         )}
       </div>
     </Link>

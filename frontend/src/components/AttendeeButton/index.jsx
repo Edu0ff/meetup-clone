@@ -48,11 +48,11 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
         await createAttendeeService({ meetupId, userId, token });
       }
 
-      console.log("Acción de asistente realizada exitosamente");
+      console.log("Attendance action successfully executed");
       setIsAttendee(!isAttendee);
       updateAttendees();
     } catch (error) {
-      console.error("Error en la acción de asistente:", error.message);
+      console.error("Error during attendance action:", error.message);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -66,11 +66,7 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
         onClick={handleAttendeeAction}
         disabled={loading}
       >
-        {loading
-          ? "Realizando acción..."
-          : isAttendee
-          ? "Cancelar asistencia"
-          : "Asistir"}
+        {loading ? "Processing.." : isAttendee ? "Cancel attendance" : "Attend"}
       </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
