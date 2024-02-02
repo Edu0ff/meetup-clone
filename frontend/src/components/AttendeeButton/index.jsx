@@ -48,7 +48,7 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
         await createAttendeeService({ meetupId, userId, token });
       }
 
-      console.log(chalk.green("Attendance action successfully executed"));
+      console.log("Attendance action successfully executed");
       setIsAttendee(!isAttendee);
       updateAttendees();
     } catch (error) {

@@ -54,7 +54,7 @@ function PostEventPage() {
     try {
       setLoading(true);
       if (!token) {
-        console.log(chalk.red("Token is missing"));
+        console.log("Token is missing");
         return;
       }
 
