@@ -7,11 +7,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .basic-container {
   display: flex;
-  align-items: center;
   max-width: 95vh;
   max-height: 100vh;
   border-radius: none;
@@ -32,28 +32,38 @@
 .signin-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .signin-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
-  font-family: "IBM Plex Mono", monospace;
-}
-
-.signin-text {
-  margin-bottom: 1rem;
-}
-
-.form-group {
-  margin-bottom: 1rem;
+  font-weight: bolder;
+  font-size: 30px;
 }
 
 .signin-header a {
   text-decoration: none;
+  color: black;
 }
 
-#signin-button {
+.signin-header a:last-of-type {
+  border-bottom: 3px var(--primary) solid;
+}
+
+.signin-text {
+  font-weight: 100;
+}
+
+/* .form-group {
+  margin-bottom: 1rem;
+  margin-bottom: 1rem;
+} */
+
+.input-reg {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px var(--primary) solid;
+  font-family: "IBM Plex Mono", monospace;
+  outline: none;
 }
