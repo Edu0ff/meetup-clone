@@ -66,6 +66,12 @@ function SignInPage() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      submitHandler(e);
+    }
+  };
+
   return (
     <main className="signin-page">
       {loading ? (
@@ -100,6 +106,7 @@ function SignInPage() {
                   required
                   placeholder="password"
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
               <div className="form-group">

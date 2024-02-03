@@ -78,8 +78,8 @@ function SignUpPage() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="signup-container">
-          <img className="signup-image" src="/img/cosplay.avif" alt="" />
+        <div className="basic-container">
+          <img className="signin-image" src="/img/cosplay.avif" alt="" />
           <div className="signup-section">
             <div className="signup-header">
               <Link to="/signup">Sign Up</Link>
@@ -89,6 +89,7 @@ function SignUpPage() {
               <ul>
                 <li className="form-group">
                   <input
+                    className="input-reg"
                     type="text"
                     id="username"
                     name="username"
@@ -99,6 +100,7 @@ function SignUpPage() {
                 </li>
                 <li className="form-group">
                   <input
+                    className="input-reg"
                     type="email"
                     id="email"
                     name="email"
@@ -109,6 +111,7 @@ function SignUpPage() {
                 </li>
                 <li className="form-group">
                   <input
+                    className="input-reg"
                     htmlFor="pass1"
                     type="password"
                     id="pass1"
@@ -120,6 +123,7 @@ function SignUpPage() {
                 </li>
                 <li className="form-group">
                   <input
+                    className="input-reg"
                     htmlFor="pass2"
                     type="password"
                     id="pass2"
@@ -131,6 +135,7 @@ function SignUpPage() {
                 </li>
                 <li className="form-group">
                   <textarea
+                    className="input-reg"
                     id="bio"
                     name="bio"
                     value={bio}
