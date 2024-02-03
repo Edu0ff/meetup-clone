@@ -22,13 +22,11 @@ const ScrollToTop = () => {
   }, []);
 
   return (
-    <button
-      id="scrollto-top"
-      onClick={scrollToTop}
-      style={{ display: isVisible ? "block" : "none" }}
-    >
-      <BlackArrow />
-    </button>
+    <div style={{ display: isVisible ? "block" : "none" }}>
+      <button id="scrollto-top" onClick={scrollToTop}>
+        <BlackArrow />
+      </button>
+    </div>
   );
 };
 
