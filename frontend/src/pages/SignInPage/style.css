@@ -20,6 +20,7 @@
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
   outline: none;
   background-color: rgba(255, 255, 255, 0.5);
+  position: relative;
 }
 
 .signin-image {
@@ -32,6 +33,7 @@
 .signin-section {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .signin-header {
@@ -39,25 +41,49 @@
   justify-content: space-between;
   font-weight: bolder;
   font-size: 30px;
+  align-items: center;
 }
 
-.signin-header a {
+.link-sign {
   text-decoration: none;
   color: black;
+  margin: 2rem 0;
+  padding-bottom: 0.5rem;
 }
 
-.signin-header a:last-of-type {
-  border-bottom: 3px var(--primary) solid;
+.link-sign:first-of-type {
+  margin-left: 3rem;
+}
+
+#link-signin {
+  border-bottom: 4px var(--primary) solid;
+  margin-right: 3rem;
 }
 
 .signin-text {
   font-weight: 100;
+  font-size: 1.8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: 0.4rem;
+  margin: auto;
 }
 
-/* .form-group {
-  margin-bottom: 1rem;
-  margin-bottom: 1rem;
-} */
+.black-text {
+  color: black;
+  display: block;
+}
+
+.you-text {
+  color: var(--primary);
+  display: block;
+}
+
+.form-group {
+  padding: 1rem;
+}
 
 .input-reg {
   width: 100%;
@@ -66,4 +92,14 @@
   border-bottom: 3px var(--primary) solid;
   font-family: "IBM Plex Mono", monospace;
   outline: none;
+}
+
+#form-signinbutton {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.signin-section > form {
+  margin: 0 1rem 5rem 1rem;
 }

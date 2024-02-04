@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUserService, loginUserService } from "../../services/index.js";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import ArrowButton from "../../components/ArrowButton";
 import Loading from "../../components/Loading";
+import "./style.css";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -74,16 +74,20 @@ function SignUpPage() {
   };
 
   return (
-    <main className="signup-page">
+    <main className="signin-page">
       {loading ? (
         <Loading />
       ) : (
         <div className="basic-container">
           <img className="signin-image" src="/img/cosplay.avif" alt="" />
-          <div className="signup-section">
+          <div className="signin-section">
             <div className="signup-header">
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signup" className="link-sign" id="link-signup">
+                Sign Up
+              </Link>
+              <Link to="/signin" className="link-sign">
+                Sign In
+              </Link>
             </div>
             <form onSubmit={handleForm}>
               <ul>
@@ -147,8 +151,9 @@ function SignUpPage() {
                   <div className="character-count">{`${characterCount}/255`}</div>
                 </li>
               </ul>
-
-              <ArrowButton id="signup-button" type="submit" />
+              <div className="form-group" id="form-signinbutton">
+                <ArrowButton id="signin-button" type="submit" />
+              </div>
             </form>
           </div>
         </div>
