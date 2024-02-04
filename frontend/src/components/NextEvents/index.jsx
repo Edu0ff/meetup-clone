@@ -39,9 +39,7 @@ function NextEvents() {
       ) : filteredAndSortedMeetups.length > 0 ? (
         <div className="event-cards-container">
           {filteredAndSortedMeetups.map((meetup) => (
-            <Link key={meetup.id} to={`/event/${meetup.id}`}>
-              <EventCard meetup={meetup} />
-            </Link>
+            <EventCard key={meetup.id} meetup={meetup} />
           ))}
         </div>
       ) : (
