@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 import { activateUserService, loginUserService } from "../../services/index.js";
 import ArrowButton from "../../components/ArrowButton";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import "./style.css";
 import Loading from "../../components/Loading/index.jsx";
+import "./style.css";
 
 function SignInPage() {
   const { setToken, setLogin, setAuth } = useContext(AuthContext);
@@ -81,10 +81,18 @@ function SignInPage() {
           <img className="signin-image" src="/img/show.avif" alt="" />
           <div className="signin-section">
             <div className="signin-header">
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signup" className="link-sign">
+                Sign Up
+              </Link>
+              <Link to="/signin" id="link-signin" className="link-sign">
+                Sign In
+              </Link>
             </div>
-            <h2 className="signin-text">Glad to see you again!</h2>
+            <h2 className="signin-text">
+              <span className="black-text">Glad to see</span>
+              <span className="you-text"> you</span>
+              <span className="black-text"> again!</span>
+            </h2>
             <form onSubmit={submitHandler}>
               <div className="form-group">
                 <input
@@ -109,7 +117,7 @@ function SignInPage() {
                   onKeyPress={handleKeyPress}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group" id="form-signinbutton">
                 <ArrowButton id="signin-button" type="submit" />
               </div>
             </form>
