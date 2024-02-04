@@ -1,14 +1,3 @@
-.signup-page {
-  background-image: linear-gradient(#baeea7 10px, transparent 10px),
-    linear-gradient(to right, #baeea7 10px, transparent 10px);
-  background-size: 20px 20px;
-  background-color: #dcf08d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "IBM Plex Mono", monospace;
-}
-
 .signup-header {
   display: flex;
   justify-content: space-between;
@@ -16,13 +5,12 @@
   font-size: 30px;
 }
 
-.signup-header a {
-  text-decoration: none;
-  color: black;
+#link-signup {
+  border-bottom: 4px var(--primary) solid;
 }
 
-.signup-header a:first-of-type {
-  border-bottom: 3px var(--primary) solid;
+.link-sign:last-of-type {
+  margin-right: 3rem;
 }
 
 ul {
