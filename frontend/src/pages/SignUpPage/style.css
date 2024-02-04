@@ -16,3 +16,16 @@
 ul {
   list-style: none;
 }
+
+.input-reg#bio {
+  background-color: var(--lavender-ish);
+  border-bottom: none;
+  border: 2px solid var(--primary);
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  outline: none;
+  height: 7.3rem;
+  resize: none;
+}
+
+.character-count {
+}

@@ -151,8 +151,9 @@ function SignUpPage() {
                   <div className="character-count">{`${characterCount}/255`}</div>
                 </li>
               </ul>
-
-              <ArrowButton id="signup-button" type="submit" />
+              <div className="form-group" id="form-signinbutton">
+                <ArrowButton id="signin-button" type="submit" />
+              </div>
             </form>
           </div>
         </div>
