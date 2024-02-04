@@ -39,7 +39,7 @@ export const newMeetupController = async (req, res, next) => {
     if (req.files?.picture) {
       const currentFilePath = fileURLToPath(import.meta.url)
       const currentDir = path.dirname(currentFilePath)
-      const uploadsDir = path.join(currentDir, '..', 'uploads')
+      const uploadsDir = path.join(currentDir, '../', 'uploads')
       await createPathIfNotExists(uploadsDir)
       const image = sharp(req.files.picture.data)
       const fileName = req.files.picture.name

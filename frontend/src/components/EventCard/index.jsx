@@ -18,7 +18,14 @@ function EventCard({ meetup }) {
           <>
             <img
               className="eventcard-image"
-              src={meetup.picture || ""}
+              src={
+                meetup.picture.endsWith(".jpg") ||
+                meetup.picture.endsWith(".jpeg") ||
+                meetup.picture.endsWith(".png") ||
+                meetup.picture.endsWith(".gif")
+                  ? `http://localhost:3000/uploads/${meetup.picture || ""}`
+                  : meetup.picture
+              }
               alt={`Event: ${meetup.title}`}
               width={300}
               height={200}
