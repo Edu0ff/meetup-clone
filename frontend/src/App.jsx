@@ -4,6 +4,7 @@ import "./App.css";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import PrivateRoutes from "./components/user/PrivateRoutes";
 import LandingPage from "./pages/LandingPage";
 import AllEventsPage from "./pages/AllEventsPage";
 import SignInPage from "./pages/SignInPage";
@@ -26,13 +27,15 @@ function App() {
         <Route path="/events" element={<AllEventsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/user/:nickname" element={<UserProfile />} />
         <Route path="/event/:id" element={<EventPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/cookie" element={<CookiePage />} />
-        <Route path="/postevent" element={<PostEventPage />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/postevent" element={<PostEventPage />} />
+          <Route path="/user/:nickname" element={<UserProfile />} />
+        </Route>
       </Routes>
       <Footer />
     </div>
