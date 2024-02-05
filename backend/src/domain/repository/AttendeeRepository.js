@@ -7,11 +7,11 @@ export class AttendeeRepository {
       connection = await getConnection()
 
       const meetupExists = await connection.query(
-        'SELECT COUNT(*) AS count FROM Meetups WHERE id = ?',
+        'SELECT COUNT(*) AS count FROM meetups WHERE meetups_id = ?',
         [meetupId],
       )
       const userExists = await connection.query(
-        'SELECT COUNT(*) AS count FROM users WHERE id = ?',
+        'SELECT COUNT(*) AS count FROM users WHERE users_id = ?',
         [userId],
       )
 
@@ -24,13 +24,13 @@ export class AttendeeRepository {
       }
 
       const [userResult] = await connection.query(
-        'SELECT username FROM users WHERE id = ?',
+        'SELECT username FROM users WHERE users_id = ?',
         [userId],
       )
       const username = userResult[0].username
 
       const insertQuery = `
-      INSERT INTO Attendees (meetup_id, user_id, will_attend, username)
+      INSERT INTO Attendees (meetups_fk, users_fk, will_attend, username)
       VALUES (?, ?, ?, ?)
     `
 
@@ -54,7 +54,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       const [result] = await connection.query(
-        'SELECT * FROM Attendees WHERE meetup_id = ?',
+        'SELECT * FROM Attendees WHERE meetups_fk = ?',
         [meetupId],
       )
 
@@ -72,7 +72,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       const [result] = await connection.query(
-        'SELECT DISTINCT username FROM Attendees WHERE meetup_id = ?',
+        'SELECT DISTINCT username FROM attendees WHERE meetups_fk = ?',
         [meetupId],
       )
 
@@ -86,7 +86,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       const [result] = await connection.query(
-        'SELECT * FROM Attendees WHERE id = ?',
+        'SELECT * FROM attendees WHERE attendees_id = ?',
         [attendeeId],
       )
 
@@ -104,7 +104,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       await connection.query(
-        'DELETE FROM Attendees WHERE meetup_id = ? AND user_id = ?',
+        'DELETE FROM attendees WHERE meetups_fk = ? AND users_fk = ?',
         [meetupId, userId],
       )
     } finally {
@@ -115,7 +115,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       const [result] = await connection.query(
-        'SELECT * FROM Attendees WHERE meetup_id = ? AND user_id = ?',
+        'SELECT * FROM attendees WHERE meetups_fk = ? AND users_fk = ?',
         [meetupId, userId],
       )
 
@@ -172,7 +172,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       const [result] = await connection.query(
-        'SELECT COUNT(*) as totalAttendees FROM Attendees',
+        'SELECT COUNT(*) as totalAttendees FROM attendees',
       )
 
       return result[0].totalAttendees
@@ -186,7 +186,7 @@ export class AttendeeRepository {
       connection = await getConnection()
 
       const [result] = await connection.query(
-        'SELECT COUNT(*) as totalAttendees FROM Attendees WHERE meetup_id = ? AND will_attend = 1',
+        'SELECT COUNT(*) as totalAttendees FROM attendees WHERE meetups_fk = ? AND will_attend = 1',
         [meetupId],
       )
 
@@ -201,7 +201,7 @@ export class AttendeeRepository {
     const connection = await getConnection()
     try {
       await connection.query(
-        'UPDATE Meetups SET attendees_count = ? WHERE id = ?',
+        'UPDATE meetups SET attendees_count = ? WHERE meetups_id = ?',
         [totalAttendees, meetupId],
       )
     } finally {
@@ -214,7 +214,7 @@ export class AttendeeRepository {
       connection = await getConnection()
 
       const [result] = await connection.query(
-        'SELECT meetups_attended FROM users WHERE id = ?',
+        'SELECT meetups_attended FROM users WHERE users_id = ?',
         [userId],
       )
 
@@ -231,14 +231,14 @@ export class AttendeeRepository {
       connection = await getConnection()
 
       const [meetupsAttendedResult] = await connection.query(
-        'SELECT COUNT(*) as totalMeetupsAttended FROM Attendees WHERE user_id = ? AND will_attend = 1',
+        'SELECT COUNT(*) as totalMeetupsAttended FROM attendees WHERE users_fk = ? AND will_attend = 1',
         [userId],
       )
 
       const totalMeetupsAttended = meetupsAttendedResult[0].totalMeetupsAttended
 
       await connection.query(
-        'UPDATE users SET meetups_attended = ? WHERE id = ?',
+        'UPDATE users SET meetups_attended = ? WHERE users_id = ?',
         [totalMeetupsAttended, userId],
       )
     } finally {
