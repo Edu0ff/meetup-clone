@@ -1,14 +1,16 @@
 import { generateError } from '../../../domain/utils/helpers.js'
 import { fileURLToPath } from 'url'
 import MeetupService from '../../../domain/services/MeetupService.js'
-import { meetupSchema } from '../schemas/meetupsSchemas.js'
 import UserService from '../../../domain/services/UserService.js'
+import OrganizerService from '../../../domain/services/OrganizerService.js'
+import { meetupSchema } from '../schemas/meetupsSchemas.js'
 import { createPathIfNotExists } from '../../../domain/utils/helpers.js'
 import sharp from 'sharp'
 import crypto from 'crypto'
 import path from 'path'
 const userService = new UserService()
 const meetupService = new MeetupService()
+const organizerService = new OrganizerService()
 
 const randomName = (n) => crypto.randomBytes(n).toString('hex')
 
@@ -110,6 +112,15 @@ export const updateMeetupController = async (req, res, next) => {
 export const deleteMeetupController = async (req, res, next) => {
   try {
     const { id } = req.params
+    const meetup = await meetupService.getMeetupById(id)
+    const organizer_id = meetup.organizer_id
+    const validateOrganizer = await organizerService.getOrganizersByMeetupId(id)
+
+    if (validateOrganizer[0].user_id !== req.userId) {
+      return res
+        .status(403)
+        .json({ message: 'You are not authorized to delete this meetup.' })
+    }
 
     await meetupService.deleteMeetupById(id)
 

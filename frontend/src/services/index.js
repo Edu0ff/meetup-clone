@@ -314,3 +314,28 @@ export const deleteAttendeeService = async ({ meetupId, userId, token }) => {
     throw new Error(`Error al eliminar el asistente: ${error.message}`);
   }
 };
+
+export const deleteMeetup = async (meetupId, token) => {
+  try {
+    const response = await axios.delete(
+      `${import.meta.env.VITE_APP_BACKEND}/meetups/${meetupId}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    } else {
+      const data = response.data;
+      console.error("Error in deleteMeetup:", data.message);
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.error("Error in deleteMeetup:", error.message);
+    throw new Error(`Error al eliminar el meetup: ${error.message}`);
+  }
+};
