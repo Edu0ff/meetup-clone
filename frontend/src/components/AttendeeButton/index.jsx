@@ -3,6 +3,7 @@ import {
   createAttendeeService,
   deleteAttendeeService,
 } from "../../services/index.js";
+import "./style.css";
 
 const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
   const [loading, setLoading] = useState(false);
@@ -66,9 +67,9 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
         onClick={handleAttendeeAction}
         disabled={loading}
       >
+        <img className="event-icon" src="../../icons/check.svg" alt="signme" />
         {loading ? "Processing.." : isAttendee ? "Cancel attendance" : "Attend"}
       </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
