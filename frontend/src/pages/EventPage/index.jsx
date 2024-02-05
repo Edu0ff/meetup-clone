@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./style.css";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import AttendeesList from "../../components/AttendeesList/index.jsx";
 import AttendeeButton from "../../components/AttendeeButton/index.jsx";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { getDataUserService } from "../../services/index.js";
 import { format } from "date-fns";
+import DeleteMeetup from "../../components/DeleteMeetup/index.jsx";
+import "./style.css";
 
 function EventPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [eventData, setEventData] = useState(null);
   const [organizerUsername, setOrganizerUsername] = useState("");
@@ -58,6 +60,8 @@ function EventPage() {
   };
 
   useEffect(() => {
+    let unmounted = false;
+
     const fetchEventData = async () => {
       try {
         const response = await fetch(
@@ -70,26 +74,17 @@ function EventPage() {
           throw new Error(eventData.message);
         }
 
-        setEventData(eventData);
+        if (!eventData) {
+          navigate("*");
+          return;
+        }
+
+        if (!unmounted) {
+          setEventData(eventData);
+        }
 
         const userData = await getDataUserService({ id: userId, token });
         setUsername(userData.username);
-
-        if (eventData.organizer_id) {
-          const organizerResponse = await fetch(
-            `${import.meta.env.VITE_APP_BACKEND}/organizers/${
-              eventData.organizer_id
-            }`
-          );
-          const organizerData = await organizerResponse.json();
-
-          if (!organizerResponse.ok) {
-            throw new Error(organizerData.message);
-          }
-
-          setOrganizerUsername(organizerData.username);
-          setOrganizerAvatar(organizerData.avatar);
-        }
       } catch (error) {
         console.error("Error fetching event data:", error);
       } finally {
@@ -100,7 +95,11 @@ function EventPage() {
     };
 
     fetchEventData();
-  }, [id, userId, token]);
+
+    return () => {
+      unmounted = true;
+    };
+  }, [id, userId, token, navigate]);
 
   let formattedDate = "No date available";
   let formattedTime = "No time available";
@@ -158,25 +157,46 @@ function EventPage() {
               {eventData.attendees_count} going
             </div>
           </Link>
-          <div className="green-banner" id="event-signme">
-            <img
-              className="event-icon"
-              src="../../icons/check.svg"
-              alt="signme"
-            />
-            <AttendeeButton
-              meetupId={id}
-              userId={userId}
-              username={username}
-              token={token}
-              updateAttendees={updateAttendees}
-            />
+          <div
+            className={`green-banner ${
+              eventData.organizer_id === userId
+                ? "delete-meetup"
+                : "attendee-button"
+            }`}
+            id="event-signme"
+          >
+            {eventData.organizer_id === userId ? (
+              <DeleteMeetup
+                meetupId={id}
+                isOrganizer={true}
+                onDeleteMeetup={() => {
+                  navigate("/events");
+                }}
+              />
+            ) : (
+              <AttendeeButton
+                meetupId={id}
+                userId={userId}
+                username={username}
+                token={token}
+                updateAttendees={updateAttendees}
+              />
+            )}
           </div>
           <div id="eventpage-imgcontainer">
             <img
               id="eventpage-image"
               className="event-icon"
-              src={eventData.picture || ""}
+              src={
+                eventData.picture.endsWith(".jpg") ||
+                eventData.picture.endsWith(".jpeg") ||
+                eventData.picture.endsWith(".png") ||
+                eventData.picture.endsWith(".gif")
+                  ? `${import.meta.env.VITE_APP_BACKEND}/uploads/${
+                      eventData.picture || ""
+                    }`
+                  : eventData.picture || ""
+              }
               alt={`Event: ${eventData.title}`}
             />
           </div>
@@ -207,7 +227,7 @@ function EventPage() {
           </div>
         </div>
       ) : (
-        <p>There is no data available for this event.</p>
+        <Navigate to="*" />
       )}
     </main>
   );

@@ -44,3 +44,8 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+::selection {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
