@@ -11,13 +11,15 @@ function EventFilter({ locations, onFilterChange }) {
 
   return (
     <div className="event-filter">
-      <label htmlFor="location">Search by city:</label>
       <select
         id="location"
         name="location"
         value={selectedLocation}
         onChange={handleLocationChange}
       >
+        <option value="" disabled>
+          Search by city_
+        </option>
         <option value="">All cities</option>
         {locations.map((location) => (
           <option key={location} value={location}>
