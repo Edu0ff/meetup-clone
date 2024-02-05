@@ -22,3 +22,10 @@
 #nextevents-banner {
   margin-top: 1.5rem;
 }
+
+.event-cards-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  gap: 2rem;
+}

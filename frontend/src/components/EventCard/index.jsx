@@ -53,6 +53,11 @@ function EventCard({ meetup }) {
                 <img className="event-icon" src="icons/check.svg" alt="Going" />
                 {meetup.attendees_count} going
               </p>
+              <p className="eventcard-organizer">
+                <img
+                  className="event-icon" src="icons/person.svg" alt="Organizer icon" />
+                Organized by {meetup.organizer}
+              </p>
             </div>
           </>
         ) : (

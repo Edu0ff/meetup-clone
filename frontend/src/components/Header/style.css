@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 26px;
 }
 
 .header-nav {
@@ -21,8 +20,8 @@
   margin-left: 3rem;
 }
 
-.right-section {
-  margin-right: 3rem;
+.left-section a {
+  font-size: 26px;
 }
 
 .right-section a {
@@ -30,6 +29,7 @@
   margin-right: 1rem;
   margin: 2rem;
   color: var(--text);
+  font-size: clamp(18px, 1.85vmax, 26px);
 }
 
 .right-section a:hover {
@@ -64,4 +64,8 @@
   transform: rotate(180deg);
   right: 0px;
   margin-top: 3rem;
+}
+
+@media (max-width:700px) {
+  
 }
