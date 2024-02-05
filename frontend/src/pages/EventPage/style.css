@@ -25,14 +25,17 @@
 }
 
 .event-container {
+  width: 100%;
   max-width: 95vh;
-  max-height: 95vh;
+  max-height: 100vh;
+  min-height: 70vh;
   border-radius: none;
   border: 2px solid var(--text);
   box-sizing: border-box;
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
   outline: none;
   background-color: rgba(255, 255, 255, 0.5);
+  margin: 2rem auto;
 }
 
 #event-signme {

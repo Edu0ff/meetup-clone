@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
 import ArrowButton from "../../components/ArrowButton";
 import { AuthContext } from "../../context/AuthContext.jsx";
@@ -7,6 +6,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createMeetup } from "../../services/index.js";
 import Loading from "../../components/Loading";
+import toast from "react-hot-toast";
+import BlackArrow from "../../components/BlackArrow";
+import "./style.css";
 
 function PostEventPage() {
   const { token } = useContext(AuthContext);
@@ -119,34 +121,45 @@ function PostEventPage() {
 
     if (formData.title.trim() === "") {
       errors.title = "Title is required";
+      toast.error("Title is required");
     }
 
     if (formData.description.trim() === "") {
       errors.description = "Description is required";
+      toast.error("Description is required");
     }
 
-    if (formData.picture && !formData.picture.type.includes("image/")) {
+    if (!formData.picture) {
+      errors.picture = "Event photo is required";
+      toast.error("Event photo is required");
+    } else if (!formData.picture.type.includes("image/")) {
       errors.picture = "Please select a valid image file";
+      toast.error("Please select a valid image file");
     }
 
     if (formData.theme.trim() === "") {
       errors.theme = "Category is required";
+      toast.error("Category is required");
     }
 
     if (formData.location.trim() === "") {
       errors.location = "City is required";
+      toast.error("City is required");
     }
 
     if (formData.address.trim() === "") {
       errors.address = "Address is required";
+      toast.error("Address is required");
     }
 
     if (!formData.date) {
       errors.date = "Date is required";
+      toast.error("Date is required");
     }
 
     if (formData.time.trim() === "") {
       errors.time = "Time is required";
+      toast.error("Time is required");
     }
 
     setFormErrors(errors);
@@ -175,12 +188,12 @@ function PostEventPage() {
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
+                className="input-reg"
                 id="title"
                 name="title"
                 placeholder="title"
                 value={formData.title}
                 onChange={handleInputChange}
-                required
               />
               <div className="description-group">
                 <textarea
@@ -188,7 +201,6 @@ function PostEventPage() {
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  required
                   placeholder="description"
                   maxLength={255}
                 />
@@ -199,21 +211,20 @@ function PostEventPage() {
                   name="picture"
                   accept="image/jpeg, image/png"
                   onChange={handlePictureChange}
-                  style={{ marginBottom: "10px" }}
+                  style={{ display: "none" }}
+                  id="customFileInput"
                 />
-                {formErrors.picture && (
-                  <p style={{ color: "red", marginBottom: "10px" }}>
-                    {formErrors.picture}
-                  </p>
-                )}
+                <label htmlFor="customFileInput" className="custom-file-input">
+                  select a file for your event photo
+                </label>
               </div>
-              <div>
+              <div className="custom-select">
                 <select
+                  className="select-box"
                   id="theme"
                   name="theme"
                   value={formData.theme}
                   onChange={handleInputChange}
-                  required
                 >
                   <option value="">category</option>
                   <option value="Social Events">Social Events</option>
@@ -231,33 +242,28 @@ function PostEventPage() {
                   type="text"
                   id="location"
                   name="location"
+                  className="input-reg"
                   placeholder="Select a city"
                   value={formData.location}
                   onChange={handleInputChange}
-                  required
                 />
-                {formErrors.location && (
-                  <p style={{ color: "red" }}>{formErrors.location}</p>
-                )}
               </div>
               <div>
                 <input
                   type="text"
+                  className="input-reg"
                   id="address"
                   name="address"
                   placeholder="Select an address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  required
                 />
-                {formErrors.address && (
-                  <p style={{ color: "red" }}>{formErrors.address}</p>
-                )}
               </div>
               <div>
                 <DatePicker
                   id="date"
                   name="date"
+                  className="input-form"
                   selected={formData.date}
                   onChange={(date) =>
                     setFormData({
@@ -267,35 +273,29 @@ function PostEventPage() {
                   }
                   placeholderText="Select a date"
                   dateFormat="dd/MM/yyyy"
-                  required
                 />
-                {formErrors.date && (
-                  <p style={{ color: "red" }}>{formErrors.date}</p>
-                )}
               </div>
               <div>
                 <input
                   type="time"
                   id="time"
                   name="time"
+                  className="input-form"
                   placeholder="Select a time"
                   value={formData.time}
                   onChange={handleInputChange}
-                  required
                 />
-                {formErrors.time && (
-                  <p style={{ color: "red" }}>{formErrors.time}</p>
-                )}
               </div>
-
-              <ArrowButton
-                id="post-button"
-                type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSubmit(e);
-                }}
-              />
+              <div className="form-group" id="form-signinbutton">
+                <ArrowButton
+                  id="form-signinbutton"
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit(e);
+                  }}
+                />
+              </div>
             </form>
           </div>
         </div>
