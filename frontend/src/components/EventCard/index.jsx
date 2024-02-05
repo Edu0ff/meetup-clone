@@ -23,7 +23,9 @@ function EventCard({ meetup }) {
                 meetup.picture.endsWith(".jpeg") ||
                 meetup.picture.endsWith(".png") ||
                 meetup.picture.endsWith(".gif")
-                  ? `http://localhost:3000/uploads/${meetup.picture || ""}`
+                  ? `${import.meta.env.VITE_APP_BACKEND}/uploads/${
+                      meetup.picture || ""
+                    }`
                   : meetup.picture
               }
               alt={`Event: ${meetup.title}`}

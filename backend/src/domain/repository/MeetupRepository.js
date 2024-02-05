@@ -164,6 +164,10 @@ export class MeetupRepository {
           [id],
         )
 
+        await connection.query('DELETE FROM organizers WHERE meetup_id = ?', [
+          id,
+        ])
+
         await connection.query('DELETE FROM Attendees WHERE meetup_id = ?', [
           id,
         ])

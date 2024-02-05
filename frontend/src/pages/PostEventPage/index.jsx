@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import ArrowButton from "../../components/ArrowButton";
@@ -81,10 +81,7 @@ function PostEventPage() {
       meetupData.append("time", formData.time);
       meetupData.append("organizer_id", organizerId);
 
-      const newMeetup = await createMeetup(
-        Object.fromEntries(meetupData.entries()),
-        token
-      );
+      await createMeetup(Object.fromEntries(meetupData.entries()), token);
 
       resetForm();
       navigate("/");
@@ -278,7 +275,7 @@ function PostEventPage() {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="time"
                   id="time"
                   name="time"
                   placeholder="Select a time"
