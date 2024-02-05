@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import AttendeesList from "../../components/AttendeesList/index.jsx";
@@ -9,6 +8,7 @@ import { AuthContext } from "../../context/AuthContext.jsx";
 import { getDataUserService } from "../../services/index.js";
 import { format } from "date-fns";
 import DeleteMeetup from "../../components/DeleteMeetup/index.jsx";
+import "./style.css";
 
 function EventPage() {
   const { id } = useParams();
@@ -156,37 +156,32 @@ function EventPage() {
               />
               {eventData.attendees_count} going
             </div>
-            {eventData.organizer_id === userId && (
-              <div className="green-banner" id="event-signme">
-                <img
-                  className="event-icon"
-                  src="../../icons/check.svg"
-                  alt="signme"
-                />
-                <DeleteMeetup
-                  meetupId={id}
-                  isOrganizer={true}
-                  onDeleteMeetup={() => {
-                    navigate("/events");
-                  }}
-                />
-              </div>
-            )}
           </Link>
-          <div className="green-banner" id="event-signme">
-            <img
-              className="event-icon"
-              src="../../icons/check.svg"
-              alt="signme"
-            />
-
-            <AttendeeButton
-              meetupId={id}
-              userId={userId}
-              username={username}
-              token={token}
-              updateAttendees={updateAttendees}
-            />
+          <div
+            className={`green-banner ${
+              eventData.organizer_id === userId
+                ? "delete-meetup"
+                : "attendee-button"
+            }`}
+            id="event-signme"
+          >
+            {eventData.organizer_id === userId ? (
+              <DeleteMeetup
+                meetupId={id}
+                isOrganizer={true}
+                onDeleteMeetup={() => {
+                  navigate("/events");
+                }}
+              />
+            ) : (
+              <AttendeeButton
+                meetupId={id}
+                userId={userId}
+                username={username}
+                token={token}
+                updateAttendees={updateAttendees}
+              />
+            )}
           </div>
           <div id="eventpage-imgcontainer">
             <img
@@ -232,7 +227,7 @@ function EventPage() {
           </div>
         </div>
       ) : (
-        <p>Event not found</p>
+        <Navigate to="*" />
       )}
     </main>
   );

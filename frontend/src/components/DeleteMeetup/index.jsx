@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { deleteMeetup } from "../../services/index";
 import { useParams, useNavigate } from "react-router-dom";
+import "./style.css";
 
 const DeleteMeetup = ({ meetupId, isOrganizer, onDeleteMeetup }) => {
   const { token } = useContext(AuthContext);
@@ -23,15 +24,18 @@ const DeleteMeetup = ({ meetupId, isOrganizer, onDeleteMeetup }) => {
 
   return (
     <div>
-      {loading && <p>Deleting meetup...</p>}
-      {error && <p>Error: {error}</p>}
       {isOrganizer && (
         <button
-          id="button-signme"
+          id="button-deletemeetup"
           onClick={handleDeleteMeetup}
           disabled={loading}
         >
-          Delete Meetup
+          <img
+            className="event-icon"
+            src="../../icons/cross.svg"
+            alt="delete event"
+          />
+          Delete event
         </button>
       )}
     </div>

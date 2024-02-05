@@ -1,0 +1,22 @@
+#button-signme {
+  background-color: var(--yellow-ish);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 600;
+  border-radius: none;
+  border: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#button-signme:hover {
+  background-color: var(--primary);
+}
