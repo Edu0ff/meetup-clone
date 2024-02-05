@@ -40,7 +40,7 @@ async function dropTableIfExists(connection, tableName) {
 
 async function createUsersTable(connection) {
   await connection.query(`CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    users_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     bio VARCHAR(255) NOT NULL,
     email VARCHAR(90) NOT NULL UNIQUE,
@@ -48,7 +48,8 @@ async function createUsersTable(connection) {
     meetups_attended INT DEFAULT 0,  
     avatar VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )`)
+    );`
+  )
 
   const usersToInsert = [
     {
@@ -100,22 +101,22 @@ async function createUsersTable(connection) {
 async function createMeetupsTable(connection) {
   await connection.query(`
    CREATE TABLE IF NOT EXISTS meetups (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  picture VARCHAR(255) NOT NULL,
-  theme VARCHAR(255) NOT NULL,
-  location VARCHAR(255) NOT NULL,
-  address VARCHAR(255) NOT NULL,
-  date DATETIME NOT NULL, -- O TIMESTAMP
-  time TIME NOT NULL,
-  attendees_count INT DEFAULT 0,  
-  organizer_id INT, 
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (organizer_id) REFERENCES users(id) 
-);
-  `)
+   meetups_id INT AUTO_INCREMENT PRIMARY KEY,
+   title VARCHAR(255) NOT NULL,
+   description VARCHAR(255) NOT NULL,
+   picture VARCHAR(255) NOT NULL,
+   theme VARCHAR(255) NOT NULL,
+   location VARCHAR(255) NOT NULL,
+   address VARCHAR(255) NOT NULL,
+   date DATETIME NOT NULL, -- O TIMESTAMP
+   time TIME NOT NULL,
+   attendees_count INT DEFAULT 0,  
+   organizer_fk INT, 
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   FOREIGN KEY (organizer_fk) REFERENCES users(users_id) 
+   );`
+  )
 
   const meetupsToInsert = [
     {
@@ -127,7 +128,7 @@ async function createMeetupsTable(connection) {
       address: 'Dirección 1',
       date: '2025-01-01',
       time: '12:00:00',
-      organizer_id: 1,
+      organizer_fk: 1,
     },
     {
       title: 'Meetup 2',
@@ -138,7 +139,7 @@ async function createMeetupsTable(connection) {
       address: 'Dirección 2',
       date: '2025-02-02',
       time: '12:00:00',
-      organizer_id: 2,
+      organizer_fk: 2,
     },
     {
       title: 'Meetup 3',
@@ -149,7 +150,7 @@ async function createMeetupsTable(connection) {
       address: 'Dirección 3',
       date: '2025-03-03',
       time: '12:00:00',
-      organizer_id: 3,
+      organizer_fk: 3,
     },
     {
       title: 'Meetup 4',
@@ -160,7 +161,7 @@ async function createMeetupsTable(connection) {
       address: 'Dirección 4',
       date: '2025-04-04',
       time: '12:00:00',
-      organizer_id: 4,
+      organizer_fk: 4,
     },
     {
       title: 'Meetup 5',
@@ -171,7 +172,7 @@ async function createMeetupsTable(connection) {
       address: 'Dirección 5',
       date: '2025-05-05',
       time: '12:00:00',
-      organizer_id: 5,
+      organizer_fk: 5,
     },
   ]
 
@@ -187,49 +188,50 @@ async function createMeetupsTable(connection) {
 async function createOrganizersTable(connection) {
   await connection.query(`
     CREATE TABLE IF NOT EXISTS organizers (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      user_id INT,
-      meetup_id INT,
+      organizers_id INT AUTO_INCREMENT PRIMARY KEY,
+      users_fk INT,
+      meetups_fk INT,
       username VARCHAR(50),  -- Agregar la columna username
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (meetup_id) REFERENCES Meetups(id)
-    )
-  `)
+      FOREIGN KEY (users_fk) REFERENCES users(users_id),
+      FOREIGN KEY (meetups_fk) REFERENCES meetups(meetups_id)
+    );`
+  )
 
   console.log(chalk.green('Table Organizers created.'))
 }
 
 async function createAttendeesTable(connection) {
   await connection.query(`CREATE TABLE IF NOT EXISTS attendees (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    meetup_id INT,
-    user_id INT,
+    attendees_id INT AUTO_INCREMENT PRIMARY KEY,
+    meetups_fk INT,
+    users_fk INT,
     username VARCHAR(50),
     will_attend BOOLEAN,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (meetup_id) REFERENCES Meetups(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-  );`)
+    FOREIGN KEY (meetups_fk) REFERENCES meetups(meetups_id),
+    FOREIGN KEY (users_fk) REFERENCES users(users_id)
+    );`
+  )
 
   console.log(chalk.green('Table Attendees created.'))
 }
 
 async function insertData(connection) {
   const organizersToInsert = [
-    { user_id: 1, meetup_id: 1, username: 'user1' },
-    { user_id: 2, meetup_id: 2, username: 'user2' },
-    { user_id: 3, meetup_id: 3, username: 'user3' },
-    { user_id: 4, meetup_id: 4, username: 'user4' },
-    { user_id: 5, meetup_id: 5, username: 'user5' },
+    { users_fk: 1, meetups_fk: 1, username: 'user1' },
+    { users_fk: 2, meetups_fk: 2, username: 'user2' },
+    { users_fk: 3, meetups_fk: 3, username: 'user3' },
+    { users_fk: 4, meetups_fk: 4, username: 'user4' },
+    { users_fk: 5, meetups_fk: 5, username: 'user5' },
   ]
 
   const attendeesToInsert = [
-    { meetup_id: 1, user_id: 1, username: 'user1', will_attend: true },
-    { meetup_id: 2, user_id: 2, username: 'user2', will_attend: true },
-    { meetup_id: 3, user_id: 3, username: 'user3', will_attend: true },
-    { meetup_id: 4, user_id: 4, username: 'user4', will_attend: true },
-    { meetup_id: 5, user_id: 5, username: 'user5', will_attend: true },
+    { meetups_fk: 1, users_fk: 1, username: 'user1', will_attend: true },
+    { meetups_fk: 2, users_fk: 2, username: 'user2', will_attend: true },
+    { meetups_fk: 3, users_fk: 3, username: 'user3', will_attend: true },
+    { meetups_fk: 4, users_fk: 4, username: 'user4', will_attend: true },
+    { meetups_fk: 5, users_fk: 5, username: 'user5', will_attend: true },
   ]
 
   for (const organizer of organizersToInsert) {
@@ -249,20 +251,20 @@ async function updateCounters(connection) {
     SET attendees_count = (
       SELECT COUNT(*)
       FROM attendees
-      WHERE Attendees.meetup_id = Meetups.id
-      AND Attendees.will_attend = 1
-    )
-  `)
+      WHERE attendees.meetups_fk = meetups.meetups_id
+      AND attendees.will_attend = 1
+    );`
+  )
 
   await connection.query(`
     UPDATE users
     SET meetups_attended = (
       SELECT COUNT(*)
       FROM attendees
-      WHERE Attendees.user_id = users.id
-      AND Attendees.will_attend = 1
-    )
-  `)
+      WHERE attendees.users_fk = users.users_id
+      AND attendees.will_attend = 1
+    );`
+  )
 
   console.log(chalk.green('Attendees updated.'))
 }
