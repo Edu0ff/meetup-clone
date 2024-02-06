@@ -25,7 +25,13 @@ ul {
   outline: none;
   height: 7.3rem;
   resize: none;
+  padding: 0.3rem;
 }
 
-.character-count {
+.eye-icon-up {
+  position: absolute;
+  height: 1.5rem;
+  right: 2rem;
+  bottom: 21.5rem;
+  cursor: pointer;
 }

@@ -9,7 +9,9 @@ function EventCard({ meetup }) {
     ? format(new Date(meetup.date), "dd/MM/yy")
     : "Date not available";
 
-  const formattedTime = meetup.time ? meetup.time : "Time not available";
+  const formattedTime = meetup.time
+    ? format(new Date(`2022-01-01 ${meetup.time}`), "HH:mm")
+    : "";
 
   return (
     <Link to={`/event/${meetup.id}`}>
@@ -50,6 +52,7 @@ function EventCard({ meetup }) {
                   alt="Date"
                 />
                 {formattedDate}
+                {formattedTime}
               </p>
               <p className="eventcard-going">
                 <img className="event-icon" src="icons/check.svg" alt="Going" />

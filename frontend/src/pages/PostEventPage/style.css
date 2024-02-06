@@ -54,7 +54,6 @@
   height: 7.3rem;
   width: 50%;
   resize: none;
-  margin-bottom: 2rem;
   margin-top: 2rem;
   padding: 0.3rem;
 }
@@ -132,4 +131,11 @@
   height: 100%;
   padding: 8px;
   margin-right: 0.5rem;
+}
+
+.description-count {
+  font-family: "IBM Plex Mono", monospace;
+  margin-bottom: 2rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
 }

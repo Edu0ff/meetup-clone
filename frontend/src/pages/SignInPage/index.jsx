@@ -16,6 +16,11 @@ function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   useEffect(() => {
     const activateAccount = async (token) => {
@@ -74,56 +79,66 @@ function SignInPage() {
 
   return (
     <main className="signin-page">
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="basic-container" id="signin-container">
-          <img className="signin-image" src="/img/show.avif" alt="" />
-          <div className="signin-section">
-            <div className="signin-header">
-              <Link to="/signup" className="link-sign">
-                Sign Up
-              </Link>
-              <Link to="/signin" id="link-signin" className="link-sign">
-                Sign In
-              </Link>
-            </div>
-            <h2 className="signin-text">
-              <span className="black-text">Glad to see</span>
-              <span className="you-text"> you</span>
-              <span className="black-text"> again!</span>
-            </h2>
-            <form onSubmit={submitHandler}>
-              <div className="form-group">
-                <input
-                  className="input-reg"
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="input-reg"
-                  type="password"
-                  id="password"
-                  name="password"
-                  required
-                  placeholder="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                />
-              </div>
-              <div className="form-group" id="form-signinbutton">
-                <ArrowButton id="signin-button" type="submit" />
-              </div>
-            </form>
+      <div className="basic-container" id="signin-container">
+        <img className="signin-image" src="/img/show.avif" alt="" />
+        <div className="signin-section">
+          <div className="signin-header">
+            <Link to="/signup" className="link-sign">
+              Sign Up
+            </Link>
+            <Link to="/signin" id="link-signin" className="link-sign">
+              Sign In
+            </Link>
           </div>
+          <h2 className="signin-text">
+            <span className="black-text">Glad to see</span>
+            <span className="you-text"> you</span>
+            <span className="black-text"> again!</span>
+          </h2>
+          <form onSubmit={submitHandler} autocomplete="off">
+            <div className="form-group">
+              <input
+                className="input-reg"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group" id="signin-password">
+              <input
+                className="input-reg"
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              {showPassword ? (
+                <img
+                  className="eye-icon"
+                  src="../../icons/eye_opened.svg"
+                  alt="Hide Password"
+                  onClick={togglePasswordVisibility}
+                />
+              ) : (
+                <img
+                  className="eye-icon"
+                  src="../../icons/eye_closed.svg"
+                  alt="Show Password"
+                  onClick={togglePasswordVisibility}
+                />
+              )}
+            </div>
+
+            <div className="form-group" id="form-signinbutton">
+              <ArrowButton id="signin-button" type="submit" />
+            </div>
+          </form>
         </div>
-      )}
+      </div>
     </main>
   );
 }
