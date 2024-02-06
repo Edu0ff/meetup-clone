@@ -56,6 +56,7 @@
   resize: none;
   margin-bottom: 2rem;
   margin-top: 2rem;
+  padding: 0.3rem;
 }
 
 .input-form {
@@ -68,8 +69,8 @@
   width: 10rem;
   resize: none;
   font-family: "IBM Plex Mono", monospace;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
 }
 
 .select-box {
@@ -94,6 +95,11 @@
   background-image: none; */
 }
 
+#address,
+#location {
+  margin-bottom: 1rem;
+}
+
 .custom-file-input {
   background-color: var(--lavender-ish);
   border-bottom: none;
@@ -104,9 +110,26 @@
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
   cursor: pointer;
+  height: 4rem;
+  width: 50%;
+  position: relative;
+  padding: 0.3rem;
 }
 
-#address,
-#location {
-  margin-bottom: 1rem;
+.custom-file-input label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.custom-file-input img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 100%;
+  padding: 8px;
+  margin-right: 0.5rem;
 }
