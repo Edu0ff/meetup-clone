@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import BlackArrow from "../BlackArrow";
 import "./style.css";
-import Loading from "../Loading";
 
-function ExploreCategories({ onCategoryChange, isLoading }) {
+function ExploreCategories({ onCategoryChange }) {
   const categories = [
     "Social Events",
     "Art and Culture",
@@ -12,25 +12,40 @@ function ExploreCategories({ onCategoryChange, isLoading }) {
     "Sports and Fitness",
   ];
 
-  const handleCategoryChange = (event) => {
-    const selectedCategory = event.target.value;
-    onCategoryChange(selectedCategory);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsMenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMenuOpen(false);
+  };
+
+  const handleCategoryChange = (category) => {
+    onCategoryChange(category);
+    setIsMenuOpen(false);
   };
 
   return (
-    <div className="explore-categories">
-      <h2>Discover Categories</h2>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <select onChange={handleCategoryChange}>
-          <option value="">All Categories</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+    <div
+      className="explore-categories"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <BlackArrow id="explore-arrow" />
+      <h2>Explore Categories</h2>
+
+      {isMenuOpen && (
+        <div className="category-menu">
+          <ul>
+            {categories.map((category) => (
+              <li key={category} onClick={() => handleCategoryChange(category)}>
+                {category}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
