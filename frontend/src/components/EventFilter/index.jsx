@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./style.css";
 
 function EventFilter({ locations, onFilterChange }) {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -10,7 +11,7 @@ function EventFilter({ locations, onFilterChange }) {
   };
 
   return (
-    <div className="event-filter">
+    <div className="filter-element">
       <select
         id="location"
         name="location"

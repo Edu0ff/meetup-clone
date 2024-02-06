@@ -3,7 +3,7 @@ import "./style.css";
 
 function BlackArrow() {
   return (
-    <div id="black-arrow">
+    <div className="black-arrow">
       <img
         src="../../icons/black-arrow.svg"
         alt=""

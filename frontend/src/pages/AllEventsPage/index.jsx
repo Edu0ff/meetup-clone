@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./style.css";
 import { searchMeetups } from "../../services/index.js";
 import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
 import EventCard from "../../components/EventCard";
-import SearchBar from "../../components/SearchBar/index.jsx";
 import ExploreCategories from "../../components/ExploreCategories/index.jsx";
-import EventFilter from "../../components/EventFilter.jsx";
+import EventFilter from "../../components/EventFilter";
 import ScrollToTop from "../../components/ScrollToTop";
 import ScrollBar from "../../components/ScrollBar";
+import "./style.css";
 
 function AllEventsPage() {
   const [meetups, setMeetups] = useState([]);
@@ -54,13 +53,12 @@ function AllEventsPage() {
 
   return (
     <main className="events-page">
+      <ScrollBar />
+      <ScrollToTop />
       {loading ? (
         <Loading />
       ) : (
         <>
-          <ScrollBar />
-          <ScrollToTop />
-          <SearchBar placeholderText="Search by city_" />
           <EventFilter
             locations={getUniqueLocations(meetups)}
             onFilterChange={handleLocationChange}
