@@ -145,18 +145,18 @@ function EventPage() {
               src="../../icons/calendar.svg"
               alt="calendar"
             />
-            {formattedDate} {formattedTime}
+            <div id="date-info">{formattedDate} </div>
+            <div id="time-info"> {formattedTime}</div>
           </div>
-          <Link to="/">
-            <div className="green-banner" id="event-going">
-              <img
-                className="event-icon"
-                src="../../icons/attendees.svg"
-                alt="signme"
-              />
-              {eventData.attendees_count} going
-            </div>
-          </Link>
+
+          <div className="green-banner" id="event-going">
+            <img
+              className="event-icon"
+              src="../../icons/attendees.svg"
+              alt="signme"
+            />
+            {eventData.attendees_count} going
+          </div>
           <div
             className={`green-banner ${
               eventData.organizer_id === userId
