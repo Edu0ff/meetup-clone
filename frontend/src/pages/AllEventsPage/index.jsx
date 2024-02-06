@@ -55,27 +55,25 @@ function AllEventsPage() {
     <main className="events-page">
       <ScrollBar />
       <ScrollToTop />
+      <div className="top-section">
+        <EventFilter
+          locations={getUniqueLocations(meetups)}
+          onFilterChange={handleLocationChange}
+        />
+        <ExploreCategories onCategoryChange={handleCategoryChange} />
+      </div>
       {loading ? (
         <Loading />
       ) : (
-        <>
-          <EventFilter
-            locations={getUniqueLocations(meetups)}
-            onFilterChange={handleLocationChange}
-          />
-          <ExploreCategories onCategoryChange={handleCategoryChange} />
+        <div className="event-card-container">
           {filteredAndSortedMeetups.length > 0 ? (
-            <ul>
-              {filteredAndSortedMeetups.map((meetup) => (
-                <li key={meetup.id}>
-                  <EventCard meetup={meetup} />
-                </li>
-              ))}
-            </ul>
+            filteredAndSortedMeetups.map((meetup) => (
+              <EventCard key={meetup.id} meetup={meetup} />
+            ))
           ) : (
             <p>No events available.</p>
           )}
-        </>
+        </div>
       )}
     </main>
   );
