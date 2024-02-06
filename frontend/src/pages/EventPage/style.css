@@ -48,8 +48,19 @@
   margin-right: 0.5rem;
 }
 
+#event-time,
+#event-signme,
+#event-going {
+  height: 3.5rem;
+}
+
 #event-time {
   font-weight: 200;
+}
+
+.date-time-info {
+  text-align: right;
+  width: 100%;
 }
 
 #event-signme {
@@ -84,4 +95,9 @@
 #event-going {
   font-weight: 200;
   text-decoration: none;
+}
+
+.event-locationinfo {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: bold;
 }

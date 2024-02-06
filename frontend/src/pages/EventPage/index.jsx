@@ -145,8 +145,10 @@ function EventPage() {
               src="../../icons/calendar.svg"
               alt="calendar"
             />
-            <div id="date-info">{formattedDate} </div>
-            <div id="time-info"> {formattedTime}</div>
+            <div className="date-time-info">
+              <div id="date-info">{formattedDate} </div>
+              <div id="time-info"> {formattedTime}</div>
+            </div>
           </div>
 
           <div className="green-banner" id="event-going">
