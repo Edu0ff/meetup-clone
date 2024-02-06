@@ -205,7 +205,7 @@ function PostEventPage() {
                   maxLength={255}
                 />
               </div>
-              <div>
+              <div className="custom-file-input">
                 <input
                   type="file"
                   name="picture"
@@ -214,8 +214,13 @@ function PostEventPage() {
                   style={{ display: "none" }}
                   id="customFileInput"
                 />
-                <label htmlFor="customFileInput" className="custom-file-input">
+
+                <label htmlFor="customFileInput">
                   select a file for your event photo
+                  <img
+                    src="../../public/icons/upload.svg"
+                    alt="upload image icon"
+                  />
                 </label>
               </div>
               <div className="custom-select">
