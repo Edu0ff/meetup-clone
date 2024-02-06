@@ -17,6 +17,7 @@ function SignUpPage() {
   const [pass2, setPass2] = useState("");
   const [bio, setBio] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleBioChange = (event) => {
     const newBio = event.target.value.slice(0, 255);
@@ -24,6 +25,10 @@ function SignUpPage() {
   };
 
   const characterCount = bio.length;
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -75,89 +80,95 @@ function SignUpPage() {
 
   return (
     <main className="signin-page">
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="basic-container">
-          <img className="signin-image" src="/img/cosplay.avif" alt="" />
-          <div className="signin-section">
-            <div className="signup-header">
-              <Link to="/signup" className="link-sign" id="link-signup">
-                Sign Up
-              </Link>
-              <Link to="/signin" className="link-sign">
-                Sign In
-              </Link>
-            </div>
-            <form onSubmit={handleForm}>
-              <ul>
-                <li className="form-group">
-                  <input
-                    className="input-reg"
-                    type="text"
-                    id="username"
-                    name="username"
-                    required
-                    placeholder="nickname"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </li>
-                <li className="form-group">
-                  <input
-                    className="input-reg"
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </li>
-                <li className="form-group">
-                  <input
-                    className="input-reg"
-                    htmlFor="pass1"
-                    type="password"
-                    id="pass1"
-                    name="pass1"
-                    required
-                    placeholder="password"
-                    onChange={(e) => setPass1(e.target.value)}
-                  />
-                </li>
-                <li className="form-group">
-                  <input
-                    className="input-reg"
-                    htmlFor="pass2"
-                    type="password"
-                    id="pass2"
-                    name="pass2"
-                    required
-                    placeholder="repeat password"
-                    onChange={(e) => setPass2(e.target.value)}
-                  />
-                </li>
-                <li className="form-group">
-                  <textarea
-                    className="input-reg"
-                    id="bio"
-                    name="bio"
-                    value={bio}
-                    onChange={handleBioChange}
-                    required
-                    placeholder="tell the world a little about you_"
-                    maxLength={255}
-                  />
-                  <div className="character-count">{`${characterCount}/255`}</div>
-                </li>
-              </ul>
-              <div className="form-group" id="form-signinbutton">
-                <ArrowButton id="signin-button" type="submit" />
-              </div>
-            </form>
+      <div className="basic-container">
+        <img className="signin-image" src="/img/cosplay.avif" alt="" />
+        <div className="signin-section">
+          <div className="signup-header">
+            <Link to="/signup" className="link-sign" id="link-signup">
+              Sign Up
+            </Link>
+            <Link to="/signin" className="link-sign">
+              Sign In
+            </Link>
           </div>
+          <form onSubmit={handleForm} autocomplete="off">
+            <ul>
+              <li className="form-group">
+                <input
+                  className="input-reg"
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="nickname"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </li>
+              <li className="form-group">
+                <input
+                  className="input-reg"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </li>
+              <li className="form-group">
+                <input
+                  className="input-reg"
+                  htmlFor="pass1"
+                  type={showPassword ? "text" : "password"}
+                  id="pass1"
+                  name="pass1"
+                  placeholder="password"
+                  onChange={(e) => setPass1(e.target.value)}
+                />
+                {showPassword ? (
+                  <img
+                    className="eye-icon-up"
+                    src="../../icons/eye_opened.svg"
+                    alt="Hide Password"
+                    onClick={togglePasswordVisibility}
+                  />
+                ) : (
+                  <img
+                    className="eye-icon-up"
+                    src="../../icons/eye_closed.svg"
+                    alt="Show Password"
+                    onClick={togglePasswordVisibility}
+                  />
+                )}
+              </li>
+              <li className="form-group">
+                <input
+                  className="input-reg"
+                  htmlFor="pass2"
+                  type={showPassword ? "text" : "password"}
+                  id="pass2"
+                  name="pass2"
+                  placeholder="repeat password"
+                  onChange={(e) => setPass2(e.target.value)}
+                />
+              </li>
+              <li className="form-group">
+                <textarea
+                  className="input-reg"
+                  id="bio"
+                  name="bio"
+                  value={bio}
+                  onChange={handleBioChange}
+                  placeholder="tell the world a little about you_"
+                  maxLength={255}
+                />
+                <div className="character-count">{`${characterCount}/255`}</div>
+              </li>
+            </ul>
+            <div className="form-group" id="form-signinbutton">
+              <ArrowButton id="signin-button" type="submit" />
+            </div>
+          </form>
         </div>
-      )}
+      </div>
     </main>
   );
 }

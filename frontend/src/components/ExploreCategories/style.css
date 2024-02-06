@@ -1,0 +1,56 @@
+.explore-categories {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  background-color: var(--secondary);
+  border-radius: none;
+  border: 2px solid var(--text);
+  border-right: 0px;
+  font-size: large;
+  height: 3.5rem;
+  padding: 0 3rem;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.explore-categories h2 {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  letter-spacing: 0.1rem;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.category-menu {
+  position: absolute;
+  z-index: 10;
+  background-color: var(--secondary);
+  left: 0;
+  width: 100%;
+  border: 2px solid var(--text);
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  display: none;
+}
+
+.explore-categories:hover .category-menu {
+  display: block;
+}
+
+.category-menu ul {
+  list-style: none;
+  padding: 10px;
+}
+
+.category-menu li {
+  cursor: pointer;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.category-menu li:hover {
+  color: var(--primary);
+}

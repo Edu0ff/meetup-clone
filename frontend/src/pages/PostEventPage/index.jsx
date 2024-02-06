@@ -26,6 +26,7 @@ function PostEventPage() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [descriptionLength, setDescriptionLength] = useState(0);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -41,6 +42,14 @@ function PostEventPage() {
   const [formErrors, setFormErrors] = useState({});
 
   const handleInputChange = (event) => {
+    const value = event.target.value;
+    setFormData({
+      ...formData,
+      [event.target.name]: value,
+    });
+    if (event.target.name === "description") {
+      setDescriptionLength(value.length);
+    }
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -185,7 +194,7 @@ function PostEventPage() {
             <h1 className="postevent-title">Event Details</h1>
           </div>
           <div className="formevent-container">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autocomplete="off">
               <input
                 type="text"
                 className="input-reg"
@@ -204,8 +213,9 @@ function PostEventPage() {
                   placeholder="description"
                   maxLength={255}
                 />
+                <div className="description-count">{descriptionLength}/255</div>
               </div>
-              <div>
+              <div className="custom-file-input">
                 <input
                   type="file"
                   name="picture"
@@ -214,8 +224,10 @@ function PostEventPage() {
                   style={{ display: "none" }}
                   id="customFileInput"
                 />
-                <label htmlFor="customFileInput" className="custom-file-input">
+
+                <label htmlFor="customFileInput">
                   select a file for your event photo
+                  <img src="../../icons/upload.svg" alt="upload image icon" />
                 </label>
               </div>
               <div className="custom-select">

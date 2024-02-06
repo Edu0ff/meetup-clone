@@ -67,8 +67,17 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
         onClick={handleAttendeeAction}
         disabled={loading}
       >
-        <img className="event-icon" src="../../icons/check.svg" alt="signme" />
-        {loading ? "Processing.." : isAttendee ? "Cancel attendance" : "Attend"}
+        <img
+          className="event-icon"
+          src="../../icons/check.svg"
+          alt="signme icon"
+          id="icon-signme"
+        />
+        {loading
+          ? "Processing.."
+          : isAttendee
+          ? "I changed my mind"
+          : "Sign me up!"}
       </button>
     </div>
   );
