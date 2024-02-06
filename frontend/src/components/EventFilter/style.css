@@ -8,7 +8,7 @@
   background-color: var(--lavender-ish);
   border-radius: none;
   border: 2px solid var(--text);
-  border-right: 0px;
+
   font-size: large;
   width: 100%;
   height: 3.5rem;
@@ -22,4 +22,5 @@
   background-position: 0 50%;
   background-position-x: 0.5rem;
   color: #757b8b;
+  font-family: "IBM Plex Mono", monospace;
 }

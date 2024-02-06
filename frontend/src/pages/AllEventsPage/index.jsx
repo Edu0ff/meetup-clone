@@ -67,13 +67,9 @@ function AllEventsPage() {
       ) : (
         <div className="event-card-container">
           {filteredAndSortedMeetups.length > 0 ? (
-            <ul>
-              {filteredAndSortedMeetups.map((meetup) => (
-                <li key={meetup.id}>
-                  <EventCard meetup={meetup} />
-                </li>
-              ))}
-            </ul>
+            filteredAndSortedMeetups.map((meetup) => (
+              <EventCard key={meetup.id} meetup={meetup} />
+            ))
           ) : (
             <p>No events available.</p>
           )}

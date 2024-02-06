@@ -2,20 +2,19 @@
   background-image: url(/img/suminagashi.svg);
   background-size: cover;
   background-color: var(--lavender-ish);
-}
-
-.events-page {
-  padding: 2rem;
+  margin-bottom: 3rem;
 }
 
 .top-section {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  padding: 2rem;
+  gap: 4rem;
 }
 
 .event-card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 4rem;
+  padding: 2rem;
 }
