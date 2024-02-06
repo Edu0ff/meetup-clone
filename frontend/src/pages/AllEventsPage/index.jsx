@@ -55,15 +55,17 @@ function AllEventsPage() {
     <main className="events-page">
       <ScrollBar />
       <ScrollToTop />
+      <div className="top-section">
+        <EventFilter
+          locations={getUniqueLocations(meetups)}
+          onFilterChange={handleLocationChange}
+        />
+        <ExploreCategories onCategoryChange={handleCategoryChange} />
+      </div>
       {loading ? (
         <Loading />
       ) : (
-        <>
-          <EventFilter
-            locations={getUniqueLocations(meetups)}
-            onFilterChange={handleLocationChange}
-          />
-          <ExploreCategories onCategoryChange={handleCategoryChange} />
+        <div className="event-card-container">
           {filteredAndSortedMeetups.length > 0 ? (
             <ul>
               {filteredAndSortedMeetups.map((meetup) => (
@@ -75,7 +77,7 @@ function AllEventsPage() {
           ) : (
             <p>No events available.</p>
           )}
-        </>
+        </div>
       )}
     </main>
   );
