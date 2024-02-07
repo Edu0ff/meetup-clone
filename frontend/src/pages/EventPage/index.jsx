@@ -53,6 +53,10 @@ function EventPage() {
       }
 
       setAttendees(attendeesData);
+      setEventData((prevEventData) => ({
+        ...prevEventData,
+        attendees_count: attendeesData.length,
+      }));
     } catch (error) {
       console.error("Error fetching attendees:", error);
     } finally {
@@ -130,96 +134,22 @@ function EventPage() {
         <Loading />
       ) : eventData ? (
         <div className="event-container">
-          <h1 className="event-title">{eventData.title}</h1>
-          <div className="event-locationinfo">
-            <div className="event-map" id="eventpage-map">
-              {eventData.address}
-            </div>
-            <div className="event-location">
+          <div className="left-column">
+            <h1 className="event-title">{eventData.title}</h1>
+            <p id="eventpage-description">{eventData.description}</p>
+            <div id="organized-by-container">
               <img
                 className="event-icon"
-                src="../../icons/location.svg"
-                alt="location"
+                src="../../icons/person.svg"
+                alt="organized by"
               />
-              <p>{eventData.location}</p>
+              <span id="organized-by">{`Organized by `}</span>
+              <span id="organized-by-username">{` ${
+                organizerUsername || ""
+              }`}</span>
             </div>
-          </div>
-          <div className="green-banner" id="event-time">
-            <img
-              className="event-icon"
-              src="../../icons/calendar.svg"
-              alt="calendar"
-            />
-            <div className="date-time-info">
-              <div id="date-info">{formattedDate} </div>
-              <div id="time-info"> {formattedTime}</div>
-            </div>
-          </div>
-
-          <div
-            className={`green-banner ${
-              eventData.organizer_id === userId
-                ? "delete-meetup"
-                : "attendee-button"
-            }`}
-            id="event-going"
-            onClick={() => setIsAttendeesListOpen(true)}
-          >
-            <img
-              className="event-icon"
-              src="../../icons/attendees.svg"
-              alt="signme"
-            />
-            {eventData.attendees_count} going
-          </div>
-          <div
-            className={`green-banner ${
-              eventData.organizer_id === userId
-                ? "delete-meetup"
-                : "attendee-button"
-            }`}
-            id="event-signme"
-          >
-            {eventData.organizer_id === userId ? (
-              <DeleteMeetup
-                meetupId={id}
-                isOrganizer={true}
-                onDeleteMeetup={() => {
-                  navigate("/events");
-                }}
-              />
-            ) : (
-              <AttendeeButton
-                meetupId={id}
-                userId={userId}
-                username={username}
-                token={token}
-                updateAttendees={updateAttendees}
-              />
-            )}
-          </div>
-
-          <div id="eventpage-imgcontainer">
-            <img
-              id="eventpage-image"
-              className="event-icon"
-              src={
-                eventData.picture.endsWith(".jpg") ||
-                eventData.picture.endsWith(".jpeg") ||
-                eventData.picture.endsWith(".png") ||
-                eventData.picture.endsWith(".gif")
-                  ? `${import.meta.env.VITE_APP_BACKEND}/uploads/${
-                      eventData.picture || ""
-                    }`
-                  : eventData.picture || ""
-              }
-              alt={`Event: ${eventData.title}`}
-            />
-          </div>
-          <div id="eventpage-details">
-            <p id="eventpage-text">{eventData.description}</p>
             <div>
-              {/* {organizerAvatar ? (
+              {organizerAvatar ? (
                 <img
                   id="eventpage-person"
                   src={`${import.meta.env.VITE_APP_BACKEND}/${organizerAvatar}`}
@@ -227,25 +157,104 @@ function EventPage() {
                 />
               ) : (
                 ""
-              )} */}
-              <div>
-                <img
-                  className="event-icon"
-                  src="../../icons/person.svg"
-                  alt="orgnized by"
+              )}
+            </div>
+          </div>
+          <div className="right-column">
+            <div id="eventpage-imgcontainer">
+              <img
+                id="eventpage-image"
+                className="event-icon"
+                src={
+                  eventData.picture.endsWith(".jpg") ||
+                  eventData.picture.endsWith(".jpeg") ||
+                  eventData.picture.endsWith(".png") ||
+                  eventData.picture.endsWith(".gif")
+                    ? `${import.meta.env.VITE_APP_BACKEND}/uploads/${
+                        eventData.picture || ""
+                      }`
+                    : eventData.picture || ""
+                }
+                alt={`Event: ${eventData.title}`}
+              />
+            </div>
+            <div className="green-banner" id="event-time">
+              <img
+                className="event-icon"
+                src="../../icons/calendar.svg"
+                alt="calendar"
+              />
+              <div className="date-time-info">
+                <div id="date-info">{formattedDate} </div>
+                <div id="time-info"> {formattedTime}</div>
+              </div>
+            </div>
+
+            <div
+              className={`green-banner ${
+                eventData.organizer_id === userId
+                  ? "delete-meetup"
+                  : "attendee-button"
+              }`}
+              id="event-going"
+              onClick={() => setIsAttendeesListOpen(true)}
+            >
+              <img
+                className="event-icon"
+                src="../../icons/attendees.svg"
+                alt="signme"
+              />
+              {eventData.attendees_count} going
+            </div>
+            <div
+              className={`green-banner ${
+                eventData.organizer_id === userId
+                  ? "delete-meetup"
+                  : "attendee-button"
+              }`}
+              id="event-signme"
+            >
+              {eventData.organizer_id === userId ? (
+                <DeleteMeetup
+                  meetupId={id}
+                  isOrganizer={true}
+                  onDeleteMeetup={() => {
+                    navigate("/events");
+                  }}
                 />
-                <p id="eventpage-organizedby">{`Organized by ${
-                  organizerUsername || ""
-                }`}</p>
-                {isAttendeesListOpen && (
-                  <AttendeesList
-                    updateAttendees={updateAttendees}
-                    onClose={() => setIsAttendeesListOpen(false)}
+              ) : (
+                <AttendeeButton
+                  meetupId={id}
+                  userId={userId}
+                  username={username}
+                  token={token}
+                  updateAttendees={updateAttendees}
+                />
+              )}
+            </div>
+            <div className="event-locationinfo">
+              <div className="event-map" id="eventpage-map">
+                {eventData.address}
+              </div>
+              <div className="event-location">
+                <p>
+                  {" "}
+                  <img
+                    className="event-icon"
+                    src="../../icons/location.svg"
+                    alt="location"
                   />
-                )}
+                  {eventData.location}
+                </p>
               </div>
             </div>
           </div>
+          {isAttendeesListOpen && (
+            <AttendeesList
+              updateAttendees={updateAttendees}
+              onClose={() => setIsAttendeesListOpen(false)}
+            />
+          )}
         </div>
       ) : (
         <Navigate to="*" />

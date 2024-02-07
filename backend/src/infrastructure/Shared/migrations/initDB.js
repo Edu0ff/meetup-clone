@@ -131,7 +131,8 @@ async function createMeetupsTable(connection) {
     },
     {
       title: 'Meetup 2',
-      description: 'Descripción de la meetup 2',
+      description:
+        'Descripción de la meetup 2 que es bastante larga, doy muchos detalles de este evento ya que es muy interesante y además necesita información para que la gente sepa de qué va y así que vengan más.',
       picture: 'https://picsum.photos/800',
       theme: 'Technology',
       location: 'Ciudad 2',

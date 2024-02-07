@@ -73,11 +73,7 @@ const AttendeeButton = ({ meetupId, userId, token, updateAttendees }) => {
           alt="signme icon"
           id="icon-signme"
         />
-        {loading
-          ? "Processing.."
-          : isAttendee
-          ? "I changed my mind"
-          : "Sign me up!"}
+        {isAttendee ? "I changed my mind" : "Sign me up!"}
       </button>
     </div>
   );
