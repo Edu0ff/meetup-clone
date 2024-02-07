@@ -23,19 +23,19 @@
 
 .header-text {
   font-family: IBM Plex Mono;
-  font-size: 4vmin;
+  font-size: clamp(2vmax, 2vmax, 4rem);
   font-weight: 600;
   text-align: center;
   color: var(--text);
   width: 40%;
-  margin-left: 20%;
+  margin: 2rem 0 0 23%;
 }
 
 .Hello {
   background-color: var(--lavender-ish);
   position: absolute;
-  top: 11%;
-  right: 24%;
+  top: 5vmax;
+  right: 23vmax;
   width: fit-content;
   height: fit-content;
   border: solid 2px var(--text);
@@ -64,6 +64,7 @@
   flex-direction: row;
   justify-content: center;
   gap: 2rem;
+  margin: 2rem 0;
 }
 
 .search-bar {
@@ -72,7 +73,7 @@
 
 .landing-bottom {
   background-image: url(/img/suminagashi.svg);
-  background-size: cover;
+  background-size: contain;
   background-color: var(--lavender-ish);
 }
 
@@ -110,4 +111,40 @@
   border-top: 10px solid transparent;
   border-left: 20px solid var(--text);
   border-bottom: 10px solid transparent;
+}
+
+@media (max-width:700px) {
+
+  .LandingPage {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .landing-top,
+  .landing-bottom {
+    flex: auto;
+    height: 100vh;
+  }
+  
+  .landing-bottom {
+    background-size: contain;
+  }
+
+  .Hello{
+    margin-top: 5%;
+  }
+  .header-text {
+    width: 90%;
+    margin: 25% 5% 0 5%;
+  }
+
+  .search-bar{
+    width: 90%;
+  }
+
+  .landing-signup {
+    width: 90%;
+    margin: 0;
+  }
+
 }

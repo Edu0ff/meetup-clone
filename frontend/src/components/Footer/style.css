@@ -14,11 +14,13 @@ footer {
   display: flex;
   align-items: center;
 }
+
 .footer-links nav p {
   margin-right: 20px;
 }
+
 .footer-links nav a {
-  margin-right: 10px;
+  margin-right: clamp(0.2rem, 2vmax, 15px);
   text-decoration: none;
   color: var(--text);
 }
@@ -28,14 +30,14 @@ footer {
 }
 
 .footer-socials a {
-  margin-left: 10px;
+  margin-left: clamp(0.1rem, 1vmax, 10px);
   text-decoration: none;
   color: var(--text);
 }
 
 .footer-socials a img {
-  height: 1.8rem;
-  margin: 5px;
+  height: clamp(1.5rem, 1.85vmax, 1.8rem);
+  margin: clamp(0.1rem, 0.2vmax, 5px);
 }
 
 .footer-socials a img:hover {
@@ -72,4 +74,30 @@ footer {
   transform: rotate(180deg);
   margin-bottom: 3.75rem;
   right: 0px;
+}
+
+@media (max-width:700px) {
+  footer {
+    height: fit-content;
+    position: relative;
+    flex-direction: column;
+  }
+
+  .footer-links nav {
+    margin-bottom: 10px;
+  }
+
+  .footer-links nav p {
+    margin-right: 10;
+  }
+
+  .footer-socials a {
+    gap: 15px;
+    align-items: center;
+  }
+
+  .triangleright-footer, .triangleleft-footer {
+    margin-top: -2rem;
+  }
+
 }
