@@ -1,7 +1,7 @@
 .event-card {
   height: 20.5rem;
   width: 19.8rem;
-  background-color: var(--lavender-ish);
+  background-color: white;
   border-radius: none;
   border: 2px solid var(--text);
   box-sizing: border-box;
@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: var(--text);
 }
 
 .eventcard-image {
@@ -34,9 +35,20 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.eventcard-by,
+.eventcard-theme {
+  color: var(--primary);
+  font-weight: 700;
+  font-family: "IBM Plex Mono", monospace;
+}
+
 .eventcard-date,
 .eventcard-going {
   font-size: 1.1rem;
@@ -44,15 +56,19 @@
 
 .eventcard-details {
   display: flex;
+  justify-content: space-between;
   margin-top: 1rem;
+  align-items: center;
 }
 
 .eventcard-date {
-  margin-left: 0px;
+  display: flex;
+  align-items: center;
 }
 
 .eventcard-going {
-  margin-right: 20px;
+  text-align: center;
+  margin-left: 3rem;
 }
 
 .event-icon {

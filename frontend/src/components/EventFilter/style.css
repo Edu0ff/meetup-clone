@@ -5,7 +5,7 @@
 }
 
 .filter-element > select {
-  background-color: var(--lavender-ish);
+  background-color: white;
   border-radius: none;
   border: 2px solid var(--text);
 
