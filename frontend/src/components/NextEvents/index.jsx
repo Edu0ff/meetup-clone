@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
 import EventCard from "../EventCard";
 import Loading from "../Loading";
 import { searchMeetups } from "../../services/index.js";
 import { Link } from "react-router-dom";
+import NoNextEvents from "../NoNextEvents";
+import "./style.css";
 
 function NextEvents() {
   const [meetups, setMeetups] = useState([]);
@@ -29,21 +30,25 @@ function NextEvents() {
     .filter((meetup) => new Date(meetup.date) > now)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
+  const firstThreeMeetups = filteredAndSortedMeetups.slice(0, 4);
+
   return (
     <div className="next-events">
-      <div className="green-banner" id="nextevents-banner">
-        <p>Next Events!</p>
-      </div>
       {loading ? (
         <Loading />
-      ) : filteredAndSortedMeetups.length > 0 ? (
+      ) : firstThreeMeetups.length > 0 ? (
         <div className="event-cards-container">
-          {filteredAndSortedMeetups.map((meetup) => (
-            <EventCard key={meetup.id} meetup={meetup} />
-          ))}
+          <div className="green-banner" id="nextevents-banner">
+            <p>Next Events!</p>
+          </div>
+          <div className="horizontal-events">
+            {firstThreeMeetups.map((meetup) => (
+              <EventCard key={meetup.id} meetup={meetup} />
+            ))}
+          </div>
         </div>
       ) : (
-        <p>No hay eventos disponibles.</p>
+        <NoNextEvents />
       )}
     </div>
   );
