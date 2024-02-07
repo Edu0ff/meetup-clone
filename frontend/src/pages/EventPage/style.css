@@ -25,6 +25,9 @@
 }
 
 .event-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   width: 100%;
   max-width: 95vh;
   max-height: 100vh;
@@ -36,7 +39,8 @@
   outline: none;
   background-color: rgba(255, 255, 255, 0.5);
   margin: 2rem auto;
-  padding: 1rem;
+  padding: 2rem;
+  position: relative;
 }
 
 .event-title {
@@ -48,10 +52,59 @@
   margin-right: 0.5rem;
 }
 
+#eventpage-description {
+  margin-top: 3rem;
+  margin-right: 30%;
+  font-size: 20px;
+}
+
+#organized-by-container {
+  font-size: 20px;
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+#organized-by {
+  color: var(--text);
+  margin-left: 0.5rem;
+}
+
+#organized-by-username {
+  color: var(--primary);
+  font-weight: 600;
+  display: block;
+  text-align: right;
+  margin-top: 0.3rem;
+}
+
+#eventpage-image {
+  width: 25rem;
+  height: 25rem;
+  object-fit: cover;
+  border: dashed;
+}
+
+#eventpage-person {
+  min-width: 10rem;
+  min-height: 10rem;
+  object-fit: cover;
+  border: dashed;
+  position: absolute;
+  left: 13rem;
+  bottom: 2rem;
+}
+
 #event-time,
 #event-signme,
 #event-going {
   height: 3.5rem;
+  width: 8rem;
+  border: 2px solid var(--text);
+  box-shadow: -3px 3px 0 1px rgba(24, 3, 37);
+  position: relative;
+  right: 6.5rem;
+  bottom: 17rem;
 }
 
 #event-time {
@@ -60,11 +113,13 @@
 
 .date-time-info {
   text-align: right;
-  width: 100%;
+  width: 60%;
 }
 
 #event-signme {
   background-color: var(--yellow-ish);
+  position: relative;
+  bottom: 13rem;
 }
 
 #button-signme {
@@ -74,30 +129,15 @@
   font-weight: 200;
 }
 
-#eventpage-image {
-  width: 10rem;
-  height: 10rem;
-  object-fit: cover;
-  border: dashed;
-}
-
-#eventpage-person {
-  width: 10rem;
-  height: 10rem;
-  object-fit: cover;
-  border: dashed;
-}
-
-#event-signme {
-  position: relative;
-}
-
 #event-going {
   font-weight: 200;
   text-decoration: none;
+  cursor: pointer;
+  bottom: 15rem;
 }
 
 .event-locationinfo {
   font-family: "IBM Plex Mono", monospace;
   font-weight: bold;
+  text-align: right;
 }
