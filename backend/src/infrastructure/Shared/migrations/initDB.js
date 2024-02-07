@@ -358,9 +358,16 @@ async function insertData(connection) {
 
   const attendeesToInsert = [
     { meetup_id: 1, user_id: 1, username: 'user1', will_attend: true },
-    { meetup_id: 2, user_id: 2, username: 'user2', will_attend: true },
+    { meetup_id: 1, user_id: 2, username: 'user2', will_attend: true },
+    { meetup_id: 1, user_id: 3, username: 'user3', will_attend: true },
+    { meetup_id: 1, user_id: 4, username: 'user4', will_attend: true },
+    { meetup_id: 1, user_id: 5, username: 'user5', will_attend: true },
+    { meetup_id: 2, user_id: 3, username: 'user3', will_attend: true },
+    { meetup_id: 2, user_id: 4, username: 'user4', will_attend: true },
     { meetup_id: 3, user_id: 3, username: 'user3', will_attend: true },
-    { meetup_id: 4, user_id: 4, username: 'user4', will_attend: true },
+    { meetup_id: 5, user_id: 2, username: 'user2', will_attend: true },
+    { meetup_id: 5, user_id: 3, username: 'user3', will_attend: true },
+    { meetup_id: 5, user_id: 4, username: 'user4', will_attend: true },
     { meetup_id: 5, user_id: 5, username: 'user5', will_attend: true },
   ]
 

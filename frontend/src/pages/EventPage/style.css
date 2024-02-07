@@ -75,8 +75,8 @@
 }
 
 #eventpage-image {
-  width: 25rem;
-  height: 25rem;
+  width: 10rem;
+  height: 10rem;
   object-fit: cover;
   border: dashed;
 }

@@ -3,8 +3,9 @@ import { getAttendeesByMeetup } from "../../services/index";
 import { AuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
+import "./style.css";
 
-const AttendeesList = ({ updateAttendees }) => {
+const AttendeesList = ({ updateAttendees, onClose }) => {
   const { id } = useParams();
   const { token } = useContext(AuthContext);
   const [attendees, setAttendees] = useState([]);
@@ -29,27 +30,46 @@ const AttendeesList = ({ updateAttendees }) => {
     fetchAttendeesData();
   }, [id, token, updateAttendees]);
 
+  const handleClose = () => {
+    onClose();
+  };
+
+  useEffect(() => {
+    const body = document.body;
+    if (attendees.length > 0) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "auto";
+    }
+
+    return () => {
+      body.style.overflow = "auto";
+    };
+  }, [attendees]);
+
   if (loading) {
     return <Loading />;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
-    <div>
-      <h2>Meetup Attendees List</h2>
-      {attendees.length === 0 ? (
-        <p>No attendees for this meetup.</p>
-      ) : (
-        <ul>
-          {attendees.map((attendee) => (
-            <li key={attendee.id}>{attendee.username}</li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <div className="overlay"></div>
+      <div className="confirmation-box">
+        <button id="close-box" onClick={handleClose}>
+          <img src="../icons/cross.svg" alt="Close button" id="close-img" />
+        </button>
+        {attendees.length === 0 ? (
+          <p className="no-attendees">No attendees for this event (yet).</p>
+        ) : (
+          <ul className="event-attendees-list">
+            <h2 id="attendee-title">Who else has signed up?</h2>
+            {attendees.map((attendee) => (
+              <li key={attendee.id}>{attendee.username}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 };
 

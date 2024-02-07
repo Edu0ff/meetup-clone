@@ -28,12 +28,13 @@
   z-index: 10;
   background-color: var(--secondary);
   right: 0;
-  top: 3.3rem;
+  top: 3.4rem;
   width: 100%;
-  border-top: none;
   border-radius: none;
-  box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
+  box-shadow: 3px 3px 0 3px rgba(24, 3, 37);
   display: none;
+  outline: 2px solid var(--text);
+  outline-offset: 0;
 }
 
 .explore-categories:hover .category-menu {
@@ -48,12 +49,10 @@
 .category-menu li {
   cursor: pointer;
   font-family: "IBM Plex Mono", monospace;
+  font-size: 24px;
 }
 
 .category-menu li:hover {
   color: var(--primary);
-}
-
-.explore-categories:hover {
-  border-bottom: none;
+  font-weight: 900;
 }

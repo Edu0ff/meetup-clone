@@ -21,6 +21,7 @@ function EventPage() {
   const [username, setUsername] = useState("");
   const [attendees, setAttendees] = useState([]);
   const [updatingAttendees, setUpdatingAttendees] = useState(false);
+  const [isAttendeesListOpen, setIsAttendeesListOpen] = useState(false);
 
   const decodedToken = JSON.parse(atob(token.split(".")[1]));
   const userId = parseInt(decodedToken.userId, 10);
@@ -83,8 +84,12 @@ function EventPage() {
           setEventData(eventData);
         }
 
-        const userData = await getDataUserService({ id: userId, token });
-        setUsername(userData.username);
+        const organizerUserData = await getDataUserService({
+          id: eventData.organizer_id,
+          token,
+        });
+        setOrganizerUsername(organizerUserData.username);
+        setOrganizerAvatar(organizerUserData.avatar);
       } catch (error) {
         console.error("Error fetching event data:", error);
       } finally {
@@ -151,7 +156,15 @@ function EventPage() {
             </div>
           </div>
 
-          <div className="green-banner" id="event-going">
+          <div
+            className={`green-banner ${
+              eventData.organizer_id === userId
+                ? "delete-meetup"
+                : "attendee-button"
+            }`}
+            id="event-going"
+            onClick={() => setIsAttendeesListOpen(true)}
+          >
             <img
               className="event-icon"
               src="../../icons/attendees.svg"
@@ -185,6 +198,7 @@ function EventPage() {
               />
             )}
           </div>
+
           <div id="eventpage-imgcontainer">
             <img
               id="eventpage-image"
@@ -205,7 +219,7 @@ function EventPage() {
           <div id="eventpage-details">
             <p id="eventpage-text">{eventData.description}</p>
             <div>
-              {organizerAvatar ? (
+              {/* {organizerAvatar ? (
                 <img
                   id="eventpage-person"
                   src={`${import.meta.env.VITE_APP_BACKEND}/${organizerAvatar}`}
@@ -213,17 +227,22 @@ function EventPage() {
                 />
               ) : (
                 ""
-              )}
+              )} */}
               <div>
                 <img
                   className="event-icon"
                   src="../../icons/person.svg"
                   alt="orgnized by"
                 />
-                <AttendeesList updateAttendees={updateAttendees} />
                 <p id="eventpage-organizedby">{`Organized by ${
                   organizerUsername || ""
                 }`}</p>
+                {isAttendeesListOpen && (
+                  <AttendeesList
+                    updateAttendees={updateAttendees}
+                    onClose={() => setIsAttendeesListOpen(false)}
+                  />
+                )}
               </div>
             </div>
           </div>
