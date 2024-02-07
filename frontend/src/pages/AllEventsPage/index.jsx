@@ -7,6 +7,7 @@ import ExploreCategories from "../../components/ExploreCategories/index.jsx";
 import EventFilter from "../../components/EventFilter";
 import ScrollToTop from "../../components/ScrollToTop";
 import ScrollBar from "../../components/ScrollBar";
+import ConfirmBox from "../../components/ConfirmBox";
 import "./style.css";
 
 function AllEventsPage() {
@@ -71,7 +72,7 @@ function AllEventsPage() {
               <EventCard key={meetup.id} meetup={meetup} />
             ))
           ) : (
-            <p>No events available.</p>
+            <ConfirmBox id="no-events" message={"No events available"} />
           )}
         </div>
       )}
