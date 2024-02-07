@@ -1,0 +1,57 @@
+#close-box {
+  position: fixed;
+  height: 3rem;
+  width: 3rem;
+  top: 5%;
+  left: 90%;
+  background-color: var(--secondary);
+  border-radius: none;
+  outline: none;
+  border: 2px solid var(--text);
+  z-index: 10001;
+  cursor: pointer;
+}
+
+#close-img {
+  width: 2rem;
+  display: block;
+  margin: auto;
+}
+
+#attendee-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--text);
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  z-index: 1;
+  color: var(--lavender-ish);
+  margin: 0 2rem;
+}
+
+.confirmation-box {
+  display: flex;
+  justify-content: center;
+}
+
+.no-attendees {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 3rem;
+  color: var(--text);
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  z-index: 1;
+  color: var(--lavender-ish);
+}
+
+.event-attendees-list > li {
+  display: block;
+  margin: 1rem;
+  list-style: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
