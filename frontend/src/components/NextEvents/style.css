@@ -22,3 +22,17 @@
 #nextevents-banner {
   margin-top: 1.5rem;
 }
+
+.horizontal-events {
+  display: flex;
+  justify-content: center; /* Centra los eventos horizontalmente */
+}
+
+.horizontal-events .event-card {
+  margin-right: 3rem; /* Separación de 3rem entre los eventos */
+}
+
+/* Estilos adicionales para que los eventos ocupen el mismo espacio */
+.horizontal-events .event-card {
+  flex: 1; /* Hace que todos los eventos ocupen el mismo espacio disponible */
+}

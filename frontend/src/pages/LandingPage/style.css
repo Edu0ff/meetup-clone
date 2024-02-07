@@ -21,30 +21,35 @@
   background-position: 15px 11px;
 }
 
+.first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .header-text {
   font-family: IBM Plex Mono;
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
   color: var(--text);
-  width: 40%;
-  margin-left: 24vw;
+  width: 50%;
+  margin-left: 8rem;
 }
 
 .Hello {
   background-color: var(--lavender-ish);
   position: absolute;
-  top: 11%;
-  right: 24%;
   width: fit-content;
   height: fit-content;
   border: solid 2px var(--text);
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
   font-family: "Roboto", sans-serif;
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 500;
   padding: 0 15px 0 15px;
   color: var(--text);
+  right: 20%;
 }
 
 .Hello::after {
@@ -72,8 +77,9 @@
 
 .landing-bottom {
   background-image: url(/img/suminagashi.svg);
-  background-size: contain;
+  background-size: cover;
   background-color: var(--lavender-ish);
+  background-attachment: fixed;
 }
 
 .landing-signup {

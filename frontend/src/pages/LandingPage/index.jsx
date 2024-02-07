@@ -10,15 +10,15 @@ function LandingPage() {
       <section className="landing-top">
         <div className="first-row">
           <h1 className="header-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-            nobis dolor ratione aspernatur!
+            Join our vibrant community and discover unique moments that will
+            connect you with amazing people!
           </h1>
           <div className="Hello">Hello!</div>
         </div>
-        <div className="second-row">
+        {/* <div className="second-row">
           <SearchBar placeholderText="Search events_" />
           <button className="landing-signup">Sign Up</button>
-        </div>
+        </div> */}
       </section>
 
       <section className="landing-bottom">
