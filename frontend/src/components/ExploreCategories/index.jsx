@@ -4,6 +4,7 @@ import "./style.css";
 
 function ExploreCategories({ onCategoryChange }) {
   const categories = [
+    "All Categories",
     "Social Events",
     "Art and Culture",
     "Videogames",
@@ -23,7 +24,7 @@ function ExploreCategories({ onCategoryChange }) {
   };
 
   const handleCategoryChange = (category) => {
-    onCategoryChange(category);
+    onCategoryChange(category === "All Categories" ? null : category);
     setIsMenuOpen(false);
   };
 
