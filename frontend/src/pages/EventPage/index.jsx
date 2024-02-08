@@ -103,7 +103,40 @@ function EventPage() {
       }
     };
 
+    const fetchAttendees = async () => {
+      try {
+        const attendeesResponse = await fetch(
+          `${import.meta.env.VITE_APP_BACKEND}/attendees/${id}/list`
+        );
+
+        const attendeesData = await attendeesResponse.json();
+
+        if (!attendeesResponse.ok) {
+          throw new Error(attendeesData.message);
+        }
+
+        if (attendeesData && attendeesData.message) {
+          throw new Error(attendeesData.message);
+        }
+
+        if (!Array.isArray(attendeesData)) {
+          throw new Error("Invalid data format: Expected an array");
+        }
+
+        setAttendees(attendeesData);
+        setEventData((prevEventData) => ({
+          ...prevEventData,
+          attendees_count: attendeesData.length,
+        }));
+      } catch (error) {
+        console.error("Error fetching attendees:", error);
+      } finally {
+        setUpdatingAttendees(false);
+      }
+    };
+
     fetchEventData();
+    fetchAttendees()
 
     return () => {
       unmounted = true;

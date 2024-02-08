@@ -41,7 +41,7 @@ async function dropTableIfExists(connection, tableName) {
 async function createUsersTable(connection) {
   await connection.query(`CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(20) NOT NULL UNIQUE,
     bio VARCHAR(255) NOT NULL,
     email VARCHAR(90) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -101,12 +101,12 @@ async function createMeetupsTable(connection) {
   await connection.query(`
   CREATE TABLE IF NOT EXISTS meetups (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
+  title VARCHAR(40) NOT NULL,
   description VARCHAR(255) NOT NULL,
   picture VARCHAR(255) NOT NULL,
   theme VARCHAR(255) NOT NULL,
-  location VARCHAR(255) NOT NULL,
-  address VARCHAR(255) NOT NULL,
+  location VARCHAR(40) NOT NULL,
+  address VARCHAR(100) NOT NULL,
   date DATETIME NOT NULL, -- O TIMESTAMP
   time TIME NOT NULL,
   attendees_count INT DEFAULT 0,  
