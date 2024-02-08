@@ -30,9 +30,9 @@ function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/cookie" element={<CookiePage />} />
-        <Route element={<PrivateRoutes />}>
-        <Route path="/event/:id" element={<EventPage />} />
         <Route path="/events" element={<AllEventsPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
+        <Route element={<PrivateRoutes />}>
           <Route path="/postevent" element={<PostEventPage />} />
           <Route path="/user/:nickname" element={<UserProfile />} />
         </Route>
