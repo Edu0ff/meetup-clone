@@ -136,7 +136,7 @@ function EventPage() {
     };
 
     fetchEventData();
-    fetchAttendees()
+    fetchAttendees();
 
     return () => {
       unmounted = true;
@@ -182,15 +182,19 @@ function EventPage() {
               }`}</span>
             </div>
             <div>
-              {organizerAvatar ? (
+              {/* {organizerAvatar ? (
                 <img
                   id="eventpage-person"
                   src={`${import.meta.env.VITE_APP_BACKEND}/${organizerAvatar}`}
                   alt={`Avatar of ${organizerUsername || ""}`}
                 />
-              ) : (
-                ""
-              )}
+              ) : ( */}
+              <img
+                id="eventpage-person"
+                src="/img/default_avatar.png"
+                alt={`Default Avatar`}
+              />
+              {/* )} */}
             </div>
           </div>
           <div className="right-column">
