@@ -141,3 +141,74 @@
   font-weight: bold;
   text-align: right;
 }
+
+@media (max-width: 900px) {
+  .event-container {
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+    max-width: 90%;
+    max-height: 80%;
+  }
+
+  #goback-banner {
+    top: 3rem;
+  }
+
+  .event-title {
+    font-size: 22px;
+  }
+
+  #eventpage-description {
+    margin-right: 0.2rem;
+    font-size: 18px;
+  }
+
+  #organized-by-container {
+    position: static;
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+
+  #organized-by-username {
+    text-align: left;
+  }
+
+  #eventpage-person {
+    position: static;
+    left: auto;
+    bottom: auto;
+    margin-top: 2rem;
+  }
+
+  #event-time {
+    right: auto;
+    bottom: auto;
+    margin-top: 0.5rem;
+    margin-right: auto;
+  }
+
+  #event-signme {
+    right: auto;
+    bottom: auto;
+    margin-top: -2rem;
+    margin-right: auto;
+  }
+
+  #event-going {
+    left: 40%;
+    bottom: 9%;
+    margin-right: auto;
+  }
+
+  .event-locationinfo {
+    text-align: right;
+    margin-right: 1rem;
+  }
+
+  #eventpage-image {
+    width: 22rem;
+    height: 25rem;
+    object-fit: cover;
+    border: dashed;
+  }
+}

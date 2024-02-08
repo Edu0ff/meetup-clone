@@ -25,14 +25,28 @@
 
 .horizontal-events {
   display: flex;
-  justify-content: center; /* Centra los eventos horizontalmente */
+  justify-content: center;
 }
 
 .horizontal-events .event-card {
-  margin-right: 3rem; /* Separación de 3rem entre los eventos */
+  margin-right: 3rem;
 }
 
-/* Estilos adicionales para que los eventos ocupen el mismo espacio */
 .horizontal-events .event-card {
-  flex: 1; /* Hace que todos los eventos ocupen el mismo espacio disponible */
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .next-events {
+    max-height: calc(100vh - 50px);
+    overflow-y: scroll;
+  }
+
+  .horizontal-events {
+    flex-wrap: wrap;
+  }
+
+  .horizontal-events .event-card {
+    margin: 0.5rem;
+  }
 }

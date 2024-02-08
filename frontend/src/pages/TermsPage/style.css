@@ -49,3 +49,25 @@
 .terms-page a:hover {
   color: var(--secondary);
 }
+
+@media (max-width: 900px) {
+  .terms-page {
+    flex-direction: column;
+  }
+
+  #terms-page {
+    max-width: 100%;
+  }
+
+  .terms-page h1 {
+    font-size: 2rem;
+  }
+
+  .terms-page h2 {
+    font-size: 1.3rem;
+  }
+
+  .terms-page p {
+    font-size: 1rem;
+  }
+}
