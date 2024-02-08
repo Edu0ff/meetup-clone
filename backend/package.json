@@ -14,7 +14,9 @@
     "lint:check": "eslint .",
     "format:fix": "prettier --write .",
     "format:check": "prettier --check .",
-    "migrate": "node src/infrastructure/Shared/migrations/initDB.js"
+    "migrate": "node src/infrastructure/Shared/migrations/initDB.js",
+    "seed": "node src/infrastructure/Shared/migrations/seedDB.js",
+    "setup": "npm run migrate && npm run seed"
   },
   "keywords": [],
   "author": "",

@@ -33,15 +33,27 @@ function SignUpPage() {
   const handleForm = async (e) => {
     e.preventDefault();
 
-    if (pass1 !== pass2) {
+    const usernameRegex = /^[a-zA-Z0-9_-]{4,20}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+
+    if (!usernameRegex.test(username)) {
       toast.error(
-        `Passwords do not match. Make sure to enter the same password in both fields.`
+        "Username must be between 4 and 20 characters and can only contain letters, numbers, underscores, and hyphens."
       );
       return;
     }
 
-    if (pass1.length < 8) {
-      toast.error("Password must be at least 8 characters long.");
+    if (!passwordRegex.test(pass1)) {
+      toast.error(
+        "Password must be at least 8 characters long and contain at least one letter, one number, and one special character."
+      );
+      return;
+    }
+
+    if (pass1 !== pass2) {
+      toast.error(
+        "Passwords do not match. Make sure to enter the same password in both fields."
+      );
       return;
     }
 
@@ -91,7 +103,7 @@ function SignUpPage() {
               Sign In
             </Link>
           </div>
-          <form onSubmit={handleForm} autocomplete="off">
+          <form onSubmit={handleForm} autoComplete="off">
             <ul>
               <li className="form-group">
                 <input

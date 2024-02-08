@@ -95,7 +95,7 @@ function SignInPage() {
             <span className="you-text"> you</span>
             <span className="black-text"> again!</span>
           </h2>
-          <form onSubmit={submitHandler} autocomplete="off">
+          <form onSubmit={submitHandler} autoComplete="off">
             <div className="form-group">
               <input
                 className="input-reg"

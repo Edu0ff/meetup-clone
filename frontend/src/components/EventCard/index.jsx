@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import "./style.css";
 
 function EventCard({ meetup }) {
+  const [attendeesCount, setAttendeesCount] = useState(0);
+
+  useEffect(() => {
+    let unmounted = false;
+
+    const fetchAttendees = async () => {
+      try {
+        const attendeesResponse = await fetch(
+          `${import.meta.env.VITE_APP_BACKEND}/attendees/${meetup.id}/list`
+        );
+
+        const attendeesData = await attendeesResponse.json();
+
+        if (!attendeesResponse.ok) {
+          throw new Error(attendeesData.message);
+        }
+
+        if (attendeesData && attendeesData.message) {
+          throw new Error(attendeesData.message);
+        }
+
+        if (!Array.isArray(attendeesData)) {
+          throw new Error("Invalid data format: Expected an array");
+        }
+
+        if (!unmounted) {
+          setAttendeesCount(attendeesData.length);
+        }
+      } catch (error) {
+        console.error("Error fetching attendees:", error);
+      }
+    };
+
+    fetchAttendees();
+
+    return () => {
+      unmounted = true;
+    };
+  }, [meetup.id]);
+
   const formattedDate = meetup.date
     ? format(new Date(meetup.date), "dd/MM/yy")
     : "Date not available";
@@ -58,7 +98,7 @@ function EventCard({ meetup }) {
               </p>
               <p className="eventcard-going">
                 <img className="event-icon" src="icons/check.svg" alt="Going" />
-                {meetup.attendees_count} going
+                {attendeesCount} going
               </p>
             </div>
           </>

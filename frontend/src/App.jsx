@@ -24,14 +24,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/events" element={<AllEventsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/event/:id" element={<EventPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/cookie" element={<CookiePage />} />
+        <Route path="/events" element={<AllEventsPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/postevent" element={<PostEventPage />} />
           <Route path="/user/:nickname" element={<UserProfile />} />
