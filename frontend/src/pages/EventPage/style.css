@@ -86,8 +86,8 @@
 }
 
 #eventpage-person {
-  min-width: 10rem;
-  min-height: 10rem;
+  width: 10rem;
+  height: 10rem;
   object-fit: cover;
   border: dashed;
   position: absolute;
