@@ -4,6 +4,7 @@
   background-color: var(--lavender-ish);
   background-attachment: fixed;
   margin-bottom: 3rem;
+  padding-bottom: 3rem;
 }
 
 .top-section {
@@ -25,9 +26,22 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  font-size: 4rem;
   color: var(--text);
   margin: 0;
   font-family: "IBM Plex Mono", monospace;
   z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .top-section {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .event-card-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
 }

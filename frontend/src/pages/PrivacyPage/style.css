@@ -49,3 +49,26 @@
 .privacy-page a:hover {
   color: var(--secondary);
 }
+
+@media (max-width: 900px) {
+  .privacy-page {
+    flex-direction: column;
+    padding: 2rem 1rem;
+  }
+
+  #privacy-page {
+    max-width: 100%;
+  }
+
+  .privacy-page h1 {
+    font-size: 2rem;
+  }
+
+  .privacy-page h2 {
+    font-size: 1.3rem;
+  }
+
+  .privacy-page p {
+    font-size: 1rem;
+  }
+}

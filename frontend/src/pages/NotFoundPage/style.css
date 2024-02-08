@@ -35,3 +35,18 @@
   margin-top: 10rem;
   margin-bottom: 1rem;
 }
+
+@media (max-width: 900px) {
+  .errorfour {
+    font-size: 4rem;
+  }
+
+  .pagenotfound {
+    font-size: 1.5rem;
+  }
+
+  .go-back {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}

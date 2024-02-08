@@ -139,3 +139,28 @@
   margin-left: 0.5rem;
   margin-top: 0.5rem;
 }
+
+@media (max-width: 900px) {
+  .description-group > textarea {
+    width: 100%;
+  }
+
+  .select-box {
+    width: 100%;
+  }
+
+  .custom-file-input {
+    width: 100%;
+  }
+
+  .date-time-container,
+  .location-container {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  .date-time-container > div,
+  .location-container > div {
+    margin-right: 1.5rem;
+  }
+}

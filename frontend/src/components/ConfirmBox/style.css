@@ -2,8 +2,8 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 30rem;
   width: 40rem;
+  overflow: auto;
   background-color: var(--primary);
   transform: translate(-50%, -50%);
   border-radius: none;
@@ -11,9 +11,22 @@
   border: 2px solid var(--text);
   box-shadow: 3px 3px 0 1px rgba(24, 3, 37);
   padding: 20px;
+  overflow: auto;
   z-index: 1000;
 }
 
-.confirmation-buttons button {
-  cursor: pointer;
+.confirmation-content {
+  font-size: 3rem;
+}
+
+@media (max-width: 900px) {
+  .confirmation-box {
+    max-width: 90%;
+    padding: 10px;
+    max-height: 90vh;
+  }
+
+  .confirmation-content {
+    font-size: 1.5rem;
+  }
 }

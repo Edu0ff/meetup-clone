@@ -10,8 +10,8 @@ function LandingPage() {
       <section className="landing-top">
         <div className="first-row">
           <h1 className="header-text">
-            Join our vibrant community and discover unique moments that will
-            connect you with amazing people!
+            Join our vibrant community 🎉 Make friends, learn new things and
+            have fun!
           </h1>
           <div className="Hello">Hello!</div>
         </div>

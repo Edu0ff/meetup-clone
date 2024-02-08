@@ -176,7 +176,7 @@ function EventPage() {
                 src="../../icons/person.svg"
                 alt="organized by"
               />
-              <span id="organized-by">{`Organized by `}</span>
+              <span id="organized-by">{`Organized by`}</span>
               <span id="organized-by-username">{` ${
                 organizerUsername || ""
               }`}</span>

@@ -65,7 +65,7 @@ function PostEventPage() {
     try {
       setLoading(true);
       if (!token) {
-        console.log("Token is missing");
+        toast.error("Please sign in first");
         return;
       }
 
@@ -261,54 +261,58 @@ function PostEventPage() {
                   <option value="Sports and Fitness">Sports and Fitness</option>
                 </select>
               </div>
-              <div>
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  className="input-reg"
-                  placeholder="Select a city"
-                  value={formData.location}
-                  onChange={handleInputChange}
-                />
+              <div className="location-container">
+                <div>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    className="input-reg"
+                    placeholder="Select a city"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    className="input-reg"
+                    id="address"
+                    name="address"
+                    placeholder="Select an address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
-              <div>
-                <input
-                  type="text"
-                  className="input-reg"
-                  id="address"
-                  name="address"
-                  placeholder="Select an address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <DatePicker
-                  id="date"
-                  name="date"
-                  className="input-form"
-                  selected={formData.date}
-                  onChange={(date) =>
-                    setFormData({
-                      ...formData,
-                      date,
-                    })
-                  }
-                  placeholderText="Select a date"
-                  dateFormat="dd/MM/yyyy"
-                />
-              </div>
-              <div>
-                <input
-                  type="time"
-                  id="time"
-                  name="time"
-                  className="input-form"
-                  placeholder="Select a time"
-                  value={formData.time}
-                  onChange={handleInputChange}
-                />
+              <div className="date-time-container">
+                <div>
+                  <DatePicker
+                    id="date"
+                    name="date"
+                    className="input-form"
+                    selected={formData.date}
+                    onChange={(date) =>
+                      setFormData({
+                        ...formData,
+                        date,
+                      })
+                    }
+                    placeholderText="Select a date"
+                    dateFormat="dd/MM/yyyy"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="time"
+                    id="time"
+                    name="time"
+                    className="input-form"
+                    placeholder="Select a time"
+                    value={formData.time}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
               <div className="form-group" id="form-signinbutton">
                 <ArrowButton

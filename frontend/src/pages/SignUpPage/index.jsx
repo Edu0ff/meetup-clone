@@ -126,30 +126,32 @@ function SignUpPage() {
                 />
               </li>
               <li className="form-group">
-                <input
-                  className="input-reg"
-                  htmlFor="pass1"
-                  type={showPassword ? "text" : "password"}
-                  id="pass1"
-                  name="pass1"
-                  placeholder="password"
-                  onChange={(e) => setPass1(e.target.value)}
-                />
-                {showPassword ? (
-                  <img
-                    className="eye-icon-up"
-                    src="../../icons/eye_opened.svg"
-                    alt="Hide Password"
-                    onClick={togglePasswordVisibility}
+                <div id="signup-password">
+                  <input
+                    className="input-reg"
+                    htmlFor="pass1"
+                    type={showPassword ? "text" : "password"}
+                    id="pass1"
+                    name="pass1"
+                    placeholder="password"
+                    onChange={(e) => setPass1(e.target.value)}
                   />
-                ) : (
-                  <img
-                    className="eye-icon-up"
-                    src="../../icons/eye_closed.svg"
-                    alt="Show Password"
-                    onClick={togglePasswordVisibility}
-                  />
-                )}
+                  {showPassword ? (
+                    <img
+                      className="eye-icon-up"
+                      src="../../icons/eye_opened.svg"
+                      alt="Hide Password"
+                      onClick={togglePasswordVisibility}
+                    />
+                  ) : (
+                    <img
+                      className="eye-icon-up"
+                      src="../../icons/eye_closed.svg"
+                      alt="Show Password"
+                      onClick={togglePasswordVisibility}
+                    />
+                  )}
+                </div>
               </li>
               <li className="form-group">
                 <input

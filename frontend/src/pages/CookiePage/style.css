@@ -12,3 +12,10 @@
   padding: 1.5rem 2rem;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  .cookie-button {
+    font-size: 3rem;
+    padding: 1rem 1.5rem;
+  }
+}
