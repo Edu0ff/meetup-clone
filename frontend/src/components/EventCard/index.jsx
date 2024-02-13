@@ -33,9 +33,7 @@ function EventCard({ meetup }) {
         if (!unmounted) {
           setAttendeesCount(attendeesData.length);
         }
-      } catch (error) {
-        console.error("Error fetching attendees:", error);
-      }
+      } catch (error) {}
     };
 
     fetchAttendees();
@@ -52,6 +50,14 @@ function EventCard({ meetup }) {
   const formattedTime = meetup.time
     ? format(new Date(`2022-01-01 ${meetup.time}`), "HH:mm")
     : "";
+
+  const formatLocation = (location) => {
+    return location
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   return (
     <Link to={`/event/${meetup.id}`} style={{ textDecoration: "none" }}>
@@ -80,12 +86,12 @@ function EventCard({ meetup }) {
                 src="icons/location.svg"
                 alt="Location"
               />
-              {meetup.location}
+              {formatLocation(meetup.location)}
             </p>
             <h1 className="eventcard-title">{meetup.title}</h1>
             <p className="eventcard-theme">{meetup.theme}</p>
             <div className="eventcard-details">
-              <p className="eventcard-date">
+              <div className="eventcard-date">
                 <img
                   className="event-icon"
                   src="icons/calendar.svg"
@@ -95,11 +101,11 @@ function EventCard({ meetup }) {
                   <div id="date-card">{formattedDate} </div>
                   <div id="time-card"> {formattedTime}</div>
                 </div>
-              </p>
-              <p className="eventcard-going">
+              </div>
+              <div className="eventcard-going">
                 <img className="event-icon" src="icons/check.svg" alt="Going" />
                 {attendeesCount} going
-              </p>
+              </div>
             </div>
           </>
         ) : (

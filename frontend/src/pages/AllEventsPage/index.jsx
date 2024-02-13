@@ -15,6 +15,7 @@ function AllEventsPage() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [visibleMeetups, setVisibleMeetups] = useState(50);
 
   useEffect(() => {
     const fetchMeetups = async () => {
@@ -26,7 +27,7 @@ function AllEventsPage() {
       } finally {
         setTimeout(() => {
           setLoading(false);
-        }, 400);
+        }, 300);
       }
     };
 
@@ -38,18 +39,26 @@ function AllEventsPage() {
     .filter((meetup) => new Date(meetup.date) > now)
     .filter((meetup) => !selectedCategory || meetup.theme === selectedCategory)
     .filter(
-      (meetup) =>
-        !selectedLocation ||
-        meetup.location.toLowerCase() === selectedLocation.toLowerCase()
+      (meetup) => !selectedLocation || meetup.location === selectedLocation
     )
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .slice(0, visibleMeetups);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
 
   const handleLocationChange = (location) => {
-    setSelectedLocation(location);
+    const formattedLocation = location
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    setSelectedLocation(formattedLocation);
+  };
+
+  const loadMoreMeetups = () => {
+    setVisibleMeetups((prevVisibleMeetups) => prevVisibleMeetups + 20);
   };
 
   return (
@@ -68,11 +77,18 @@ function AllEventsPage() {
       ) : (
         <div className="event-card-container">
           {filteredAndSortedMeetups.length > 0 ? (
-            filteredAndSortedMeetups.map((meetup) => (
-              <EventCard key={meetup.id} meetup={meetup} />
-            ))
+            <>
+              {filteredAndSortedMeetups.map((meetup) => (
+                <EventCard key={meetup.id} meetup={meetup} />
+              ))}
+            </>
           ) : (
             <ConfirmBox id="no-events" message={"No events available"} />
+          )}
+          {meetups.length > visibleMeetups && (
+            <button onClick={loadMoreMeetups} id="loadmore">
+              Load more
+            </button>
           )}
         </div>
       )}
@@ -81,9 +97,7 @@ function AllEventsPage() {
 }
 
 const getUniqueLocations = (meetups) => {
-  const locationsSet = new Set(
-    meetups.map((meetup) => meetup.location.toLowerCase())
-  );
+  const locationsSet = new Set(meetups.map((meetup) => meetup.location));
   return Array.from(locationsSet);
 };
 
